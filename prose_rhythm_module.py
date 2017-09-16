@@ -31,7 +31,8 @@ class prose_rhythm_module(object):
         syllabified = []
         for sentence in tokenized_cola:
             syllabified_words = [syllabifier.syllabify(word) for word in sentence.split(' ')]
-            syllabified.append(syllabified_words if syllabified_words not [])
+            syllabified.append(syllabified_words)
+        syllabified = [sentence for sentence in syllabified if [] not in sentence]
         return syllabified
 
 if __name__ == "__main__":
