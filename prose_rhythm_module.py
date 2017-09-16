@@ -11,6 +11,10 @@ from cltk.stem.latin.syllabifier import Syllabifier
 
 class prose_rhythm_module(object):
 
+    SEST = ['sc', 'sm', 'sp', 'st', 'z']
+    MUTES = ['b', 'd', 'g', 'p', 't', 'c', 'k', 'ph', 'th', 'ch']
+    LIQUIDS = ['r', 'l']
+
     def __init__(self, elision, sests, mute_plus_liquid, punctuation, text):
         self.elision = elision
         self.sests = sests
