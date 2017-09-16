@@ -11,9 +11,13 @@ from cltk.stem.latin.syllabifier import Syllabifier
 
 class prose_rhythm_module(object):
 
-    SEST = ['sc', 'sm', 'sp', 'st', 'z']
-    MUTES = ['b', 'd', 'g', 'p', 't', 'c', 'k', 'ph', 'th', 'ch']
+    SESTS = ['sc', 'sm', 'sp', 'st', 'z']
+    MUTES = ['b', 'c', 'k', 'd', 'g', 'p', 't']
+    DIGRAPHS = ['ch', 'ph', 'th']
     LIQUIDS = ['r', 'l']
+    VOWELS = ['a', 'e', 'i', 'o', 'u', 'y']
+    SINGLE_CONSONANTS = ['b', 'c', 'd', 'g', 'h', 'k', 'l', 'm', 'n', 'p', 'q', 'r', 's', 't', 'v']
+    DOUBLE_CONSONANTS = ['x', 'z']
 
     def __init__(self, elision, sests, mute_plus_liquid, punctuation, text):
         self.elision = elision
@@ -31,6 +35,17 @@ class prose_rhythm_module(object):
             txt = txt.replace(sep, default_sep)
         return [i.strip() for i in txt.split(default_sep)]
 
+    def preprocessed_text(self):
+        """
+        Tokenize text on supplied characters.
+        :return: sentence strings
+        :rtype : list
+        """
+        default_seperator = self.punctuation[0]
+        for punc in self.punctuation[1:]:
+            self.text = self.text.replace(punc, default_seperator)
+        return [sentence.strip() for sentence in self.text.split(default_seperator) if sentence.strip() is not '']
+
     def preprocessed(self):
         tokenized_cola = self.split(self.text, self.punctuation)
         syllabifier = Syllabifier()
@@ -43,6 +58,6 @@ class prose_rhythm_module(object):
 
 if __name__ == "__main__":
     test_text = "[1] [I] Quonam meo fato, patres conscripti, fieri dicam, ut nemo his annis viginti rei publicae fuerit hostis, qui non bellum eodem tempore mihi quoque indixerit? Nec vero necesse est quemquam a me nominari; vobiscum ipsi recordamini. Mihi poenarum illi plus, quam optaram, dederunt: te miror, Antoni, quorum facta imitere, eorum exitus non perhorrescere. Atque hoc in aliis minus mirabar. Nemo enim illorum inimicus mihi fuit voluntarius, omnes a me rei publicae causa lacessiti. Tu ne verbo quidem violatus, ut audacior quam Catilina, furiosior quam Clodius viderere, ultro me maledictis lacessisti, tuamque a me alienationem commendationem tibi ad impios civis fore putavisti."
-    test = prose_rhythm_module(elision=True, sests=True, mute_plus_liquid=True, punctuation=[',', ';', '.'], text=test_text)
-    preprocessed = test.preprocessed()
+    test = prose_rhythm_module(elision=True, sests=True, mute_plus_liquid=True, punctuation=[':',';','.','?','!'], text=test_text)
+    preprocessed = test.preprocessed_text()
     print(preprocessed)
