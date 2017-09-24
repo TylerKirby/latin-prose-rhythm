@@ -4,22 +4,22 @@ Module for analyzing the prose rhythm of Latin texts.
 
 from cltk.stem.latin.syllabifier import Syllabifier
 
-# TODO: Define langauge variables
 # TODO: Check for elision
-# TODO: Check if syllabifier works
-# TODO: Combine 'qu' syllables for first sentence in sentence
+# TODO: Rewrite preprocessing to remove numbers and punc not in self.punc
+
 
 class prose_rhythm(object):
 
     SESTS = ['sc', 'sm', 'sp', 'st', 'z']
     MUTES = ['b', 'c', 'k', 'd', 'g', 'p', 't']
-    DIGRAPHS = ['ch', 'ph', 'th']
+    DIGRAPHS = ['ch', 'ph', 'th', 'qu']
     LIQUIDS = ['r', 'l']
     VOWELS = ['a', 'e', 'i', 'o', 'u', 'y']
-    SINGLE_CONSONANTS = ['b', 'c', 'd', 'g', 'h', 'k', 'l', 'm', 'n', 'p', 'q', 'r', 's', 't', 'v']
+    SINGLE_CONSONANTS = ['b', 'c', 'd', 'g', 'k', 'l', 'm', 'n', 'p', 'q', 'r', 's', 't', 'v', 'f', 'j']
     DOUBLE_CONSONANTS = ['x', 'z']
     LONG_VOWELS = ['ā', 'ē', 'ī', 'ō', 'ū']
     DIPHTHONGS = ['ae', 'au', 'ei', 'eu', 'oe', 'ui']
+    NASALS = ['m', 'n']
 
     def __init__(self, elision, sests, mute_plus_liquid, punctuation, text):
         self.elision = elision
