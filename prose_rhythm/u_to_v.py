@@ -43,4 +43,4 @@ if __name__ == "__main__":
     tests = ["amaui", "amatus", "auctor", "habui", "habuerit", "imbuantur", "fluuius", "exuuiae", "uita", "uae", "mortuus", "perpetuum"]
 
     for test in tests:
-        print(convert_u_to_v(test))
+        print(test, convert_u_to_v(test))
