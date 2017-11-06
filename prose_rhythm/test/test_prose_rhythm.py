@@ -1,7 +1,6 @@
 from prose_rhythm import prose_rhythm
 
 TEST_TEXT = "[1] [I] Quonam meo fato, patres conscripti, fieri dicam, ut nemo his annis viginti rei publicae fuerit hostis, qui non bellum eodem tempore mihi quoque indixerit? Nec vero necesse est quemquam a me nominari; vobiscum ipsi recordamini. Mihi poenarum illi plus, quam optaram, dederunt: te miror, Antoni, quorum facta imitere, eorum exitus non perhorrescere. Atque hoc in aliis minus mirabar. Nemo enim illorum inimicus mihi fuit voluntarius, omnes a me rei publicae causa lacessiti. Tu ne verbo quidem violatus, ut audacior quam Catilina, furiosior quam Clodius viderere, ultro me maledictis lacessisti, tuamque a me alienationem commendationem tibi ad impios civis fore putavisti."
-
 ALL_TRUE_CONFIG = prose_rhythm.prose_rhythm(elision=True, sests=True, mute_plus_liquid=True, punctuation=[':',';','.','?','!'], text=TEST_TEXT)
 
 def test_preprocessed_text():
