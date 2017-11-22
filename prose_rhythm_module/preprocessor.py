@@ -12,6 +12,7 @@ class Preprocessor(object):
         self.text = text
         self.punctuation = punctuation
 
+
     def u_to_v(self, word):
         """
         Convert u in word to v.
@@ -21,8 +22,10 @@ class Preprocessor(object):
         word = list(word.lower())
 
         # u at beginning of the word
-        if word[0] == "u" and word[1] in self.VOWELS:
+        if word[0] == "u" and word[1] in self.VOWELS and word[1] != "u":
             word[0] = "v"
+        elif word[0] == "u" and word[1] == "u" and word[2] in self.VOWELS:
+            word[1] = "v"
 
         # u in word
         for char in word:
@@ -33,7 +36,7 @@ class Preprocessor(object):
                             char_index + 1] is not "i":
                     word[char_index] = "v"
                 # vowel preceeds u and vowel follows
-                if len(word) > 2 and word[char_index - 1] in self.VOWELS and word[char_index + 1] in VOWELS:
+                if len(word) > 2 and word[char_index - 1] in self.VOWELS and word[char_index + 1] in self.VOWELS:
                     word[char_index] = "v"
                 # consonant + u + u + vowel
                 if len(word) > 3 and word[char_index - 1] not in self.VOWELS and word[char_index + 1] == "u" and word[
@@ -67,3 +70,6 @@ class Preprocessor(object):
             syllabified_sentence.append(syllabified_words)
         syllabified = [sentence for sentence in syllabified_sentence if [] not in sentence]
         return syllabified
+
+if __name__ == "__main__":
+    print(Preprocessor("test", ['.']).u_to_v("uua"))
