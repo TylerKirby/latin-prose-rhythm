@@ -59,3 +59,17 @@ def test_u_to_v():
     assert preprocessor.u_to_v("inuitat") == "invitat"
     # consonantal i at start of word
     assert preprocessor.u_to_v("iuuenum") == "iuvenum"
+
+def test_i_to_j():
+    # initial i + consonant (not u/v)
+    assert preprocessor.i_to_j("incoctus") == "incoctus"
+    assert preprocessor.i_to_j("ignis") == "ignis"
+    assert preprocessor.i_to_j("it") == "it"
+    # initial i + vowel (not u/v)
+    assert preprocessor.i_to_j("iaceo") == "jaceo"
+    assert preprocessor.i_to_j("iecur") == "jecur"
+    assert preprocessor.i_to_j("iocus") == "jocus"
+    # initial i + u/v
+    assert preprocessor.i_to_j("iubeo") == "jubeo"
+    assert preprocessor.i_to_j("ius") == "jus"
+    assert preprocessor.i_to_j("ivi") == "ivi"

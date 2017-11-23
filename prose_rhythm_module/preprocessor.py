@@ -54,6 +54,13 @@ class Preprocessor(object):
                     word[char_index + 1] = "v"
         return "".join(word)
 
+    def i_to_j(self, word):
+        """
+        Convert i in word to j.
+        :param word: string
+        :return: string
+        """
+
     def preprocessed_text(self):
         """
         Tokenize text on supplied characters.
