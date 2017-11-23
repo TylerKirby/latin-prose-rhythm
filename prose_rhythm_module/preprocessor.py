@@ -60,6 +60,13 @@ class Preprocessor(object):
         :param word: string
         :return: string
         """
+        word = list(word.lower())
+
+        # i at the beginning of a word
+        if word[0] == "i" and word[1] in self.VOWELS:
+            word[0] = "j"
+
+        return "".join(word)
 
     def preprocessed_text(self):
         """
