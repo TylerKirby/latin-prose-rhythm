@@ -9,7 +9,7 @@ from cltk.stem.latin.j_v import JVReplacer
 # TODO: Rewrite preprocessing to remove numbers and punc not in self.punc
 
 
-class prose_rhythm(object):
+class Prose_Rhythm_Scanner(object):
 
     SESTS = ['sc', 'sm', 'sp', 'st', 'z']
     MUTES = ['b', 'c', 'k', 'd', 'g', 'p', 't']
@@ -28,32 +28,6 @@ class prose_rhythm(object):
         self.mute_plus_liquid  = mute_plus_liquid
         self.punctuation = punctuation
         self.text = text
-
-    def preprocessed_text(self):
-        """
-        Tokenize text on supplied characters.
-        :return: tokenized text
-        :rtype : list
-        """
-        default_seperator = self.punctuation[0]
-        for punc in self.punctuation[1:]:
-            self.text = self.text.replace(punc, default_seperator)
-        return [sentence.strip() for sentence in self.text.split(default_seperator) if sentence.strip() is not '']
-
-    def syllabified(self):
-        """
-        Syllabify text.
-        :return: syllabified text
-        :rtype : list
-        """
-        preprocessed_text = self.preprocessed_text()
-        syllabifier = Syllabifier()
-        syllabified_sentence = []
-        for sentence in preprocessed_text:
-            syllabified_words = [syllabifier.syllabify(word) for word in sentence.lower().split(' ') if '[' not in word]
-            syllabified_sentence.append(syllabified_words)
-        syllabified = [sentence for sentence in syllabified_sentence if [] not in sentence]
-        return syllabified
 
     def long_by_nature(self, syllable):
         """
