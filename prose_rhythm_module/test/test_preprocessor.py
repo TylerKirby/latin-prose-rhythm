@@ -53,4 +53,9 @@ def test_u_to_v():
     assert preprocessor.u_to_v("perpetuum") == "perpetuum"
     assert preprocessor.u_to_v("fluuius") == "fluvius"
     assert preprocessor.u_to_v("exuuiae") == "exuviae"
-
+    # consonant + u + vowel (not i)
+    assert preprocessor.u_to_v("alueo") == "alveo"
+    # consonant + u + vowel (i)
+    assert preprocessor.u_to_v("inuitat") == "invitat"
+    # consonantal i at start of word
+    assert preprocessor.u_to_v("iuuenum") == "iuvenum"
