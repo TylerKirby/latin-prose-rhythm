@@ -44,8 +44,4 @@ class Prose_Rhythm_Scanner(object):
         return False
 
 if __name__ == "__main__":
-    test_text = "[1] [I] Quonam meo fato, patres conscripti, fieri dicam, ut nemo his annis viginti rei publicae fuerit hostis, qui non bellum eodem tempore mihi quoque indixerit? Nec uero necesse est quemquam a me nominari; vobiscum ipsi recordamini. Mihi poenarum illi plus, quam optaram, dederunt: te miror, Antoni, quorum facta imitere, eorum exitus non perhorrescere. Atque hoc in aliis minus mirabar. Nemo enim illorum inimicus mihi fuit voluntarius, omnes a me rei publicae causa lacessiti. Tu ne verbo quidem violatus, ut audacior quam Catilina, furiosior quam Clodius viderere, ultro me maledictis lacessisti, tuamque a me alienationem commendationem tibi ad impios civis fore putavisti iam iacio iacet."
-    test = prose_rhythm(elision=True, sests=True, mute_plus_liquid=True, punctuation=[':',';','.','?','!'], text=test_text)
-    preprocessed = test.syllabified()
-    # print(preprocessed)
-    print(JVReplacer().replace(test_text))
+    pass

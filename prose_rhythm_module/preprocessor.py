@@ -95,4 +95,4 @@ class Preprocessor(object):
         return syllabified
 
 if __name__ == "__main__":
-    print(Preprocessor("test", ['.']).u_to_v("iuuenum"))
+    print(Preprocessor("test", ['.']).i_to_j("iuuo"))
