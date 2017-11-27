@@ -59,6 +59,8 @@ def test_u_to_v():
     assert preprocessor.u_to_v("inuitat") == "invitat"
     # consonantal i at start of word
     assert preprocessor.u_to_v("iuuenum") == "iuvenum"
+    # extras
+    assert preprocessor.u_to_v("adiuuo") == "adiuvo"
 
 def test_i_to_j():
     # initial i + consonant (not u/v)
@@ -73,3 +75,18 @@ def test_i_to_j():
     assert preprocessor.i_to_j("iubeo") == "jubeo"
     assert preprocessor.i_to_j("ius") == "jus"
     assert preprocessor.i_to_j("ivi") == "ivi"
+    # i after prefix
+    assert preprocessor.i_to_j("adicio") == "adjicio"
+    assert preprocessor.i_to_j("adiectus") == "adjectus" # TODO: double check accuracy here
+    assert preprocessor.i_to_j("abicio") == "abjicio"
+    assert preprocessor.i_to_j("abiectus") == "abjectus"
+    assert preprocessor.i_to_j("conicio") == "conjicio"
+    assert preprocessor.i_to_j("coniectus") == "conjectus"
+    assert preprocessor.i_to_j("subicio") == "subjicio"
+    assert preprocessor.i_to_j("subiectus") == "subjectus"
+    assert preprocessor.i_to_j("adiudico") == "adjudico"
+    assert preprocessor.i_to_j("coniuro") == "conjuro"
+    assert preprocessor.i_to_j("coniungo") == "conjungo"
+    assert preprocessor.i_to_j("coniunctus") == "conjunctus"
+    assert preprocessor.i_to_j("adiuvo") == "adjuvo"
+

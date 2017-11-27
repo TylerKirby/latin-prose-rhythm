@@ -49,8 +49,8 @@ class Preprocessor(object):
                 if len(word) > char_index + 2 and word[char_index - 1] not in self.VOWELS and word[char_index + 1] == "i" and word[
                             char_index + 2] not in self.VOWELS:
                     word[char_index] = "v"
-                # consonantal i at start of word
-                if len(word) > 3 and word[0] == "i" and word[char_index + 1] == "u":
+                # i + u + u
+                if len(word) > 3 and word[char_index - 1] == "i" and word[char_index + 1] == "u":
                     word[char_index + 1] = "v"
         return "".join(word)
 
@@ -60,11 +60,25 @@ class Preprocessor(object):
         :param word: string
         :return: string
         """
+        PREFIXES = ["ab", "ad", "ante", "circum", "cum", "in", "inter", "ob", "per", "praeter", "sub", "subter", "super", "con"]
+
+        word_prefix = [prefix for prefix in PREFIXES if word.startswith(prefix)]
+        word_prefix_end_index = len(word_prefix[0]) if len(word_prefix) == 1 else None
+
         word = list(word.lower())
 
         # i at the beginning of a word
         if word[0] == "i" and word[1] in self.VOWELS:
             word[0] = "j"
+
+        # word has prefix
+        if word_prefix_end_index != None and word[word_prefix_end_index] == "i":
+            # prefix + i + vowel
+            if word[word_prefix_end_index + 1] in self.VOWELS:
+                word[word_prefix_end_index] = "j"
+            #prefix + i + consonant
+            else:
+                word.insert(word_prefix_end_index, "j")
 
         return "".join(word)
 
@@ -95,4 +109,4 @@ class Preprocessor(object):
         return syllabified
 
 if __name__ == "__main__":
-    print(Preprocessor("test", ['.']).i_to_j("iuuo"))
+    print(Preprocessor("test", ['.']).i_to_j("conicio"))
