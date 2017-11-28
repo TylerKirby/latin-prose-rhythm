@@ -82,6 +82,13 @@ class Preprocessor(object):
 
         return "".join(word)
 
+    def i_u_to_j_v(self):
+        converted_text = []
+        for word in self.text.split(" "):
+            converted_word = self.i_to_j(self.u_to_v(word))
+            converted_text.append(converted_word)
+        return " ".join(converted_text)
+
     def preprocessed_text(self):
         """
         Tokenize text on supplied characters.
@@ -109,4 +116,7 @@ class Preprocessor(object):
         return syllabified
 
 if __name__ == "__main__":
-    print(Preprocessor("test", ['.']).i_to_j("conicio"))
+    test_text = "Mihi conicio iui it, quam optaram, auditu dederunt: te miror, Antoni, quorum. Iuuenum iuuo coniectus et si cetera; coniugo auctor uia uector."
+    test_class = Preprocessor(test_text, ['.'])
+    print(test_class.i_u_to_j_v())
+    print(test_class.u_to_v("iui"))
