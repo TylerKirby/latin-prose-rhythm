@@ -35,11 +35,11 @@ class Preprocessor(object):
             if char_index != len(word) - 1 and char == "u":
                 # consonant + u + vowel (that's not i)
                 if word[char_index - 1] not in self.VOWELS and word[char_index + 1] in self.VOWELS and word[
-                            char_index + 1] is not "u" and word[char_index + 1] is not "i" and word[
+                            char_index + 1] != "u" and word[char_index + 1] != "i" and word[
                             char_index + 2] in self.VOWELS:
                     word[char_index] = "v"
                 # vowel preceeds u and vowel follows
-                if len(word) > 2 and word[char_index - 1] in self.VOWELS and word[char_index + 1] in self.VOWELS and word[char_index - 1] != "i":
+                if len(word) > 2 and word[char_index - 1] in self.VOWELS and word[char_index + 1] in self.VOWELS and word[char_index + 1] != "u":
                     word[char_index] = "v"
                 # consonant + u + u + vowel
                 if len(word) > 3 and word[char_index - 1] not in self.VOWELS and word[char_index + 1] == "u" and word[
@@ -49,8 +49,8 @@ class Preprocessor(object):
                 if len(word) > char_index + 2 and word[char_index - 1] not in self.VOWELS and word[char_index + 1] == "i" and word[
                             char_index + 2] not in self.VOWELS:
                     word[char_index] = "v"
-                # i + u + u
-                if len(word) > 3 and word[char_index - 1] == "i" and word[char_index + 1] == "u":
+                # i + u + u + vowel
+                if len(word) > 3 and word[char_index - 1] == "i" and word[char_index + 1] == "u" and word[char_index + 2] in self.VOWELS:
                     word[char_index + 1] = "v"
         return "".join(word)
 
@@ -83,6 +83,11 @@ class Preprocessor(object):
         return "".join(word)
 
     def i_u_to_j_v(self):
+        """
+        Convert all u's and i's to v's and j's.
+        Note that u to v converter must be used before i to j converter.
+        :return:
+        """
         converted_text = []
         for word in self.text.split(" "):
             converted_word = self.i_to_j(self.u_to_v(word))
@@ -119,4 +124,3 @@ if __name__ == "__main__":
     test_text = "Mihi conicio iui it, quam optaram, auditu dederunt: te miror, Antoni, quorum. Iuuenum iuuo coniectus et si cetera; coniugo auctor uia uector."
     test_class = Preprocessor(test_text, ['.'])
     print(test_class.i_u_to_j_v())
-    print(test_class.u_to_v("iui"))

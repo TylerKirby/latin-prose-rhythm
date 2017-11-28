@@ -61,6 +61,7 @@ def test_u_to_v():
     assert preprocessor.u_to_v("iuuenum") == "iuvenum"
     # extras
     assert preprocessor.u_to_v("adiuuo") == "adiuvo"
+    assert preprocessor.u_to_v("iui") == "ivi"
 
 def test_i_to_j():
     # initial i + consonant (not u/v)
