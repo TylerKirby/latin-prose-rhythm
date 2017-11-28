@@ -78,7 +78,7 @@ def test_i_to_j():
     assert preprocessor.i_to_j("ivi") == "ivi"
     # i after prefix
     assert preprocessor.i_to_j("adicio") == "adjicio"
-    assert preprocessor.i_to_j("adiectus") == "adjectus" # TODO: double check accuracy here
+    assert preprocessor.i_to_j("adiectus") == "adjectus"
     assert preprocessor.i_to_j("abicio") == "abjicio"
     assert preprocessor.i_to_j("abiectus") == "abjectus"
     assert preprocessor.i_to_j("conicio") == "conjicio"
