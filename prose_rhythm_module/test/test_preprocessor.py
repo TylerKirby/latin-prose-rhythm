@@ -91,3 +91,12 @@ def test_i_to_j():
     assert preprocessor.i_to_j("coniunctus") == "conjunctus"
     assert preprocessor.i_to_j("adiuvo") == "adjuvo"
 
+def test_i_u_to_j_v():
+   TEST_TEXT1 = "Mihi conicio iui it, quam optaram, auditu dederunt: te miror, Antoni, quorum. Iuuenum iuuo coniectus et si cetera; coniugo auctor uia uector."
+   CORRECT1 = "mihi conjicio ivi it, quam optaram, auditu dederunt: te miror, antoni, quorum. juvenum juvo conjectus et si cetera; conjugo auctor via vector."
+   test_class1 = Preprocessor(text=TEST_TEXT1)
+   assert test_class1.i_u_to_j_v() == CORRECT1
+
+
+
+

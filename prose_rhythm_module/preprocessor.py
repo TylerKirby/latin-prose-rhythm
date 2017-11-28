@@ -8,7 +8,7 @@ class Preprocessor(object):
 
     VOWELS = ['ā', 'ē', 'ī', 'ō', 'ū', 'ȳ','a', 'e', 'i', 'o', 'u', 'y']
 
-    def __init__(self, text, punctuation):
+    def __init__(self, text, punctuation=['.']):
         self.text = text
         self.punctuation = punctuation
 
