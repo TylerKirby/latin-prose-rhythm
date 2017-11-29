@@ -2,11 +2,15 @@
 Preprocessor
 """
 
+import regex as re
+
 from cltk.stem.latin.syllabifier import Syllabifier
 
 class Preprocessor(object):
 
     VOWELS = ['ā', 'ē', 'ī', 'ō', 'ū', 'ȳ','a', 'e', 'i', 'o', 'u', 'y']
+    LONG_VOWELS = ['ā', 'ē', 'ī', 'ō', 'ū']
+    DIPHTHONGS = ['ae', 'au', 'ei', 'eu', 'oe', 'ui']
 
     def __init__(self, text, punctuation=['.']):
         self.text = text
@@ -94,33 +98,85 @@ class Preprocessor(object):
             converted_text.append(converted_word)
         return " ".join(converted_text)
 
+    def tokenize_syllables(self, word):
+        """
+        Tokenize syllables for word.
+        "mihi" -> [{"syllable": "mi", index: 0, ... } ... ]
+        Syllable properties:
+            syllable: string -> syllable
+            index: int -> postion in word
+            long_by_nature: bool -> is syllable long by nature
+            accent: bool -> does receive accent
+        :param word: string
+        :return: list
+        """
+        syllable_tokens = []
+        syllables = Syllabifier().syllabify(word)
+
+        longs = self.LONG_VOWELS + self.DIPHTHONGS
+
+        for i in range(0, len(syllables)):
+            # basic properties
+            syllable_dict = {"syllable": syllables[i], "index": i}
+
+            # is long by nature
+            syllable_dict["long_by_nature"] = True if any(long in syllables[i] for long in longs) else False
+
+            # is accented
+            if i == len(syllables) - 2 and syllable_dict["long_by_nature"]:
+                syllable_dict["accent"] = True
+            elif i == len(syllables):
+                syllable_dict["accent"] = True
+            else:
+                syllable_dict["accent"] = False
+
+            syllable_tokens.append(syllable_dict)
+
+        return syllable_tokens
+
+    def tokenize_words(self, sentence):
+        """
+        Tokenize words for sentence.
+        "Puella bona est" -> [{word: puella, index: 0, ... }, ... ]
+        Word properties:
+            word: string -> word
+            index: int -> position in sentence
+            syllables: list -> list of syllable objects
+            syllables_count: int -> number of syllables in word
+        :param sentence: string
+        :return: list
+        """
+        tokens = []
+        split_sent = sentence.split(" ")
+        for i in range(0, len(split_sent)):
+            # basic properties
+            word_dict = {"word": split_sent[i], "index": i}
+            # syllables and syllables count
+            word_dict["syllables"] = self.tokenize_syllables(split_sent[i])
+            word_dict["syllables_count"] = len(word_dict["syllables"])
+
+            tokens.append(word_dict)
+
+        return tokens
+
     def tokenize(self):
         """
         Tokenize text on supplied characters.
-        :return: tokenized text
-        :rtype : list
+        "Puella bona est. Puer malus est." -> [ [{word: puella, syllables: [...], index: 0}, ... ], ... ]
+        :return:list
         """
-        default_seperator = self.punctuation[0]
-        for punc in self.punctuation[1:]:
+        # tokenize text on supplied punc
+        default_seperator = '.'
+        for punc in self.punctuation:
             self.text = self.text.replace(punc, default_seperator)
-        return [sentence.strip() for sentence in self._i_u_to_j_v().split(default_seperator) if sentence.strip() is not '']
+        # regex remove all non-alphanumeric chars except '.' and ' ', then convert i/u to j/v
+        clean_text = re.sub(r"[^a-z.\s]", "", self._i_u_to_j_v())
+        tokenized_sentences = [sentence.strip() for sentence in clean_text.split(default_seperator) if sentence.strip() is not '']
 
-    def syllabify(self):
-        """
-        Syllabify text.
-        :return: syllabified text
-        :rtype : list
-        """
-        preprocessed_text = self.tokenize()
-        syllabifier = Syllabifier()
-        syllabified_sentence = []
-        for sentence in preprocessed_text:
-            syllabified_words = [syllabifier.syllabify(word) for word in sentence.lower().split(' ') if '[' not in word]
-            syllabified_sentence.append(syllabified_words)
-        syllabified = [sentence for sentence in syllabified_sentence if [] not in sentence]
-        return syllabified
+        return [self.tokenize_words(sentence) for sentence in tokenized_sentences]
+
 
 if __name__ == "__main__":
     test_text = "Mihi conicio iui it, quam optaram, auditu dederunt: te miror, Antoni, quorum. Iuuenum iuuo coniectus et si cetera; coniugo auctor uia uector."
-    test_class = Preprocessor(test_text, ['.'])
+    test_class = Preprocessor(test_text, ['.', ';'])
     print(test_class.tokenize())
