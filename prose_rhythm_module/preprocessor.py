@@ -13,7 +13,7 @@ class Preprocessor(object):
         self.punctuation = punctuation
 
 
-    def u_to_v(self, word):
+    def _u_to_v(self, word):
         """
         Convert u in word to v.
         :param word: string
@@ -54,7 +54,7 @@ class Preprocessor(object):
                     word[char_index + 1] = "v"
         return "".join(word)
 
-    def i_to_j(self, word):
+    def _i_to_j(self, word):
         """
         Convert i in word to j.
         :param word: string
@@ -82,7 +82,7 @@ class Preprocessor(object):
 
         return "".join(word)
 
-    def i_u_to_j_v(self):
+    def _i_u_to_j_v(self):
         """
         Convert all u's and i's to v's and j's.
         Note that u to v converter must be used before i to j converter.
@@ -90,11 +90,11 @@ class Preprocessor(object):
         """
         converted_text = []
         for word in self.text.split(" "):
-            converted_word = self.i_to_j(self.u_to_v(word))
+            converted_word = self._i_to_j(self._u_to_v(word))
             converted_text.append(converted_word)
         return " ".join(converted_text)
 
-    def preprocessed_text(self):
+    def tokenize(self):
         """
         Tokenize text on supplied characters.
         :return: tokenized text
@@ -103,15 +103,15 @@ class Preprocessor(object):
         default_seperator = self.punctuation[0]
         for punc in self.punctuation[1:]:
             self.text = self.text.replace(punc, default_seperator)
-        return [sentence.strip() for sentence in self.text.split(default_seperator) if sentence.strip() is not '']
+        return [sentence.strip() for sentence in self._i_u_to_j_v().split(default_seperator) if sentence.strip() is not '']
 
-    def syllabified(self):
+    def syllabify(self):
         """
         Syllabify text.
         :return: syllabified text
         :rtype : list
         """
-        preprocessed_text = self.preprocessed_text()
+        preprocessed_text = self.tokenize()
         syllabifier = Syllabifier()
         syllabified_sentence = []
         for sentence in preprocessed_text:
@@ -123,4 +123,4 @@ class Preprocessor(object):
 if __name__ == "__main__":
     test_text = "Mihi conicio iui it, quam optaram, auditu dederunt: te miror, Antoni, quorum. Iuuenum iuuo coniectus et si cetera; coniugo auctor uia uector."
     test_class = Preprocessor(test_text, ['.'])
-    print(test_class.i_u_to_j_v())
+    print(test_class.tokenize())
