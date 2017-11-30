@@ -8,8 +8,9 @@ from cltk.stem.latin.syllabifier import Syllabifier
 
 class Preprocessor(object):
 
-    VOWELS = ['ā', 'ē', 'ī', 'ō', 'ū', 'ȳ','a', 'e', 'i', 'o', 'u', 'y']
+    SHORT_VOWELS = ['a', 'e', 'i', 'o', 'u', 'y']
     LONG_VOWELS = ['ā', 'ē', 'ī', 'ō', 'ū']
+    VOWELS = SHORT_VOWELS + LONG_VOWELS
     DIPHTHONGS = ['ae', 'au', 'ei', 'eu', 'oe', 'ui']
 
     def __init__(self, text, punctuation=['.']):
@@ -123,12 +124,16 @@ class Preprocessor(object):
             syllable_dict["long_by_nature"] = True if any(long in syllables[i] for long in longs) else False
 
             # is accented
-            if i == len(syllables) - 2 and syllable_dict["long_by_nature"]:
-                syllable_dict["accent"] = True
-            elif i == len(syllables):
-                syllable_dict["accent"] = True
+            if len(syllables) > 2 and i == len(syllables) - 2:
+                if syllable_dict["long_by_nature"]:
+                    syllable_dict["accented"] = True
+                else:
+                    syllable_tokens[i - 1]["accented"] = True
+            elif len(syllables) == 2 and i == 0:
+                syllable_dict["accented"] = True
             else:
-                syllable_dict["accent"] = False
+                syllable_dict["accented"] = False
+
 
             syllable_tokens.append(syllable_dict)
 
@@ -151,9 +156,18 @@ class Preprocessor(object):
         for i in range(0, len(split_sent)):
             # basic properties
             word_dict = {"word": split_sent[i], "index": i}
+
             # syllables and syllables count
             word_dict["syllables"] = self.tokenize_syllables(split_sent[i])
             word_dict["syllables_count"] = len(word_dict["syllables"])
+
+            # is elidable
+            if i != 0 and word_dict["syllables"][0]["syllable"][0] in self.VOWELS:
+                last_syll_prev_word = tokens[i - 1]["syllables"][-1]
+                if last_syll_prev_word["syllable"][-1] in self.SHORT_VOWELS:
+                    last_syll_prev_word["elide"] = (True, "weak")
+                elif last_syll_prev_word["syllable"][-1] in self.LONG_VOWELS and self.DIPHTHONGS or last_syll_prev_word["syllable"][-1] == "m":
+                    last_syll_prev_word["elide"] = (True, "strong")
 
             tokens.append(word_dict)
 
@@ -169,6 +183,7 @@ class Preprocessor(object):
         default_seperator = '.'
         for punc in self.punctuation:
             self.text = self.text.replace(punc, default_seperator)
+
         # regex remove all non-alphanumeric chars except '.' and ' ', then convert i/u to j/v
         clean_text = re.sub(r"[^a-z.\s]", "", self._i_u_to_j_v())
         tokenized_sentences = [sentence.strip() for sentence in clean_text.split(default_seperator) if sentence.strip() is not '']
