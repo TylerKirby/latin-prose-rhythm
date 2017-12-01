@@ -105,7 +105,7 @@ class Preprocessor(object):
             converted_text.append(converted_word)
         return " ".join(converted_text)
 
-    def tokenize_syllables(self, word):
+    def _tokenize_syllables(self, word):
         """
         Tokenize syllables for word.
         "mihi" -> [{"syllable": "mi", index: 0, ... } ... ]
@@ -153,7 +153,7 @@ class Preprocessor(object):
 
         return syllable_tokens
 
-    def tokenize_words(self, sentence):
+    def _tokenize_words(self, sentence):
         """
         Tokenize words for sentence.
         "Puella bona est" -> [{word: puella, index: 0, ... }, ... ]
@@ -172,7 +172,7 @@ class Preprocessor(object):
             word_dict = {"word": split_sent[i], "index": i}
 
             # syllables and syllables count
-            word_dict["syllables"] = self.tokenize_syllables(split_sent[i])
+            word_dict["syllables"] = self._tokenize_syllables(split_sent[i])
             word_dict["syllables_count"] = len(word_dict["syllables"])
 
             # is elidable
@@ -207,7 +207,7 @@ class Preprocessor(object):
         clean_text = re.sub(r"[^a-z.\s]", "", self._i_u_to_j_v())
         tokenized_sentences = [sentence.strip() for sentence in clean_text.split(default_seperator) if sentence.strip() is not '']
 
-        return [self.tokenize_words(sentence) for sentence in tokenized_sentences]
+        return [self._tokenize_words(sentence) for sentence in tokenized_sentences]
 
 
 if __name__ == "__main__":
