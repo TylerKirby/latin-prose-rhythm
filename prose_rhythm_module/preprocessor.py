@@ -13,6 +13,12 @@ class Preprocessor(object):
     VOWELS = SHORT_VOWELS + LONG_VOWELS
     DIPHTHONGS = ['ae', 'au', 'ei', 'eu', 'oe', 'ui']
 
+    DIGRAPHS = ['ch', 'ph', 'th', 'qu']
+    LIQUIDS = ['r', 'l']
+    SINGLE_CONSONANTS = ['b', 'c', 'd', 'g', 'k', 'l', 'm', 'n', 'p', 'q', 'r', 's', 't', 'v', 'f', 'j']
+    DOUBLE_CONSONANTS = ['x', 'z']
+    CONSONANTS = SINGLE_CONSONANTS + DOUBLE_CONSONANTS
+
     def __init__(self, text, punctuation=['.']):
         self.text = text
         self.punctuation = punctuation
@@ -134,6 +140,14 @@ class Preprocessor(object):
             else:
                 syllable_dict["accented"] = False
 
+            # long by position intra word
+            if i > 0 and i > len(syllables) - 1 and syllable_dict["syllable"][-1] in self.CONSONANTS:
+                if syllable_dict["syllable"][-1] in self.DOUBLE_CONSONANTS:
+                    syllable_dict["long_by_position"] = True
+                elif syllables[i + 1][0] in self.CONSONANTS:
+                    syllable_dict["long_by_position"] = True
+            else:
+                syllable_dict["long_by_position"] = False
 
             syllable_tokens.append(syllable_dict)
 
@@ -168,6 +182,11 @@ class Preprocessor(object):
                     last_syll_prev_word["elide"] = (True, "weak")
                 elif last_syll_prev_word["syllable"][-1] in self.LONG_VOWELS and self.DIPHTHONGS or last_syll_prev_word["syllable"][-1] == "m":
                     last_syll_prev_word["elide"] = (True, "strong")
+
+            # long by position inter word
+            if i > 0 and tokens[i - 1]["syllables"][-1]["syllable"][-1] in self.CONSONANTS and word_dict["syllables"][0]["syllable"][0] in self.CONSONANTS:
+                tokens[i - 1]["syllables"][-1]["long_by_position"] = True
+
 
             tokens.append(word_dict)
 
