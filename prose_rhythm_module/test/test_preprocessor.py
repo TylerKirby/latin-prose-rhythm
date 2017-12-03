@@ -166,6 +166,28 @@ def test_tokenize_syllables():
     assert test4[3]["long_by_position"] == False
     assert test5[0]["long_by_position"] == False
 
+def test_tokenize_words():
+    test1 = preprocessor3._tokenize_words("mihi conjiciō ivi it quam optāram auditū dedērunt te miror antōnī quorum.")
+    # word and index
+    assert test1[0]["word"] == "mihi"
+    assert test1[0]["index"] == 0
+    assert test1[1]["word"] == "conjiciō"
+    assert test1[1]["index"] == 1
+    assert len(test1) == 12
+    # syllables and syllable count
+    assert test1[0]["syllables"] == preprocessor3._tokenize_syllables("mihi")
+    assert test1[1]["syllables_count"] == 4
+    assert test1[3]["syllables_count"] == 1
+    # elision
+    assert "elide" not in test1[0]["syllables"][-1]
+    assert "elide" not in test1[3]["syllables"][-1]
+    assert test1[1]["syllables"][-1]["elide"] == (True, "strong")
+    assert test1[2]["syllables"][-1]["elide"] == (True, "weak")
+    assert test1[4]["syllables"][-1]["elide"] == (True, "strong")
+    # long by position inter word
+    test2 = preprocessor3._tokenize_words("puella est bona it con.")
+    assert test2[3]["syllables"][-1]["long_by_position"] == True
+
 
 
 
