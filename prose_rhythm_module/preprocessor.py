@@ -142,7 +142,7 @@ class Preprocessor(object):
             syllable_dict["accented"] = False if "accented" not in syllable_dict else True
 
             # long by position intra word
-            if i > 0 and i > len(syllables) - 1 and syllable_dict["syllable"][-1] in self.CONSONANTS:
+            if i < len(syllables) - 1 and syllable_dict["syllable"][-1] in self.CONSONANTS:
                 if syllable_dict["syllable"][-1] in self.DOUBLE_CONSONANTS:
                     syllable_dict["long_by_position"] = True
                 elif syllables[i + 1][0] in self.CONSONANTS:

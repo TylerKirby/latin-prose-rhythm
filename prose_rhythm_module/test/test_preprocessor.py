@@ -152,6 +152,19 @@ def test_tokenize_syllables():
     assert test4[2]["accented"] == False
     assert test4[3]["accented"] == False
     assert test5[0]["accented"] == True
+    # long by position
+    assert test1[0]["long_by_position"] == False
+    assert test1[1]["long_by_position"] == False
+    assert test2[0]["long_by_position"] == False
+    assert test2[1]["long_by_position"] == False
+    assert test3[0]["long_by_position"] == False
+    assert test3[1]["long_by_position"] == False
+    assert test3[2]["long_by_position"] == False
+    assert test4[0]["long_by_position"] == True
+    assert test4[1]["long_by_position"] == False
+    assert test4[2]["long_by_position"] == False
+    assert test4[3]["long_by_position"] == False
+    assert test5[0]["long_by_position"] == False
 
 
 
