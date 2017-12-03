@@ -12,9 +12,11 @@ TEST_TEXT1 = "[1] [I] Quonam meo fato, patres conscripti, fieri dicam, ut nemo h
             "audacior quam Catilina, furiosior quam Clodius viderere, ultro me maledictis lacessisti, tuamque a me " \
             "alienationem commendationem tibi ad impios civis fore putavisti."
 TEST_TEXT2 = "Mihi conicio iui it, quam optaram, auditu dederunt: te miror, Antoni, quorum. Iuuenum iuuo coniectus et si cetera; coniugo auctor uia uector."
+TEST_TEXT3 = "Mihi coniciō iui it, quam optāram, auditū dedērunt: te miror, Antōnī, quorum. Iuuēnum iuuō coniectus et si cetera; coniugo auctor uiā uector."
 
 preprocessor1 = Preprocessor(text=TEST_TEXT1, punctuation=[':', ';', '.', '?', '!'])
 preprocessor2 = Preprocessor(text=TEST_TEXT2)
+preprocessor3 = Preprocessor(text=TEST_TEXT3)
 
 def test_u_to_v():
     # word begins with 'u'
@@ -88,7 +90,69 @@ def test_i_u_to_j_v():
    CORRECT1 = "mihi conjicio ivi it, quam optaram, auditu dederunt: te miror, antoni, quorum. juvenum juvo conjectus et si cetera; conjugo auctor via vector."
    assert preprocessor2._i_u_to_j_v() == CORRECT1
 
-def test
+def test_tokenize_syllables():
+    test1 = preprocessor3._tokenize_syllables("mihi")
+    test2 = preprocessor3._tokenize_syllables("ivi")
+    test3 = preprocessor3._tokenize_syllables("audītū")
+    test4 = preprocessor3._tokenize_syllables("conjiciō")
+    test5 = preprocessor3._tokenize_syllables("ā")
+    # syllable and index
+    assert test1[0]["syllable"] == "mi"
+    assert test1[0]["index"] == 0
+    assert test1[1]["syllable"] ==  "hi"
+    assert test1[1]["index"] == 1
+    assert len(test1) == 2
+    assert test2[0]["syllable"] == "i"
+    assert test2[0]["index"] == 0
+    assert test2[1]["syllable"] == "vi"
+    assert test2[1]["index"] == 1
+    assert len(test2) == 2
+    assert test3[0]["syllable"] == "au"
+    assert test3[0]["index"] == 0
+    assert test3[1]["syllable"] == "dī"
+    assert test3[1]["index"] == 1
+    assert test3[2]["syllable"] == "tū"
+    assert test3[2]["index"] == 2
+    assert len(test3) == 3
+    assert test4[0]["syllable"] == "con"
+    assert test4[0]["index"] == 0
+    assert test4[1]["syllable"] == "ji"
+    assert test4[1]["index"] == 1
+    assert test4[2]["syllable"] == "ci"
+    assert test4[2]["index"] == 2
+    assert test4[3]["syllable"] == "ō"
+    assert test4[3]["index"] == 3
+    assert len(test4) == 4
+    assert test5[0]["syllable"] == "ā"
+    assert test5[0]["index"] == 0
+    assert len(test5) == 1
+    # long by nature
+    assert test1[0]["long_by_nature"] == False
+    assert test1[1]["long_by_nature"] == False
+    assert test2[0]["long_by_nature"] == False
+    assert test2[1]["long_by_nature"] == False
+    assert test3[0]["long_by_nature"] == True
+    assert test3[1]["long_by_nature"] == True
+    assert test3[2]["long_by_nature"] == True
+    assert test4[0]["long_by_nature"] == False
+    assert test4[1]["long_by_nature"] == False
+    assert test4[2]["long_by_nature"] == False
+    assert test4[3]["long_by_nature"] == True
+    assert test5[0]["long_by_nature"] == True
+    # accent
+    assert test1[0]["accented"] == True
+    assert test1[1]["accented"] == False
+    assert test2[0]["accented"] == True
+    assert test2[1]["accented"] == False
+    assert test3[0]["accented"] == False
+    assert test3[1]["accented"] == True
+    assert test3[2]["accented"] == False
+    assert test4[0]["accented"] == False
+    assert test4[1]["accented"] == True
+    assert test4[2]["accented"] == False
+    assert test4[3]["accented"] == False
+    assert test5[0]["accented"] == True
+
 
 
 

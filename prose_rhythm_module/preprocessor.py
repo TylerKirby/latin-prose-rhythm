@@ -13,11 +13,11 @@ class Preprocessor(object):
     VOWELS = SHORT_VOWELS + LONG_VOWELS
     DIPHTHONGS = ['ae', 'au', 'ei', 'eu', 'oe', 'ui']
 
-    DIGRAPHS = ['ch', 'ph', 'th', 'qu']
-    LIQUIDS = ['r', 'l']
     SINGLE_CONSONANTS = ['b', 'c', 'd', 'g', 'k', 'l', 'm', 'n', 'p', 'q', 'r', 's', 't', 'v', 'f', 'j']
     DOUBLE_CONSONANTS = ['x', 'z']
     CONSONANTS = SINGLE_CONSONANTS + DOUBLE_CONSONANTS
+    DIGRAPHS = ['ch', 'ph', 'th', 'qu']
+    LIQUIDS = ['r', 'l']
 
     def __init__(self, text, punctuation=['.']):
         self.text = text
@@ -113,7 +113,8 @@ class Preprocessor(object):
             syllable: string -> syllable
             index: int -> postion in word
             long_by_nature: bool -> is syllable long by nature
-            accent: bool -> does receive accent
+            accented: bool -> does receive accent
+            long_by_position: bool -> is syllable long by position
         :param word: string
         :return: list
         """
@@ -135,10 +136,10 @@ class Preprocessor(object):
                     syllable_dict["accented"] = True
                 else:
                     syllable_tokens[i - 1]["accented"] = True
-            elif len(syllables) == 2 and i == 0:
+            elif len(syllables) == 2 and i == 0 or len(syllables) == 1:
                 syllable_dict["accented"] = True
-            else:
-                syllable_dict["accented"] = False
+
+            syllable_dict["accented"] = False if "accented" not in syllable_dict else True
 
             # long by position intra word
             if i > 0 and i > len(syllables) - 1 and syllable_dict["syllable"][-1] in self.CONSONANTS:
@@ -211,6 +212,6 @@ class Preprocessor(object):
 
 
 if __name__ == "__main__":
-    test_text = "Mihi conicio iui it, quam optaram, auditu dederunt: te miror, Antoni, quorum. Iuuenum iuuo coniectus et si cetera; coniugo auctor uia uector."
+    test_text = "Mihi coniciō iui it, quam optāram, auditū dedērunt: te miror, Antōnī, quorum. Iuuēnum iuuō coniectus et si cetera; coniugo auctor uiā uector."
     test_class = Preprocessor(test_text, ['.', ';'])
-    print(test_class.tokenize())
+    print(test_class._tokenize_syllables("conjiciō"))
