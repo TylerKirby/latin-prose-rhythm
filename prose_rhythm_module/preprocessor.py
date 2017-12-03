@@ -187,10 +187,13 @@ class Preprocessor(object):
 
             # long by position inter word
             if i > 0 and tokens[i - 1]["syllables"][-1]["syllable"][-1] in self.CONSONANTS and word_dict["syllables"][0]["syllable"][0] in self.CONSONANTS:
-                if any(sest in word_dict["syllables"][0] for sest in self.SESTS):
-                    tokens[i - 1]["syllables"][-1]["long_by_position"] = (False, "sests")
-                else:
+                tokens[i - 1]["syllables"][-1]["long_by_position"] = True
+            elif i > 0 and tokens[i - 1]["syllables"][-1]["syllable"][-1] in self.VOWELS and word_dict["syllables"][0]["syllable"][0] in self.CONSONANTS:
+                if any(sest in word_dict["syllables"][0]["syllable"] for sest in self.SESTS):
+                    tokens[i - 1]["syllables"][-1]["long_by_position"] = (False, "sest")
+                elif word_dict["syllables"][0]["syllable"][0] in self.DOUBLE_CONSONANTS or word_dict["syllables"][0]["syllable"][1] in self.CONSONANTS:
                     tokens[i - 1]["syllables"][-1]["long_by_position"] = True
+
 
 
             tokens.append(word_dict)
@@ -218,4 +221,4 @@ class Preprocessor(object):
 if __name__ == "__main__":
     test_text = "Mihi coniciō iui it, quam optāram, auditū dedērunt: te miror, Antōnī, quorum. Iuuēnum iuuō coniectus et si cetera; coniugo auctor uiā uector."
     test_class = Preprocessor(test_text, ['.', ';'])
-    print(test_class._tokenize_syllables("conjiciō"))
+    print(test_class._tokenize_words("a spes con it no."))

@@ -187,6 +187,14 @@ def test_tokenize_words():
     # long by position inter word
     test2 = preprocessor3._tokenize_words("puella est bona it con.")
     assert test2[3]["syllables"][-1]["long_by_position"] == True
+    # sests test
+    test3 = preprocessor3._tokenize_words("a spes co i no xe cta.")
+    assert test3[0]["syllables"][0]["long_by_position"] == (False, "sest")
+    assert test3[1]["syllables"][0]["long_by_position"] == True
+    assert test3[2]["syllables"][0]["long_by_position"] == False
+    assert test3[3]["syllables"][0]["long_by_position"] == False
+    assert test3[4]["syllables"][0]["long_by_position"] == True
+    assert test3[5]["syllables"][0]["long_by_position"] == True
 
 
 
