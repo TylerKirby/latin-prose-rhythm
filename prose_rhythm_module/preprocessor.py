@@ -18,6 +18,7 @@ class Preprocessor(object):
     CONSONANTS = SINGLE_CONSONANTS + DOUBLE_CONSONANTS
     DIGRAPHS = ['ch', 'ph', 'th', 'qu']
     LIQUIDS = ['r', 'l']
+    SESTS = ["sc", "sm", "sp", "st", "z"]
 
     def __init__(self, text, punctuation=['.']):
         self.text = text
@@ -186,7 +187,10 @@ class Preprocessor(object):
 
             # long by position inter word
             if i > 0 and tokens[i - 1]["syllables"][-1]["syllable"][-1] in self.CONSONANTS and word_dict["syllables"][0]["syllable"][0] in self.CONSONANTS:
-                tokens[i - 1]["syllables"][-1]["long_by_position"] = True
+                if any(sest in word_dict["syllables"][0] for sest in self.SESTS):
+                    tokens[i - 1]["syllables"][-1]["long_by_position"] = (False, "sests")
+                else:
+                    tokens[i - 1]["syllables"][-1]["long_by_position"] = True
 
 
             tokens.append(word_dict)
