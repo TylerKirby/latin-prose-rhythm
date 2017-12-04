@@ -165,6 +165,11 @@ def test_tokenize_syllables():
     assert test4[2]["long_by_position"] == False
     assert test4[3]["long_by_position"] == False
     assert test5[0]["long_by_position"] == False
+    # mute plus liquid
+    test6 = preprocessor3._tokenize_syllables("volūcris")
+    assert test6[1]["long_by_position"] == (False, "mute+liquid")
+    test7 = preprocessor3._tokenize_syllables("oblinō")
+    assert test7[0]["long_by_position"] == True
 
 def test_tokenize_words():
     test1 = preprocessor3._tokenize_words("mihi conjiciō ivi it quam optāram auditū dedērunt te miror antōnī quorum.")
