@@ -13,11 +13,14 @@ class Preprocessor(object):
     VOWELS = SHORT_VOWELS + LONG_VOWELS
     DIPHTHONGS = ['ae', 'au', 'ei', 'eu', 'oe', 'ui']
 
-    DIGRAPHS = ['ch', 'ph', 'th', 'qu']
-    LIQUIDS = ['r', 'l']
     SINGLE_CONSONANTS = ['b', 'c', 'd', 'g', 'k', 'l', 'm', 'n', 'p', 'q', 'r', 's', 't', 'v', 'f', 'j']
     DOUBLE_CONSONANTS = ['x', 'z']
     CONSONANTS = SINGLE_CONSONANTS + DOUBLE_CONSONANTS
+    DIGRAPHS = ['ch', 'ph', 'th', 'qu']
+    LIQUIDS = ['r', 'l']
+    MUTES = ["b", "p", "d", "t", "g", "c"]
+    NASALS = ["m", "n"]
+    SESTS = ["sc", "sm", "sp", "st", "z"]
 
     def __init__(self, text, punctuation=['.']):
         self.text = text
@@ -105,7 +108,7 @@ class Preprocessor(object):
             converted_text.append(converted_word)
         return " ".join(converted_text)
 
-    def tokenize_syllables(self, word):
+    def _tokenize_syllables(self, word):
         """
         Tokenize syllables for word.
         "mihi" -> [{"syllable": "mi", index: 0, ... } ... ]
@@ -113,7 +116,8 @@ class Preprocessor(object):
             syllable: string -> syllable
             index: int -> postion in word
             long_by_nature: bool -> is syllable long by nature
-            accent: bool -> does receive accent
+            accented: bool -> does receive accent
+            long_by_position: bool -> is syllable long by position
         :param word: string
         :return: list
         """
@@ -135,17 +139,24 @@ class Preprocessor(object):
                     syllable_dict["accented"] = True
                 else:
                     syllable_tokens[i - 1]["accented"] = True
-            elif len(syllables) == 2 and i == 0:
+            elif len(syllables) == 2 and i == 0 or len(syllables) == 1:
                 syllable_dict["accented"] = True
-            else:
-                syllable_dict["accented"] = False
+
+            syllable_dict["accented"] = False if "accented" not in syllable_dict else True
 
             # long by position intra word
-            if i > 0 and i > len(syllables) - 1 and syllable_dict["syllable"][-1] in self.CONSONANTS:
-                if syllable_dict["syllable"][-1] in self.DOUBLE_CONSONANTS:
+            if i < len(syllables) - 1 and syllable_dict["syllable"][-1] in self.CONSONANTS:
+                if syllable_dict["syllable"][-1] in self.DOUBLE_CONSONANTS or syllables[i + 1][0] in self.CONSONANTS:
                     syllable_dict["long_by_position"] = True
-                elif syllables[i + 1][0] in self.CONSONANTS:
+                else:
+                    syllable_dict["long_by_position"] = False
+            elif i < len(syllables) - 1 and syllable_dict["syllable"][-1] in self.VOWELS and len(syllables[i + 1]) > 1:
+                if syllables[i + 1][0] in self.MUTES and syllables[i + 1][1] in self.LIQUIDS:
+                    syllable_dict["long_by_position"] = (False, "mute+liquid")
+                elif syllables[i + 1][0] in self.CONSONANTS and syllables[i + 1][1] in self.CONSONANTS or syllables[i + 1][0] in self.DOUBLE_CONSONANTS:
                     syllable_dict["long_by_position"] = True
+                else:
+                    syllable_dict["long_by_position"] = False
             else:
                 syllable_dict["long_by_position"] = False
 
@@ -153,7 +164,7 @@ class Preprocessor(object):
 
         return syllable_tokens
 
-    def tokenize_words(self, sentence):
+    def _tokenize_words(self, sentence):
         """
         Tokenize words for sentence.
         "Puella bona est" -> [{word: puella, index: 0, ... }, ... ]
@@ -172,7 +183,7 @@ class Preprocessor(object):
             word_dict = {"word": split_sent[i], "index": i}
 
             # syllables and syllables count
-            word_dict["syllables"] = self.tokenize_syllables(split_sent[i])
+            word_dict["syllables"] = self._tokenize_syllables(split_sent[i])
             word_dict["syllables_count"] = len(word_dict["syllables"])
 
             # is elidable
@@ -185,8 +196,19 @@ class Preprocessor(object):
 
             # long by position inter word
             if i > 0 and tokens[i - 1]["syllables"][-1]["syllable"][-1] in self.CONSONANTS and word_dict["syllables"][0]["syllable"][0] in self.CONSONANTS:
+                # previous word ends in consonant and current word begins with consonant
                 tokens[i - 1]["syllables"][-1]["long_by_position"] = True
-
+            elif i > 0 and tokens[i - 1]["syllables"][-1]["syllable"][-1] in self.VOWELS and word_dict["syllables"][0]["syllable"][0] in self.CONSONANTS:
+                # previous word ends in vowel and current word begins in consonant
+                if any(sest in word_dict["syllables"][0]["syllable"] for sest in self.SESTS):
+                    # current word begins with sest
+                    tokens[i - 1]["syllables"][-1]["long_by_position"] = (False, "sest")
+                elif word_dict["syllables"][0]["syllable"][0] in self.MUTES and word_dict["syllables"][0]["syllable"][1] in self.LIQUIDS:
+                    # current word begins with mute + liquid
+                    tokens[i - 1]["syllables"][-1]["long_by_position"] = (False, "mute+liquid")
+                elif word_dict["syllables"][0]["syllable"][0] in self.DOUBLE_CONSONANTS or word_dict["syllables"][0]["syllable"][1] in self.CONSONANTS:
+                    # current word begins 2 consonants
+                    tokens[i - 1]["syllables"][-1]["long_by_position"] = True
 
             tokens.append(word_dict)
 
@@ -207,10 +229,10 @@ class Preprocessor(object):
         clean_text = re.sub(r"[^a-z.\s]", "", self._i_u_to_j_v())
         tokenized_sentences = [sentence.strip() for sentence in clean_text.split(default_seperator) if sentence.strip() is not '']
 
-        return [self.tokenize_words(sentence) for sentence in tokenized_sentences]
+        return [self._tokenize_words(sentence) for sentence in tokenized_sentences]
 
 
 if __name__ == "__main__":
-    test_text = "Mihi conicio iui it, quam optaram, auditu dederunt: te miror, Antoni, quorum. Iuuenum iuuo coniectus et si cetera; coniugo auctor uia uector."
+    test_text = "Mihi coniciō iui it, quam optāram, auditū dedērunt: te miror, Antōnī, quorum. Iuuēnum iuuō coniectus et si cetera; coniugo auctor uiā uector."
     test_class = Preprocessor(test_text, ['.', ';'])
-    print(test_class.tokenize())
+    print(test_class._tokenize_words("oblino"))
