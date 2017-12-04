@@ -18,6 +18,8 @@ class Preprocessor(object):
     CONSONANTS = SINGLE_CONSONANTS + DOUBLE_CONSONANTS
     DIGRAPHS = ['ch', 'ph', 'th', 'qu']
     LIQUIDS = ['r', 'l']
+    MUTES = ["b", "p", "d", "t", "g", "c"]
+    NASALS = ["m", "n"]
     SESTS = ["sc", "sm", "sp", "st", "z"]
 
     def __init__(self, text, punctuation=['.']):
@@ -144,10 +146,17 @@ class Preprocessor(object):
 
             # long by position intra word
             if i < len(syllables) - 1 and syllable_dict["syllable"][-1] in self.CONSONANTS:
-                if syllable_dict["syllable"][-1] in self.DOUBLE_CONSONANTS:
+                if syllable_dict["syllable"][-1] in self.DOUBLE_CONSONANTS or syllables[i + 1][0] in self.CONSONANTS:
                     syllable_dict["long_by_position"] = True
-                elif syllables[i + 1][0] in self.CONSONANTS:
+                else:
+                    syllable_dict["long_by_position"] = False
+            elif i < len(syllables) - 1 and syllable_dict["syllable"][-1] in self.VOWELS and len(syllables[i + 1]) > 1:
+                if syllables[i + 1][0] in self.MUTES and syllables[i + 1][1] in self.LIQUIDS:
+                    syllable_dict["long_by_position"] = (False, "mute+liquid")
+                elif syllables[i + 1][0] in self.CONSONANTS and syllables[i + 1][1] in self.CONSONANTS or syllables[i + 1][0] in self.DOUBLE_CONSONANTS:
                     syllable_dict["long_by_position"] = True
+                else:
+                    syllable_dict["long_by_position"] = False
             else:
                 syllable_dict["long_by_position"] = False
 
@@ -187,14 +196,19 @@ class Preprocessor(object):
 
             # long by position inter word
             if i > 0 and tokens[i - 1]["syllables"][-1]["syllable"][-1] in self.CONSONANTS and word_dict["syllables"][0]["syllable"][0] in self.CONSONANTS:
+                # previous word ends in consonant and current word begins with consonant
                 tokens[i - 1]["syllables"][-1]["long_by_position"] = True
             elif i > 0 and tokens[i - 1]["syllables"][-1]["syllable"][-1] in self.VOWELS and word_dict["syllables"][0]["syllable"][0] in self.CONSONANTS:
+                # previous word ends in vowel and current word begins in consonant
                 if any(sest in word_dict["syllables"][0]["syllable"] for sest in self.SESTS):
+                    # current word begins with sest
                     tokens[i - 1]["syllables"][-1]["long_by_position"] = (False, "sest")
+                elif word_dict["syllables"][0]["syllable"][0] in self.MUTES and word_dict["syllables"][0]["syllable"][1] in self.LIQUIDS:
+                    # current word begins with mute + liquid
+                    tokens[i - 1]["syllables"][-1]["long_by_position"] = (False, "mute+liquid")
                 elif word_dict["syllables"][0]["syllable"][0] in self.DOUBLE_CONSONANTS or word_dict["syllables"][0]["syllable"][1] in self.CONSONANTS:
+                    # current word begins 2 consonants
                     tokens[i - 1]["syllables"][-1]["long_by_position"] = True
-
-
 
             tokens.append(word_dict)
 
@@ -221,4 +235,4 @@ class Preprocessor(object):
 if __name__ == "__main__":
     test_text = "Mihi coniciō iui it, quam optāram, auditū dedērunt: te miror, Antōnī, quorum. Iuuēnum iuuō coniectus et si cetera; coniugo auctor uiā uector."
     test_class = Preprocessor(test_text, ['.', ';'])
-    print(test_class._tokenize_words("a spes con it no."))
+    print(test_class._tokenize_words("oblino"))
