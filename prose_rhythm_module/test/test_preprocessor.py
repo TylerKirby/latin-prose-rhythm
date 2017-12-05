@@ -153,23 +153,23 @@ def test_tokenize_syllables():
     assert test4[3]["accented"] == False
     assert test5[0]["accented"] == True
     # long by position
-    assert test1[0]["long_by_position"] == False
-    assert test1[1]["long_by_position"] == False
-    assert test2[0]["long_by_position"] == False
-    assert test2[1]["long_by_position"] == False
-    assert test3[0]["long_by_position"] == False
-    assert test3[1]["long_by_position"] == False
-    assert test3[2]["long_by_position"] == False
-    assert test4[0]["long_by_position"] == True
-    assert test4[1]["long_by_position"] == False
-    assert test4[2]["long_by_position"] == False
-    assert test4[3]["long_by_position"] == False
-    assert test5[0]["long_by_position"] == False
+    assert test1[0]["long_by_position"] == (False, None)
+    assert test1[1]["long_by_position"] == (False, None)
+    assert test2[0]["long_by_position"] == (False, None)
+    assert test2[1]["long_by_position"] == (False, None)
+    assert test3[0]["long_by_position"] == (False, None)
+    assert test3[1]["long_by_position"] == (False, None)
+    assert test3[2]["long_by_position"] == (False, None)
+    assert test4[0]["long_by_position"] == (True, None)
+    assert test4[1]["long_by_position"] == (False, None)
+    assert test4[2]["long_by_position"] == (False, None)
+    assert test4[3]["long_by_position"] == (False, None)
+    assert test5[0]["long_by_position"] == (False, None)
     # mute plus liquid
     test6 = preprocessor3._tokenize_syllables("volūcris")
     assert test6[1]["long_by_position"] == (False, "mute+liquid")
     test7 = preprocessor3._tokenize_syllables("oblinō")
-    assert test7[0]["long_by_position"] == True
+    assert test7[0]["long_by_position"] == (True, None)
 
 def test_tokenize_words():
     test1 = preprocessor3._tokenize_words("mihi conjiciō ivi it quam optāram auditū dedērunt te miror antōnī quorum.")
@@ -184,19 +184,19 @@ def test_tokenize_words():
     assert test1[1]["syllables_count"] == 4
     assert test1[3]["syllables_count"] == 1
     # elision
-    assert "elide" not in test1[0]["syllables"][-1]
-    assert "elide" not in test1[3]["syllables"][-1]
+    assert test1[0]["syllables"][-1]["elide"] == (False, None)
+    assert test1[3]["syllables"][-1]["elide"] == (False, None)
     assert test1[1]["syllables"][-1]["elide"] == (True, "strong")
     assert test1[2]["syllables"][-1]["elide"] == (True, "weak")
     assert test1[4]["syllables"][-1]["elide"] == (True, "strong")
     # long by position inter word
     test2 = preprocessor3._tokenize_words("puella est bona it con.")
-    assert test2[3]["syllables"][-1]["long_by_position"] == True
+    assert test2[3]["syllables"][-1]["long_by_position"] == (True, None)
     # sests test
     test3 = preprocessor3._tokenize_words("a spes co i no xe cta.")
     assert test3[0]["syllables"][0]["long_by_position"] == (False, "sest")
-    assert test3[1]["syllables"][0]["long_by_position"] == True
-    assert test3[2]["syllables"][0]["long_by_position"] == False
-    assert test3[3]["syllables"][0]["long_by_position"] == False
-    assert test3[4]["syllables"][0]["long_by_position"] == True
-    assert test3[5]["syllables"][0]["long_by_position"] == True
+    assert test3[1]["syllables"][0]["long_by_position"] == (True, None)
+    assert test3[2]["syllables"][0]["long_by_position"] == (False, None)
+    assert test3[3]["syllables"][0]["long_by_position"] == (False, None)
+    assert test3[4]["syllables"][0]["long_by_position"] == (True, None)
+    assert test3[5]["syllables"][0]["long_by_position"] == (True, None)
