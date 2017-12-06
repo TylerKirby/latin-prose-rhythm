@@ -57,6 +57,7 @@ def test_u_to_v():
     # extras
     assert preprocessor1._u_to_v("adiuuo") == "adiuvo"
     assert preprocessor1._u_to_v("iui") == "ivi"
+    assert preprocessor1._u_to_v("quī") == "quī"
 
 def test_i_to_j():
     # initial i + consonant (not u/v)
@@ -85,6 +86,8 @@ def test_i_to_j():
     assert preprocessor1._i_to_j("coniungo") == "conjungo"
     assert preprocessor1._i_to_j("coniunctus") == "conjunctus"
     assert preprocessor1._i_to_j("adiuvo") == "adjuvo"
+    # i in prefix
+    assert preprocessor1._i_to_j("in") == "in"
 
 def test_i_u_to_j_v():
    CORRECT1 = "mihi conjicio ivi it, quam optaram, auditu dederunt: te miror, antoni, quorum. juvenum juvo conjectus et si cetera; conjugo auctor via vector."
