@@ -8,23 +8,30 @@ from cltk.stem.latin.syllabifier import Syllabifier
 
 class Preprocessor(object):
 
-    SHORT_VOWELS = ['a', 'e', 'i', 'o', 'u', 'y']
-    LONG_VOWELS = ['ā', 'ē', 'ī', 'ō', 'ū']
+    SHORT_VOWELS = ["a", "e", "i", "o", "u", "y"]
+    LONG_VOWELS = ["ā", "ē", "ī", "ō", "ū"]
     VOWELS = SHORT_VOWELS + LONG_VOWELS
-    DIPHTHONGS = ['ae', 'au', 'ei', 'eu', 'oe', 'ui']
+    DIPHTHONGS = ["ae", "au", "ei", "eu", "oe", "ui"]
 
-    SINGLE_CONSONANTS = ['b', 'c', 'd', 'g', 'k', 'l', 'm', 'n', 'p', 'q', 'r', 's', 't', 'v', 'f', 'j']
-    DOUBLE_CONSONANTS = ['x', 'z']
+    SINGLE_CONSONANTS = ["b", "c", "d", "g", "k", "l", "m", "n", "p", "q", "r", "s", "t", "v", "f", "j"]
+    DOUBLE_CONSONANTS = ["x", "z"]
     CONSONANTS = SINGLE_CONSONANTS + DOUBLE_CONSONANTS
-    DIGRAPHS = ['ch', 'ph', 'th', 'qu']
-    LIQUIDS = ['r', 'l']
+    DIGRAPHS = ["ch", "ph", "th", "qu"]
+    LIQUIDS = ["r", "l"]
     MUTES = ["b", "p", "d", "t", "g", "c"]
     NASALS = ["m", "n"]
     SESTS = ["sc", "sm", "sp", "st", "z"]
 
-    def __init__(self, text, punctuation=['.']):
+    ABBREV = ['Agr.', 'Ap.', 'A.', 'K.', 'D.', 'F.', 'C.',
+                       'Cn.', 'L.', 'Mam.', 'M\'', 'M.', 'N.', 'Oct.',
+                       'Opet.', 'Post.', 'Pro.', 'P.', 'Q.', 'Sert.',
+                       'Ser.', 'Sex.', 'S.', 'St.', 'Ti.', 'T.', 'V.',
+                       'Vol.', 'Vop.', 'Pl.']
+
+    def __init__(self, text, punctuation=[".", "?", "!", ";", ":"], title="No Title"):
         self.text = text
         self.punctuation = punctuation
+        self.title = title
 
 
     def _u_to_v(self, word):
@@ -48,7 +55,7 @@ class Preprocessor(object):
             char_index = word.index(char)
             if char_index != len(word) - 1 and char == "u":
                 # consonant + u + vowel (that's not i)
-                if word[char_index - 1] not in self.VOWELS and word[char_index + 1] in self.VOWELS and word[
+                if len(word) > char_index + 2 and word[char_index - 1] not in self.VOWELS and word[char_index + 1] in self.VOWELS and word[
                             char_index + 1] != "u" and word[char_index + 1] != "i" and word[
                             char_index + 2] in self.VOWELS:
                     word[char_index] = "v"
@@ -86,7 +93,7 @@ class Preprocessor(object):
             word[0] = "j"
 
         # word has prefix
-        if word_prefix_end_index != None and word[word_prefix_end_index] == "i":
+        if word_prefix_end_index != None and word_prefix_end_index < len(word) - 1 and word[word_prefix_end_index] == "i":
             # prefix + i + vowel
             if word[word_prefix_end_index + 1] in self.VOWELS:
                 word[word_prefix_end_index] = "j"
@@ -128,7 +135,7 @@ class Preprocessor(object):
 
         for i in range(0, len(syllables)):
             # basic properties
-            syllable_dict = {"syllable": syllables[i], "index": i}
+            syllable_dict = {"syllable": syllables[i], "index": i, "elide": (False, None)}
 
             # is long by nature
             syllable_dict["long_by_nature"] = True if any(long in syllables[i] for long in longs) else False
@@ -147,18 +154,18 @@ class Preprocessor(object):
             # long by position intra word
             if i < len(syllables) - 1 and syllable_dict["syllable"][-1] in self.CONSONANTS:
                 if syllable_dict["syllable"][-1] in self.DOUBLE_CONSONANTS or syllables[i + 1][0] in self.CONSONANTS:
-                    syllable_dict["long_by_position"] = True
+                    syllable_dict["long_by_position"] = (True, None)
                 else:
-                    syllable_dict["long_by_position"] = False
+                    syllable_dict["long_by_position"] = (False, None)
             elif i < len(syllables) - 1 and syllable_dict["syllable"][-1] in self.VOWELS and len(syllables[i + 1]) > 1:
                 if syllables[i + 1][0] in self.MUTES and syllables[i + 1][1] in self.LIQUIDS:
                     syllable_dict["long_by_position"] = (False, "mute+liquid")
                 elif syllables[i + 1][0] in self.CONSONANTS and syllables[i + 1][1] in self.CONSONANTS or syllables[i + 1][0] in self.DOUBLE_CONSONANTS:
-                    syllable_dict["long_by_position"] = True
+                    syllable_dict["long_by_position"] = (True, None)
                 else:
-                    syllable_dict["long_by_position"] = False
+                    syllable_dict["long_by_position"] = (False, None)
             else:
-                syllable_dict["long_by_position"] = False
+                syllable_dict["long_by_position"] = (False, None)
 
             syllable_tokens.append(syllable_dict)
 
@@ -197,7 +204,7 @@ class Preprocessor(object):
             # long by position inter word
             if i > 0 and tokens[i - 1]["syllables"][-1]["syllable"][-1] in self.CONSONANTS and word_dict["syllables"][0]["syllable"][0] in self.CONSONANTS:
                 # previous word ends in consonant and current word begins with consonant
-                tokens[i - 1]["syllables"][-1]["long_by_position"] = True
+                tokens[i - 1]["syllables"][-1]["long_by_position"] = (True, None)
             elif i > 0 and tokens[i - 1]["syllables"][-1]["syllable"][-1] in self.VOWELS and word_dict["syllables"][0]["syllable"][0] in self.CONSONANTS:
                 # previous word ends in vowel and current word begins in consonant
                 if any(sest in word_dict["syllables"][0]["syllable"] for sest in self.SESTS):
@@ -208,7 +215,7 @@ class Preprocessor(object):
                     tokens[i - 1]["syllables"][-1]["long_by_position"] = (False, "mute+liquid")
                 elif word_dict["syllables"][0]["syllable"][0] in self.DOUBLE_CONSONANTS or word_dict["syllables"][0]["syllable"][1] in self.CONSONANTS:
                     # current word begins 2 consonants
-                    tokens[i - 1]["syllables"][-1]["long_by_position"] = True
+                    tokens[i - 1]["syllables"][-1]["long_by_position"] = (True, None)
 
             tokens.append(word_dict)
 
@@ -221,18 +228,31 @@ class Preprocessor(object):
         :return:list
         """
         # tokenize text on supplied punc
-        default_seperator = '.'
+        default_seperator = "."
+
         for punc in self.punctuation:
             self.text = self.text.replace(punc, default_seperator)
 
-        # regex remove all non-alphanumeric chars except '.' and ' ', then convert i/u to j/v
-        clean_text = re.sub(r"[^a-z.\s]", "", self._i_u_to_j_v())
+        for abbrev in self.ABBREV:
+            self.text = self.text.replace(abbrev, "ABBREV")
+
+        clean_text = re.sub(r"[^a-z.\sāēīōū]", "", self._i_u_to_j_v())
+
         tokenized_sentences = [sentence.strip() for sentence in clean_text.split(default_seperator) if sentence.strip() is not '']
 
-        return [self._tokenize_words(sentence) for sentence in tokenized_sentences]
+        tokenized_text = []
+        for sentence in tokenized_sentences:
+            sentence_dict = {}
+            sentence_dict["contains_abbrev"] = True if "abbrev" in sentence else False
+            sentence = re.sub(r"\sabbrev\s", " ", sentence)
+            sentence_dict["plain_text_sentence"] = sentence
+            sentence_dict["structured_sentence"] = self._tokenize_words(sentence)
+            tokenized_text.append(sentence_dict)
+
+        return {"title": self.title, "text": tokenized_text}
 
 
 if __name__ == "__main__":
-    test_text = "Mihi coniciō iui it, quam optāram, auditū dedērunt: te miror, Antōnī, quorum. Iuuēnum iuuō coniectus et si cetera; coniugo auctor uiā uector."
-    test_class = Preprocessor(test_text, ['.', ';'])
-    print(test_class._tokenize_words("oblino"))
+    test_text = "Galliā est omnīs dīvīsa Cn. Caesar P. Curio Sex. Funnyname in partēs trēs quārum ūnam incolunt Belgae aliam Aquītānī tertiam quī ipsōrum lingua Celtae nostra Gallī appellantur. hī omnēs linguā īnstitūtīs lēgibus inter sē differunt. Gallōs ab Aquītānīs Garunna flūmen ā Belgīs Matrona et Sēquana dīvidit. hōrum omnium fortissimī sunt Belgae proptereā quod ā cultū atque hūmānitāte prōvinciae longissimē absunt minimēque ad eōs mercātōrēs saepe commeant atque ea quae ad effēminandōs animōs pertinent important proximīque sunt Germānīs quī trāns Rhēnum incolunt quibuscum continenter bellum gerunt. quā dē causā Helvētiī quoque reliquōs Gallōs virtūte praecēdunt quod ferē cotīdiānīs proeliīs cum Germānīs contendunt cum aut suīs fīnibus eōs prohibent aut ipsī in eōrum fīnibus bellum gerunt. eōrum ūna pars quam Gallōs obtinēre dictum est initium capit ā flūmine Rhodanō continētur Garunna flūmine Ōceanō fīnibus Belgārum attingit etiam ab Sēquanīs et Helvētiīs flūmen Rhēnum vergit ad septentriōnēs."
+    test_class = Preprocessor(test_text, [".", ";"])
+    print(test_class.tokenize())
