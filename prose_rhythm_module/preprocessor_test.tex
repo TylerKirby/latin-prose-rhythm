@@ -1,0 +1,2104 @@
+
+% Default to the notebook output style
+
+    
+
+
+% Inherit from the specified cell style.
+
+
+
+
+    
+\documentclass[11pt]{article}
+
+    
+    
+    \usepackage[T1]{fontenc}
+    % Nicer default font (+ math font) than Computer Modern for most use cases
+    \usepackage{mathpazo}
+
+    % Basic figure setup, for now with no caption control since it's done
+    % automatically by Pandoc (which extracts ![](path) syntax from Markdown).
+    \usepackage{graphicx}
+    % We will generate all images so they have a width \maxwidth. This means
+    % that they will get their normal width if they fit onto the page, but
+    % are scaled down if they would overflow the margins.
+    \makeatletter
+    \def\maxwidth{\ifdim\Gin@nat@width>\linewidth\linewidth
+    \else\Gin@nat@width\fi}
+    \makeatother
+    \let\Oldincludegraphics\includegraphics
+    % Set max figure width to be 80% of text width, for now hardcoded.
+    \renewcommand{\includegraphics}[1]{\Oldincludegraphics[width=.8\maxwidth]{#1}}
+    % Ensure that by default, figures have no caption (until we provide a
+    % proper Figure object with a Caption API and a way to capture that
+    % in the conversion process - todo).
+    \usepackage{caption}
+    \DeclareCaptionLabelFormat{nolabel}{}
+    \captionsetup{labelformat=nolabel}
+
+    \usepackage{adjustbox} % Used to constrain images to a maximum size 
+    \usepackage{xcolor} % Allow colors to be defined
+    \usepackage{enumerate} % Needed for markdown enumerations to work
+    \usepackage{geometry} % Used to adjust the document margins
+    \usepackage{amsmath} % Equations
+    \usepackage{amssymb} % Equations
+    \usepackage{textcomp} % defines textquotesingle
+    % Hack from http://tex.stackexchange.com/a/47451/13684:
+    \AtBeginDocument{%
+        \def\PYZsq{\textquotesingle}% Upright quotes in Pygmentized code
+    }
+    \usepackage{upquote} % Upright quotes for verbatim code
+    \usepackage{eurosym} % defines \euro
+    \usepackage[mathletters]{ucs} % Extended unicode (utf-8) support
+    \usepackage[utf8x]{inputenc} % Allow utf-8 characters in the tex document
+    \usepackage{fancyvrb} % verbatim replacement that allows latex
+    \usepackage{grffile} % extends the file name processing of package graphics 
+                         % to support a larger range 
+    % The hyperref package gives us a pdf with properly built
+    % internal navigation ('pdf bookmarks' for the table of contents,
+    % internal cross-reference links, web links for URLs, etc.)
+    \usepackage{hyperref}
+    \usepackage{longtable} % longtable support required by pandoc >1.10
+    \usepackage{booktabs}  % table support for pandoc > 1.12.2
+    \usepackage[inline]{enumitem} % IRkernel/repr support (it uses the enumerate* environment)
+    \usepackage[normalem]{ulem} % ulem is needed to support strikethroughs (\sout)
+                                % normalem makes italics be italics, not underlines
+    
+
+    
+    
+    % Colors for the hyperref package
+    \definecolor{urlcolor}{rgb}{0,.145,.698}
+    \definecolor{linkcolor}{rgb}{.71,0.21,0.01}
+    \definecolor{citecolor}{rgb}{.12,.54,.11}
+
+    % ANSI colors
+    \definecolor{ansi-black}{HTML}{3E424D}
+    \definecolor{ansi-black-intense}{HTML}{282C36}
+    \definecolor{ansi-red}{HTML}{E75C58}
+    \definecolor{ansi-red-intense}{HTML}{B22B31}
+    \definecolor{ansi-green}{HTML}{00A250}
+    \definecolor{ansi-green-intense}{HTML}{007427}
+    \definecolor{ansi-yellow}{HTML}{DDB62B}
+    \definecolor{ansi-yellow-intense}{HTML}{B27D12}
+    \definecolor{ansi-blue}{HTML}{208FFB}
+    \definecolor{ansi-blue-intense}{HTML}{0065CA}
+    \definecolor{ansi-magenta}{HTML}{D160C4}
+    \definecolor{ansi-magenta-intense}{HTML}{A03196}
+    \definecolor{ansi-cyan}{HTML}{60C6C8}
+    \definecolor{ansi-cyan-intense}{HTML}{258F8F}
+    \definecolor{ansi-white}{HTML}{C5C1B4}
+    \definecolor{ansi-white-intense}{HTML}{A1A6B2}
+
+    % commands and environments needed by pandoc snippets
+    % extracted from the output of `pandoc -s`
+    \providecommand{\tightlist}{%
+      \setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}}
+    \DefineVerbatimEnvironment{Highlighting}{Verbatim}{commandchars=\\\{\}}
+    % Add ',fontsize=\small' for more characters per line
+    \newenvironment{Shaded}{}{}
+    \newcommand{\KeywordTok}[1]{\textcolor[rgb]{0.00,0.44,0.13}{\textbf{{#1}}}}
+    \newcommand{\DataTypeTok}[1]{\textcolor[rgb]{0.56,0.13,0.00}{{#1}}}
+    \newcommand{\DecValTok}[1]{\textcolor[rgb]{0.25,0.63,0.44}{{#1}}}
+    \newcommand{\BaseNTok}[1]{\textcolor[rgb]{0.25,0.63,0.44}{{#1}}}
+    \newcommand{\FloatTok}[1]{\textcolor[rgb]{0.25,0.63,0.44}{{#1}}}
+    \newcommand{\CharTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\StringTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\CommentTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textit{{#1}}}}
+    \newcommand{\OtherTok}[1]{\textcolor[rgb]{0.00,0.44,0.13}{{#1}}}
+    \newcommand{\AlertTok}[1]{\textcolor[rgb]{1.00,0.00,0.00}{\textbf{{#1}}}}
+    \newcommand{\FunctionTok}[1]{\textcolor[rgb]{0.02,0.16,0.49}{{#1}}}
+    \newcommand{\RegionMarkerTok}[1]{{#1}}
+    \newcommand{\ErrorTok}[1]{\textcolor[rgb]{1.00,0.00,0.00}{\textbf{{#1}}}}
+    \newcommand{\NormalTok}[1]{{#1}}
+    
+    % Additional commands for more recent versions of Pandoc
+    \newcommand{\ConstantTok}[1]{\textcolor[rgb]{0.53,0.00,0.00}{{#1}}}
+    \newcommand{\SpecialCharTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\VerbatimStringTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\SpecialStringTok}[1]{\textcolor[rgb]{0.73,0.40,0.53}{{#1}}}
+    \newcommand{\ImportTok}[1]{{#1}}
+    \newcommand{\DocumentationTok}[1]{\textcolor[rgb]{0.73,0.13,0.13}{\textit{{#1}}}}
+    \newcommand{\AnnotationTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    \newcommand{\CommentVarTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    \newcommand{\VariableTok}[1]{\textcolor[rgb]{0.10,0.09,0.49}{{#1}}}
+    \newcommand{\ControlFlowTok}[1]{\textcolor[rgb]{0.00,0.44,0.13}{\textbf{{#1}}}}
+    \newcommand{\OperatorTok}[1]{\textcolor[rgb]{0.40,0.40,0.40}{{#1}}}
+    \newcommand{\BuiltInTok}[1]{{#1}}
+    \newcommand{\ExtensionTok}[1]{{#1}}
+    \newcommand{\PreprocessorTok}[1]{\textcolor[rgb]{0.74,0.48,0.00}{{#1}}}
+    \newcommand{\AttributeTok}[1]{\textcolor[rgb]{0.49,0.56,0.16}{{#1}}}
+    \newcommand{\InformationTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    \newcommand{\WarningTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    
+    
+    % Define a nice break command that doesn't care if a line doesn't already
+    % exist.
+    \def\br{\hspace*{\fill} \\* }
+    % Math Jax compatability definitions
+    \def\gt{>}
+    \def\lt{<}
+    % Document parameters
+    \title{preprocessor\_test}
+    
+    
+    
+
+    % Pygments definitions
+    
+\makeatletter
+\def\PY@reset{\let\PY@it=\relax \let\PY@bf=\relax%
+    \let\PY@ul=\relax \let\PY@tc=\relax%
+    \let\PY@bc=\relax \let\PY@ff=\relax}
+\def\PY@tok#1{\csname PY@tok@#1\endcsname}
+\def\PY@toks#1+{\ifx\relax#1\empty\else%
+    \PY@tok{#1}\expandafter\PY@toks\fi}
+\def\PY@do#1{\PY@bc{\PY@tc{\PY@ul{%
+    \PY@it{\PY@bf{\PY@ff{#1}}}}}}}
+\def\PY#1#2{\PY@reset\PY@toks#1+\relax+\PY@do{#2}}
+
+\expandafter\def\csname PY@tok@w\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.73,0.73}{##1}}}
+\expandafter\def\csname PY@tok@c\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@cp\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.74,0.48,0.00}{##1}}}
+\expandafter\def\csname PY@tok@k\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kp\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kt\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.69,0.00,0.25}{##1}}}
+\expandafter\def\csname PY@tok@o\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@ow\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.67,0.13,1.00}{##1}}}
+\expandafter\def\csname PY@tok@nb\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@nf\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@nc\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@nn\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@ne\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.82,0.25,0.23}{##1}}}
+\expandafter\def\csname PY@tok@nv\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@no\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.53,0.00,0.00}{##1}}}
+\expandafter\def\csname PY@tok@nl\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.63,0.63,0.00}{##1}}}
+\expandafter\def\csname PY@tok@ni\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.60,0.60,0.60}{##1}}}
+\expandafter\def\csname PY@tok@na\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.49,0.56,0.16}{##1}}}
+\expandafter\def\csname PY@tok@nt\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@nd\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.67,0.13,1.00}{##1}}}
+\expandafter\def\csname PY@tok@s\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sd\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@si\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.73,0.40,0.53}{##1}}}
+\expandafter\def\csname PY@tok@se\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.73,0.40,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sr\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.40,0.53}{##1}}}
+\expandafter\def\csname PY@tok@ss\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@sx\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@m\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@gh\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,0.50}{##1}}}
+\expandafter\def\csname PY@tok@gu\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.50,0.00,0.50}{##1}}}
+\expandafter\def\csname PY@tok@gd\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.63,0.00,0.00}{##1}}}
+\expandafter\def\csname PY@tok@gi\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.63,0.00}{##1}}}
+\expandafter\def\csname PY@tok@gr\endcsname{\def\PY@tc##1{\textcolor[rgb]{1.00,0.00,0.00}{##1}}}
+\expandafter\def\csname PY@tok@ge\endcsname{\let\PY@it=\textit}
+\expandafter\def\csname PY@tok@gs\endcsname{\let\PY@bf=\textbf}
+\expandafter\def\csname PY@tok@gp\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,0.50}{##1}}}
+\expandafter\def\csname PY@tok@go\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.53,0.53,0.53}{##1}}}
+\expandafter\def\csname PY@tok@gt\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.27,0.87}{##1}}}
+\expandafter\def\csname PY@tok@err\endcsname{\def\PY@bc##1{\setlength{\fboxsep}{0pt}\fcolorbox[rgb]{1.00,0.00,0.00}{1,1,1}{\strut ##1}}}
+\expandafter\def\csname PY@tok@kc\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kd\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kn\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kr\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@bp\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@fm\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@vc\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@vg\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@vi\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@vm\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@sa\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sb\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sc\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@dl\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@s2\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sh\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@s1\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@mb\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@mf\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@mh\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@mi\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@il\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@mo\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@ch\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@cm\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@cpf\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@c1\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@cs\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+
+\def\PYZbs{\char`\\}
+\def\PYZus{\char`\_}
+\def\PYZob{\char`\{}
+\def\PYZcb{\char`\}}
+\def\PYZca{\char`\^}
+\def\PYZam{\char`\&}
+\def\PYZlt{\char`\<}
+\def\PYZgt{\char`\>}
+\def\PYZsh{\char`\#}
+\def\PYZpc{\char`\%}
+\def\PYZdl{\char`\$}
+\def\PYZhy{\char`\-}
+\def\PYZsq{\char`\'}
+\def\PYZdq{\char`\"}
+\def\PYZti{\char`\~}
+% for compatibility with earlier versions
+\def\PYZat{@}
+\def\PYZlb{[}
+\def\PYZrb{]}
+\makeatother
+
+
+    % Exact colors from NB
+    \definecolor{incolor}{rgb}{0.0, 0.0, 0.5}
+    \definecolor{outcolor}{rgb}{0.545, 0.0, 0.0}
+
+
+
+    
+    % Prevent overflowing lines due to hard-to-break entities
+    \sloppy 
+    % Setup hyperref package
+    \hypersetup{
+      breaklinks=true,  % so long urls are correctly broken across lines
+      colorlinks=true,
+      urlcolor=urlcolor,
+      linkcolor=linkcolor,
+      citecolor=citecolor,
+      }
+    % Slightly bigger margins than the latex defaults
+    
+    \geometry{verbose,tmargin=1in,bmargin=1in,lmargin=1in,rmargin=1in}
+    
+    
+
+    \begin{document}
+    
+    
+    \maketitle
+    
+    
+
+    
+    \hypertarget{test-preprocessor-module}{%
+\section{Test Preprocessor Module}\label{test-preprocessor-module}}
+
+    Import preprocessor class.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}23}]:} \PY{k+kn}{from} \PY{n+nn}{preprocessor} \PY{k}{import} \PY{n}{Preprocessor}
+\end{Verbatim}
+
+
+    Instantiate class with text and punctuation parameters.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}24}]:} \PY{n}{test\PYZus{}text} \PY{o}{=} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Galliā est omnīs dīvīsa in partēs trēs quārum ūnam incolunt Belgae aliam Aquītānī tertiam quī ipsōrum lingua Celtae nostra Gallī appellantur. hī omnēs linguā īnstitūtīs lēgibus inter sē differunt. Gallōs ab Aquītānīs Garunna flūmen ā Belgīs Matrona et Sēquana dīvidit. hōrum omnium fortissimī sunt Belgae proptereā quod ā cultū atque hūmānitāte prōvinciae longissimē absunt minimēque ad eōs mercātōrēs saepe commeant atque ea quae ad effēminandōs animōs pertinent important proximīque sunt Germānīs quī trāns Rhēnum incolunt quibuscum continenter bellum gerunt. quā dē causā Helvētiī quoque reliquōs Gallōs virtūte praecēdunt quod ferē cotīdiānīs proeliīs cum Germānīs contendunt cum aut suīs fīnibus eōs prohibent aut ipsī in eōrum fīnibus bellum gerunt. eōrum ūna pars quam Gallōs obtinēre dictum est initium capit ā flūmine Rhodanō continētur Garunna flūmine Ōceanō fīnibus Belgārum attingit etiam ab Sēquanīs et Helvētiīs flūmen Rhēnum vergit ad septentriōnēs.}\PY{l+s+s2}{\PYZdq{}}
+         \PY{n}{preprocessor} \PY{o}{=} \PY{n}{Preprocessor}\PY{p}{(}\PY{n}{text}\PY{o}{=}\PY{n}{test\PYZus{}text}\PY{p}{,} \PY{n}{title}\PY{o}{=}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Beginning of Caesar}\PY{l+s+s2}{\PYZsq{}}\PY{l+s+s2}{s Gallic War, PHI Text}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+\end{Verbatim}
+
+
+    Create structured tokens with data on words, syllables, long by nature,
+long by position, elision, and accents.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}25}]:} \PY{n}{tokens} \PY{o}{=} \PY{n}{preprocessor}\PY{o}{.}\PY{n}{tokenize}\PY{p}{(}\PY{p}{)}
+\end{Verbatim}
+
+
+    Present data in easy to read format (or at least try.)
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}46}]:} \PY{n+nb}{print}\PY{p}{(}\PY{n}{preprocessor}\PY{o}{.}\PY{n}{title}\PY{p}{)}
+         \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+se}{\PYZbs{}n}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+         \PY{k}{for} \PY{n}{i} \PY{o+ow}{in} \PY{n+nb}{range}\PY{p}{(}\PY{l+m+mi}{0}\PY{p}{,} \PY{n+nb}{len}\PY{p}{(}\PY{n}{tokens}\PY{p}{[}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{text}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]}\PY{p}{)}\PY{p}{)}\PY{p}{:}
+             \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Sentence }\PY{l+s+si}{\PYZob{}0\PYZcb{}}\PY{l+s+s2}{: }\PY{l+s+si}{\PYZob{}1\PYZcb{}}\PY{l+s+s2}{\PYZdq{}}\PY{o}{.}\PY{n}{format}\PY{p}{(}\PY{n}{i}\PY{o}{+}\PY{l+m+mi}{1}\PY{p}{,} \PY{n}{tokens}\PY{p}{[}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{text}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]}\PY{p}{[}\PY{n}{i}\PY{p}{]}\PY{p}{[}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{plain\PYZus{}text\PYZus{}sentence}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]}\PY{p}{)}\PY{p}{)}
+             \PY{k}{for} \PY{n}{word} \PY{o+ow}{in} \PY{n}{tokens}\PY{p}{[}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{text}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]}\PY{p}{[}\PY{n}{i}\PY{p}{]}\PY{p}{[}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{structured\PYZus{}sentence}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]}\PY{p}{:}
+                 \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+se}{\PYZbs{}t}\PY{l+s+s2}{word: }\PY{l+s+si}{\PYZob{}0\PYZcb{}}\PY{l+s+s2}{\PYZdq{}}\PY{o}{.}\PY{n}{format}\PY{p}{(}\PY{n}{word}\PY{p}{[}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{word}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]}\PY{p}{)}\PY{p}{)}
+                 \PY{k}{for} \PY{n}{syllable} \PY{o+ow}{in} \PY{n}{word}\PY{p}{[}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{syllables}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]}\PY{p}{:}
+                     \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+se}{\PYZbs{}t}\PY{l+s+se}{\PYZbs{}t}\PY{l+s+s2}{syllable: }\PY{l+s+si}{\PYZob{}0\PYZcb{}}\PY{l+s+s2}{\PYZdq{}}\PY{o}{.}\PY{n}{format}\PY{p}{(}\PY{n}{syllable}\PY{p}{[}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{syllable}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]}\PY{p}{)}\PY{p}{)}
+                     \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+se}{\PYZbs{}t}\PY{l+s+se}{\PYZbs{}t}\PY{l+s+se}{\PYZbs{}t}\PY{l+s+s2}{long by position: }\PY{l+s+si}{\PYZob{}0\PYZcb{}}\PY{l+s+s2}{\PYZdq{}}\PY{o}{.}\PY{n}{format}\PY{p}{(}\PY{n}{syllable}\PY{p}{[}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{long\PYZus{}by\PYZus{}position}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]}\PY{p}{)}\PY{p}{)}
+                     \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+se}{\PYZbs{}t}\PY{l+s+se}{\PYZbs{}t}\PY{l+s+se}{\PYZbs{}t}\PY{l+s+s2}{long by nature: }\PY{l+s+si}{\PYZob{}0\PYZcb{}}\PY{l+s+s2}{\PYZdq{}}\PY{o}{.}\PY{n}{format}\PY{p}{(}\PY{n}{syllable}\PY{p}{[}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{long\PYZus{}by\PYZus{}nature}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]}\PY{p}{)}\PY{p}{)}
+                     \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+se}{\PYZbs{}t}\PY{l+s+se}{\PYZbs{}t}\PY{l+s+se}{\PYZbs{}t}\PY{l+s+s2}{accented: }\PY{l+s+si}{\PYZob{}0\PYZcb{}}\PY{l+s+s2}{\PYZdq{}}\PY{o}{.}\PY{n}{format}\PY{p}{(}\PY{n}{syllable}\PY{p}{[}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{accented}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]}\PY{p}{)}\PY{p}{)}
+                 \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+se}{\PYZbs{}n}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+             \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+se}{\PYZbs{}n}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+Beginning of Caesar's Gallic War, PHI Text
+
+
+Sentence 1: galliā est omnīs dīvīsa in partēs trēs quārum ūnam incolunt belgae aliam aquītānī tertiam quī ipsōrum lingua celtae nostra gallī appellantur
+	word: galliā
+		syllable: gal
+			long by position: (True, None)
+			long by nature: False
+			accented: True
+		syllable: li
+			long by position: (False, None)
+			long by nature: False
+			accented: False
+		syllable: ā
+			long by position: (False, None)
+			long by nature: True
+			accented: False
+
+
+	word: est
+		syllable: est
+			long by position: (False, None)
+			long by nature: False
+			accented: True
+
+
+	word: omnīs
+		syllable: om
+			long by position: (True, None)
+			long by nature: False
+			accented: True
+		syllable: nīs
+			long by position: (True, None)
+			long by nature: True
+			accented: False
+
+
+	word: dīvīsa
+		syllable: dī
+			long by position: (False, None)
+			long by nature: True
+			accented: False
+		syllable: vī
+			long by position: (False, None)
+			long by nature: True
+			accented: True
+		syllable: sa
+			long by position: (False, None)
+			long by nature: False
+			accented: False
+
+
+	word: in
+		syllable: in
+			long by position: (True, None)
+			long by nature: False
+			accented: True
+
+
+	word: partēs
+		syllable: par
+			long by position: (True, None)
+			long by nature: False
+			accented: True
+		syllable: tēs
+			long by position: (True, None)
+			long by nature: True
+			accented: False
+
+
+	word: trēs
+		syllable: trēs
+			long by position: (True, None)
+			long by nature: True
+			accented: True
+
+
+	word: quārum
+		syllable: quā
+			long by position: (False, None)
+			long by nature: True
+			accented: True
+		syllable: rum
+			long by position: (False, None)
+			long by nature: False
+			accented: False
+
+
+	word: ūnam
+		syllable: ū
+			long by position: (False, None)
+			long by nature: True
+			accented: True
+		syllable: nam
+			long by position: (False, None)
+			long by nature: False
+			accented: False
+
+
+	word: incolunt
+		syllable: in
+			long by position: (True, None)
+			long by nature: False
+			accented: True
+		syllable: co
+			long by position: (False, None)
+			long by nature: False
+			accented: False
+		syllable: lunt
+			long by position: (True, None)
+			long by nature: False
+			accented: False
+
+
+	word: belgae
+		syllable: bel
+			long by position: (True, None)
+			long by nature: False
+			accented: True
+		syllable: gae
+			long by position: (False, None)
+			long by nature: True
+			accented: False
+
+
+	word: aliam
+		syllable: a
+			long by position: (False, None)
+			long by nature: False
+			accented: True
+		syllable: li
+			long by position: (False, None)
+			long by nature: False
+			accented: False
+		syllable: am
+			long by position: (False, None)
+			long by nature: False
+			accented: False
+
+
+	word: aquītānī
+		syllable: a
+			long by position: (False, None)
+			long by nature: False
+			accented: False
+		syllable: quī
+			long by position: (False, None)
+			long by nature: True
+			accented: False
+		syllable: tā
+			long by position: (False, None)
+			long by nature: True
+			accented: True
+		syllable: nī
+			long by position: (False, None)
+			long by nature: True
+			accented: False
+
+
+	word: tertiam
+		syllable: ter
+			long by position: (True, None)
+			long by nature: False
+			accented: True
+		syllable: ti
+			long by position: (False, None)
+			long by nature: False
+			accented: False
+		syllable: am
+			long by position: (True, None)
+			long by nature: False
+			accented: False
+
+
+	word: quī
+		syllable: quī
+			long by position: (False, None)
+			long by nature: True
+			accented: True
+
+
+	word: ipsōrum
+		syllable: ip
+			long by position: (True, None)
+			long by nature: False
+			accented: False
+		syllable: sō
+			long by position: (False, None)
+			long by nature: True
+			accented: True
+		syllable: rum
+			long by position: (True, None)
+			long by nature: False
+			accented: False
+
+
+	word: lingua
+		syllable: lin
+			long by position: (True, None)
+			long by nature: False
+			accented: True
+		syllable: gu
+			long by position: (False, None)
+			long by nature: False
+			accented: False
+		syllable: a
+			long by position: (False, None)
+			long by nature: False
+			accented: False
+
+
+	word: celtae
+		syllable: cel
+			long by position: (True, None)
+			long by nature: False
+			accented: True
+		syllable: tae
+			long by position: (False, None)
+			long by nature: True
+			accented: False
+
+
+	word: nostra
+		syllable: nos
+			long by position: (True, None)
+			long by nature: False
+			accented: True
+		syllable: tra
+			long by position: (False, None)
+			long by nature: False
+			accented: False
+
+
+	word: gallī
+		syllable: gal
+			long by position: (True, None)
+			long by nature: False
+			accented: True
+		syllable: lī
+			long by position: (False, None)
+			long by nature: True
+			accented: False
+
+
+	word: appellantur
+		syllable: ap
+			long by position: (True, None)
+			long by nature: False
+			accented: False
+		syllable: pel
+			long by position: (True, None)
+			long by nature: False
+			accented: True
+		syllable: lan
+			long by position: (True, None)
+			long by nature: False
+			accented: False
+		syllable: tur
+			long by position: (False, None)
+			long by nature: False
+			accented: False
+
+
+
+
+Sentence 2: hī omnēs linguā īnstitūtīs lēgibus inter sē differunt
+	word: hī
+		syllable: hī
+			long by position: (False, None)
+			long by nature: True
+			accented: True
+
+
+	word: omnēs
+		syllable: om
+			long by position: (True, None)
+			long by nature: False
+			accented: True
+		syllable: nēs
+			long by position: (True, None)
+			long by nature: True
+			accented: False
+
+
+	word: linguā
+		syllable: lin
+			long by position: (True, None)
+			long by nature: False
+			accented: True
+		syllable: gu
+			long by position: (False, None)
+			long by nature: False
+			accented: False
+		syllable: ā
+			long by position: (False, None)
+			long by nature: True
+			accented: False
+
+
+	word: īnstitūtīs
+		syllable: īn
+			long by position: (True, None)
+			long by nature: True
+			accented: False
+		syllable: sti
+			long by position: (False, None)
+			long by nature: False
+			accented: False
+		syllable: tū
+			long by position: (False, None)
+			long by nature: True
+			accented: True
+		syllable: tīs
+			long by position: (True, None)
+			long by nature: True
+			accented: False
+
+
+	word: lēgibus
+		syllable: lē
+			long by position: (False, None)
+			long by nature: True
+			accented: True
+		syllable: gi
+			long by position: (False, None)
+			long by nature: False
+			accented: False
+		syllable: bus
+			long by position: (False, None)
+			long by nature: False
+			accented: False
+
+
+	word: inter
+		syllable: in
+			long by position: (True, None)
+			long by nature: False
+			accented: True
+		syllable: ter
+			long by position: (True, None)
+			long by nature: False
+			accented: False
+
+
+	word: sē
+		syllable: sē
+			long by position: (False, None)
+			long by nature: True
+			accented: True
+
+
+	word: differunt
+		syllable: dif
+			long by position: (True, None)
+			long by nature: False
+			accented: True
+		syllable: fe
+			long by position: (False, None)
+			long by nature: False
+			accented: False
+		syllable: runt
+			long by position: (False, None)
+			long by nature: False
+			accented: False
+
+
+
+
+Sentence 3: gallōs ab aquītānīs garunna flūmen ā belgīs matrona et sēquana dīvidit
+	word: gallōs
+		syllable: gal
+			long by position: (True, None)
+			long by nature: False
+			accented: True
+		syllable: lōs
+			long by position: (False, None)
+			long by nature: True
+			accented: False
+
+
+	word: ab
+		syllable: ab
+			long by position: (False, None)
+			long by nature: False
+			accented: True
+
+
+	word: aquītānīs
+		syllable: a
+			long by position: (False, None)
+			long by nature: False
+			accented: False
+		syllable: quī
+			long by position: (False, None)
+			long by nature: True
+			accented: False
+		syllable: tā
+			long by position: (False, None)
+			long by nature: True
+			accented: True
+		syllable: nīs
+			long by position: (True, None)
+			long by nature: True
+			accented: False
+
+
+	word: garunna
+		syllable: ga
+			long by position: (False, None)
+			long by nature: False
+			accented: True
+		syllable: run
+			long by position: (True, None)
+			long by nature: False
+			accented: False
+		syllable: na
+			long by position: (True, None)
+			long by nature: False
+			accented: False
+
+
+	word: flūmen
+		syllable: flū
+			long by position: (False, None)
+			long by nature: True
+			accented: True
+		syllable: men
+			long by position: (False, None)
+			long by nature: False
+			accented: False
+
+
+	word: ā
+		syllable: ā
+			long by position: (False, None)
+			long by nature: True
+			accented: True
+
+
+	word: belgīs
+		syllable: bel
+			long by position: (True, None)
+			long by nature: False
+			accented: True
+		syllable: gīs
+			long by position: (True, None)
+			long by nature: True
+			accented: False
+
+
+	word: matrona
+		syllable: ma
+			long by position: (False, 'mute+liquid')
+			long by nature: False
+			accented: True
+		syllable: tro
+			long by position: (False, None)
+			long by nature: False
+			accented: False
+		syllable: na
+			long by position: (False, None)
+			long by nature: False
+			accented: False
+
+
+	word: et
+		syllable: et
+			long by position: (True, None)
+			long by nature: False
+			accented: True
+
+
+	word: sēquana
+		syllable: sē
+			long by position: (False, None)
+			long by nature: True
+			accented: True
+		syllable: qua
+			long by position: (False, None)
+			long by nature: False
+			accented: False
+		syllable: na
+			long by position: (False, None)
+			long by nature: False
+			accented: False
+
+
+	word: dīvidit
+		syllable: dī
+			long by position: (False, None)
+			long by nature: True
+			accented: True
+		syllable: vi
+			long by position: (False, None)
+			long by nature: False
+			accented: False
+		syllable: dit
+			long by position: (False, None)
+			long by nature: False
+			accented: False
+
+
+
+
+Sentence 4: hōrum omnium fortissimī sunt belgae proptereā quod ā cultū atque hūmānitāte prōvinciae longissimē absunt minimēque ad eōs mercātōrēs saepe commeant atque ea qvae ad effēminandōs animōs pertinent important proximīque sunt germānīs quī trāns rhēnum incolunt qvibuscum continenter bellum gerunt
+	word: hōrum
+		syllable: hō
+			long by position: (False, None)
+			long by nature: True
+			accented: True
+		syllable: rum
+			long by position: (False, None)
+			long by nature: False
+			accented: False
+
+
+	word: omnium
+		syllable: om
+			long by position: (True, None)
+			long by nature: False
+			accented: True
+		syllable: ni
+			long by position: (False, None)
+			long by nature: False
+			accented: False
+		syllable: um
+			long by position: (True, None)
+			long by nature: False
+			accented: False
+
+
+	word: fortissimī
+		syllable: for
+			long by position: (True, None)
+			long by nature: False
+			accented: False
+		syllable: tis
+			long by position: (True, None)
+			long by nature: False
+			accented: True
+		syllable: si
+			long by position: (False, None)
+			long by nature: False
+			accented: False
+		syllable: mī
+			long by position: (False, None)
+			long by nature: True
+			accented: False
+
+
+	word: sunt
+		syllable: sunt
+			long by position: (True, None)
+			long by nature: False
+			accented: True
+
+
+	word: belgae
+		syllable: bel
+			long by position: (True, None)
+			long by nature: False
+			accented: True
+		syllable: gae
+			long by position: (False, 'mute+liquid')
+			long by nature: True
+			accented: False
+
+
+	word: proptereā
+		syllable: prop
+			long by position: (True, None)
+			long by nature: False
+			accented: False
+		syllable: te
+			long by position: (False, None)
+			long by nature: False
+			accented: True
+		syllable: re
+			long by position: (False, None)
+			long by nature: False
+			accented: False
+		syllable: ā
+			long by position: (False, None)
+			long by nature: True
+			accented: False
+
+
+	word: quod
+		syllable: quod
+			long by position: (False, None)
+			long by nature: False
+			accented: True
+
+
+	word: ā
+		syllable: ā
+			long by position: (False, None)
+			long by nature: True
+			accented: True
+
+
+	word: cultū
+		syllable: cul
+			long by position: (True, None)
+			long by nature: False
+			accented: True
+		syllable: tū
+			long by position: (False, None)
+			long by nature: True
+			accented: False
+
+
+	word: atque
+		syllable: at
+			long by position: (True, None)
+			long by nature: False
+			accented: True
+		syllable: que
+			long by position: (False, None)
+			long by nature: False
+			accented: False
+
+
+	word: hūmānitāte
+		syllable: hū
+			long by position: (False, None)
+			long by nature: True
+			accented: False
+		syllable: mā
+			long by position: (False, None)
+			long by nature: True
+			accented: False
+		syllable: ni
+			long by position: (False, None)
+			long by nature: False
+			accented: False
+		syllable: tā
+			long by position: (False, None)
+			long by nature: True
+			accented: True
+		syllable: te
+			long by position: (False, 'mute+liquid')
+			long by nature: False
+			accented: False
+
+
+	word: prōvinciae
+		syllable: prō
+			long by position: (False, None)
+			long by nature: True
+			accented: False
+		syllable: vin
+			long by position: (True, None)
+			long by nature: False
+			accented: True
+		syllable: ci
+			long by position: (False, None)
+			long by nature: False
+			accented: False
+		syllable: ae
+			long by position: (False, None)
+			long by nature: True
+			accented: False
+
+
+	word: longissimē
+		syllable: lon
+			long by position: (True, None)
+			long by nature: False
+			accented: False
+		syllable: gis
+			long by position: (True, None)
+			long by nature: False
+			accented: True
+		syllable: si
+			long by position: (False, None)
+			long by nature: False
+			accented: False
+		syllable: mē
+			long by position: (False, None)
+			long by nature: True
+			accented: False
+
+
+	word: absunt
+		syllable: ab
+			long by position: (True, None)
+			long by nature: False
+			accented: True
+		syllable: sunt
+			long by position: (True, None)
+			long by nature: False
+			accented: False
+
+
+	word: minimēque
+		syllable: mi
+			long by position: (False, None)
+			long by nature: False
+			accented: False
+		syllable: ni
+			long by position: (False, None)
+			long by nature: False
+			accented: False
+		syllable: mē
+			long by position: (False, None)
+			long by nature: True
+			accented: True
+		syllable: que
+			long by position: (False, None)
+			long by nature: False
+			accented: False
+
+
+	word: ad
+		syllable: ad
+			long by position: (False, None)
+			long by nature: False
+			accented: True
+
+
+	word: eōs
+		syllable: e
+			long by position: (False, None)
+			long by nature: False
+			accented: True
+		syllable: ōs
+			long by position: (True, None)
+			long by nature: True
+			accented: False
+
+
+	word: mercātōrēs
+		syllable: mer
+			long by position: (True, None)
+			long by nature: False
+			accented: False
+		syllable: cā
+			long by position: (False, None)
+			long by nature: True
+			accented: False
+		syllable: tō
+			long by position: (False, None)
+			long by nature: True
+			accented: True
+		syllable: rēs
+			long by position: (True, None)
+			long by nature: True
+			accented: False
+
+
+	word: saepe
+		syllable: sae
+			long by position: (False, None)
+			long by nature: True
+			accented: True
+		syllable: pe
+			long by position: (False, None)
+			long by nature: False
+			accented: False
+
+
+	word: commeant
+		syllable: com
+			long by position: (True, None)
+			long by nature: False
+			accented: True
+		syllable: me
+			long by position: (False, None)
+			long by nature: False
+			accented: False
+		syllable: ant
+			long by position: (False, None)
+			long by nature: False
+			accented: False
+
+
+	word: atque
+		syllable: at
+			long by position: (True, None)
+			long by nature: False
+			accented: True
+		syllable: que
+			long by position: (False, None)
+			long by nature: False
+			accented: False
+
+
+	word: ea
+		syllable: e
+			long by position: (False, None)
+			long by nature: False
+			accented: True
+		syllable: a
+			long by position: (True, None)
+			long by nature: False
+			accented: False
+
+
+	word: qvae
+		syllable: qvae
+			long by position: (False, None)
+			long by nature: True
+			accented: True
+
+
+	word: ad
+		syllable: ad
+			long by position: (False, None)
+			long by nature: False
+			accented: True
+
+
+	word: effēminandōs
+		syllable: ef
+			long by position: (True, None)
+			long by nature: False
+			accented: False
+		syllable: fē
+			long by position: (False, None)
+			long by nature: True
+			accented: False
+		syllable: mi
+			long by position: (False, None)
+			long by nature: False
+			accented: True
+		syllable: nan
+			long by position: (True, None)
+			long by nature: False
+			accented: False
+		syllable: dōs
+			long by position: (False, None)
+			long by nature: True
+			accented: False
+
+
+	word: animōs
+		syllable: a
+			long by position: (False, None)
+			long by nature: False
+			accented: True
+		syllable: ni
+			long by position: (False, None)
+			long by nature: False
+			accented: False
+		syllable: mōs
+			long by position: (True, None)
+			long by nature: True
+			accented: False
+
+
+	word: pertinent
+		syllable: per
+			long by position: (True, None)
+			long by nature: False
+			accented: True
+		syllable: ti
+			long by position: (False, None)
+			long by nature: False
+			accented: False
+		syllable: nent
+			long by position: (False, None)
+			long by nature: False
+			accented: False
+
+
+	word: important
+		syllable: im
+			long by position: (True, None)
+			long by nature: False
+			accented: True
+		syllable: por
+			long by position: (True, None)
+			long by nature: False
+			accented: False
+		syllable: tant
+			long by position: (True, None)
+			long by nature: False
+			accented: False
+
+
+	word: proximīque
+		syllable: pro
+			long by position: (True, None)
+			long by nature: False
+			accented: False
+		syllable: xi
+			long by position: (False, None)
+			long by nature: False
+			accented: False
+		syllable: mī
+			long by position: (False, None)
+			long by nature: True
+			accented: True
+		syllable: que
+			long by position: (False, None)
+			long by nature: False
+			accented: False
+
+
+	word: sunt
+		syllable: sunt
+			long by position: (True, None)
+			long by nature: False
+			accented: True
+
+
+	word: germānīs
+		syllable: ger
+			long by position: (True, None)
+			long by nature: False
+			accented: False
+		syllable: mā
+			long by position: (False, None)
+			long by nature: True
+			accented: True
+		syllable: nīs
+			long by position: (True, None)
+			long by nature: True
+			accented: False
+
+
+	word: quī
+		syllable: quī
+			long by position: (False, 'mute+liquid')
+			long by nature: True
+			accented: True
+
+
+	word: trāns
+		syllable: trāns
+			long by position: (True, None)
+			long by nature: True
+			accented: True
+
+
+	word: rhēnum
+		syllable: rhē
+			long by position: (False, None)
+			long by nature: True
+			accented: True
+		syllable: num
+			long by position: (False, None)
+			long by nature: False
+			accented: False
+
+
+	word: incolunt
+		syllable: in
+			long by position: (True, None)
+			long by nature: False
+			accented: True
+		syllable: co
+			long by position: (False, None)
+			long by nature: False
+			accented: False
+		syllable: lunt
+			long by position: (True, None)
+			long by nature: False
+			accented: False
+
+
+	word: qvibuscum
+		syllable: qvi
+			long by position: (False, None)
+			long by nature: False
+			accented: True
+		syllable: bus
+			long by position: (True, None)
+			long by nature: False
+			accented: False
+		syllable: cum
+			long by position: (True, None)
+			long by nature: False
+			accented: False
+
+
+	word: continenter
+		syllable: con
+			long by position: (True, None)
+			long by nature: False
+			accented: False
+		syllable: ti
+			long by position: (False, None)
+			long by nature: False
+			accented: True
+		syllable: nen
+			long by position: (True, None)
+			long by nature: False
+			accented: False
+		syllable: ter
+			long by position: (True, None)
+			long by nature: False
+			accented: False
+
+
+	word: bellum
+		syllable: bel
+			long by position: (True, None)
+			long by nature: False
+			accented: True
+		syllable: lum
+			long by position: (True, None)
+			long by nature: False
+			accented: False
+
+
+	word: gerunt
+		syllable: ge
+			long by position: (False, None)
+			long by nature: False
+			accented: True
+		syllable: runt
+			long by position: (False, None)
+			long by nature: False
+			accented: False
+
+
+
+
+Sentence 5: quā dē causā helvētiī quoque reliquōs gallōs virtūte praecēdunt quod ferē cotīdiānīs proeliīs cum germānīs contendunt cum aut suīs fīnibus eōs prohibent aut ipsī in eōrum fīnibus bellum gerunt
+	word: quā
+		syllable: quā
+			long by position: (False, None)
+			long by nature: True
+			accented: True
+
+
+	word: dē
+		syllable: dē
+			long by position: (False, None)
+			long by nature: True
+			accented: True
+
+
+	word: causā
+		syllable: cau
+			long by position: (False, None)
+			long by nature: True
+			accented: True
+		syllable: sā
+			long by position: (False, None)
+			long by nature: True
+			accented: False
+
+
+	word: helvētiī
+		syllable: hel
+			long by position: (True, None)
+			long by nature: False
+			accented: False
+		syllable: vē
+			long by position: (False, None)
+			long by nature: True
+			accented: True
+		syllable: ti
+			long by position: (False, None)
+			long by nature: False
+			accented: False
+		syllable: ī
+			long by position: (False, None)
+			long by nature: True
+			accented: False
+
+
+	word: quoque
+		syllable: quo
+			long by position: (False, None)
+			long by nature: False
+			accented: True
+		syllable: que
+			long by position: (False, None)
+			long by nature: False
+			accented: False
+
+
+	word: reliquōs
+		syllable: re
+			long by position: (False, None)
+			long by nature: False
+			accented: True
+		syllable: li
+			long by position: (False, None)
+			long by nature: False
+			accented: False
+		syllable: quōs
+			long by position: (True, None)
+			long by nature: True
+			accented: False
+
+
+	word: gallōs
+		syllable: gal
+			long by position: (True, None)
+			long by nature: False
+			accented: True
+		syllable: lōs
+			long by position: (True, None)
+			long by nature: True
+			accented: False
+
+
+	word: virtūte
+		syllable: vir
+			long by position: (True, None)
+			long by nature: False
+			accented: False
+		syllable: tū
+			long by position: (False, None)
+			long by nature: True
+			accented: True
+		syllable: te
+			long by position: (False, 'mute+liquid')
+			long by nature: False
+			accented: False
+
+
+	word: praecēdunt
+		syllable: prae
+			long by position: (False, None)
+			long by nature: True
+			accented: False
+		syllable: cē
+			long by position: (False, None)
+			long by nature: True
+			accented: True
+		syllable: dunt
+			long by position: (True, None)
+			long by nature: False
+			accented: False
+
+
+	word: quod
+		syllable: quod
+			long by position: (True, None)
+			long by nature: False
+			accented: True
+
+
+	word: ferē
+		syllable: fe
+			long by position: (False, None)
+			long by nature: False
+			accented: True
+		syllable: rē
+			long by position: (False, None)
+			long by nature: True
+			accented: False
+
+
+	word: cotīdiānīs
+		syllable: co
+			long by position: (False, None)
+			long by nature: False
+			accented: False
+		syllable: tī
+			long by position: (False, None)
+			long by nature: True
+			accented: False
+		syllable: di
+			long by position: (False, None)
+			long by nature: False
+			accented: False
+		syllable: ā
+			long by position: (False, None)
+			long by nature: True
+			accented: True
+		syllable: nīs
+			long by position: (True, None)
+			long by nature: True
+			accented: False
+
+
+	word: proeliīs
+		syllable: proe
+			long by position: (False, None)
+			long by nature: True
+			accented: True
+		syllable: li
+			long by position: (False, None)
+			long by nature: False
+			accented: False
+		syllable: īs
+			long by position: (True, None)
+			long by nature: True
+			accented: False
+
+
+	word: cum
+		syllable: cum
+			long by position: (True, None)
+			long by nature: False
+			accented: True
+
+
+	word: germānīs
+		syllable: ger
+			long by position: (True, None)
+			long by nature: False
+			accented: False
+		syllable: mā
+			long by position: (False, None)
+			long by nature: True
+			accented: True
+		syllable: nīs
+			long by position: (True, None)
+			long by nature: True
+			accented: False
+
+
+	word: contendunt
+		syllable: con
+			long by position: (True, None)
+			long by nature: False
+			accented: True
+		syllable: ten
+			long by position: (True, None)
+			long by nature: False
+			accented: False
+		syllable: dunt
+			long by position: (True, None)
+			long by nature: False
+			accented: False
+
+
+	word: cum
+		syllable: cum
+			long by position: (False, None)
+			long by nature: False
+			accented: True
+
+
+	word: aut
+		syllable: aut
+			long by position: (True, None)
+			long by nature: True
+			accented: True
+
+
+	word: suīs
+		syllable: su
+			long by position: (False, None)
+			long by nature: False
+			accented: True
+		syllable: īs
+			long by position: (True, None)
+			long by nature: True
+			accented: False
+
+
+	word: fīnibus
+		syllable: fī
+			long by position: (False, None)
+			long by nature: True
+			accented: True
+		syllable: ni
+			long by position: (False, None)
+			long by nature: False
+			accented: False
+		syllable: bus
+			long by position: (False, None)
+			long by nature: False
+			accented: False
+
+
+	word: eōs
+		syllable: e
+			long by position: (False, None)
+			long by nature: False
+			accented: True
+		syllable: ōs
+			long by position: (True, None)
+			long by nature: True
+			accented: False
+
+
+	word: prohibent
+		syllable: pro
+			long by position: (False, None)
+			long by nature: False
+			accented: True
+		syllable: hi
+			long by position: (False, None)
+			long by nature: False
+			accented: False
+		syllable: bent
+			long by position: (False, None)
+			long by nature: False
+			accented: False
+
+
+	word: aut
+		syllable: aut
+			long by position: (False, None)
+			long by nature: True
+			accented: True
+
+
+	word: ipsī
+		syllable: ip
+			long by position: (True, None)
+			long by nature: False
+			accented: True
+		syllable: sī
+			long by position: (False, None)
+			long by nature: True
+			accented: False
+
+
+	word: in
+		syllable: in
+			long by position: (False, None)
+			long by nature: False
+			accented: True
+
+
+	word: eōrum
+		syllable: e
+			long by position: (False, None)
+			long by nature: False
+			accented: False
+		syllable: ō
+			long by position: (False, None)
+			long by nature: True
+			accented: True
+		syllable: rum
+			long by position: (True, None)
+			long by nature: False
+			accented: False
+
+
+	word: fīnibus
+		syllable: fī
+			long by position: (False, None)
+			long by nature: True
+			accented: True
+		syllable: ni
+			long by position: (False, None)
+			long by nature: False
+			accented: False
+		syllable: bus
+			long by position: (True, None)
+			long by nature: False
+			accented: False
+
+
+	word: bellum
+		syllable: bel
+			long by position: (True, None)
+			long by nature: False
+			accented: True
+		syllable: lum
+			long by position: (True, None)
+			long by nature: False
+			accented: False
+
+
+	word: gerunt
+		syllable: ge
+			long by position: (False, None)
+			long by nature: False
+			accented: True
+		syllable: runt
+			long by position: (False, None)
+			long by nature: False
+			accented: False
+
+
+
+
+Sentence 6: eōrum ūna pars quam gallōs obtinēre dictum est injitium capit ā flūmine rhodanō continētur garunna flūmine ōceanō fīnibus belgārum attingit etiam ab sēquanīs et helvētiīs flūmen rhēnum vergit ad septentriōnēs
+	word: eōrum
+		syllable: e
+			long by position: (False, None)
+			long by nature: False
+			accented: False
+		syllable: ō
+			long by position: (False, None)
+			long by nature: True
+			accented: True
+		syllable: rum
+			long by position: (False, None)
+			long by nature: False
+			accented: False
+
+
+	word: ūna
+		syllable: ū
+			long by position: (False, None)
+			long by nature: True
+			accented: True
+		syllable: na
+			long by position: (False, None)
+			long by nature: False
+			accented: False
+
+
+	word: pars
+		syllable: pars
+			long by position: (True, None)
+			long by nature: False
+			accented: True
+
+
+	word: quam
+		syllable: quam
+			long by position: (True, None)
+			long by nature: False
+			accented: True
+
+
+	word: gallōs
+		syllable: gal
+			long by position: (True, None)
+			long by nature: False
+			accented: True
+		syllable: lōs
+			long by position: (False, None)
+			long by nature: True
+			accented: False
+
+
+	word: obtinēre
+		syllable: ob
+			long by position: (True, None)
+			long by nature: False
+			accented: False
+		syllable: ti
+			long by position: (False, None)
+			long by nature: False
+			accented: False
+		syllable: nē
+			long by position: (False, None)
+			long by nature: True
+			accented: True
+		syllable: re
+			long by position: (False, None)
+			long by nature: False
+			accented: False
+
+
+	word: dictum
+		syllable: dic
+			long by position: (True, None)
+			long by nature: False
+			accented: True
+		syllable: tum
+			long by position: (False, None)
+			long by nature: False
+			accented: False
+
+
+	word: est
+		syllable: est
+			long by position: (False, None)
+			long by nature: False
+			accented: True
+
+
+	word: injitium
+		syllable: in
+			long by position: (True, None)
+			long by nature: False
+			accented: False
+		syllable: ji
+			long by position: (False, None)
+			long by nature: False
+			accented: True
+		syllable: ti
+			long by position: (False, None)
+			long by nature: False
+			accented: False
+		syllable: um
+			long by position: (True, None)
+			long by nature: False
+			accented: False
+
+
+	word: capit
+		syllable: ca
+			long by position: (False, None)
+			long by nature: False
+			accented: True
+		syllable: pit
+			long by position: (False, None)
+			long by nature: False
+			accented: False
+
+
+	word: ā
+		syllable: ā
+			long by position: (True, None)
+			long by nature: True
+			accented: True
+
+
+	word: flūmine
+		syllable: flū
+			long by position: (False, None)
+			long by nature: True
+			accented: True
+		syllable: mi
+			long by position: (False, None)
+			long by nature: False
+			accented: False
+		syllable: ne
+			long by position: (False, None)
+			long by nature: False
+			accented: False
+
+
+	word: rhodanō
+		syllable: rho
+			long by position: (False, None)
+			long by nature: False
+			accented: True
+		syllable: da
+			long by position: (False, None)
+			long by nature: False
+			accented: False
+		syllable: nō
+			long by position: (False, None)
+			long by nature: True
+			accented: False
+
+
+	word: continētur
+		syllable: con
+			long by position: (True, None)
+			long by nature: False
+			accented: False
+		syllable: ti
+			long by position: (False, None)
+			long by nature: False
+			accented: False
+		syllable: nē
+			long by position: (False, None)
+			long by nature: True
+			accented: True
+		syllable: tur
+			long by position: (True, None)
+			long by nature: False
+			accented: False
+
+
+	word: garunna
+		syllable: ga
+			long by position: (False, None)
+			long by nature: False
+			accented: True
+		syllable: run
+			long by position: (True, None)
+			long by nature: False
+			accented: False
+		syllable: na
+			long by position: (True, None)
+			long by nature: False
+			accented: False
+
+
+	word: flūmine
+		syllable: flū
+			long by position: (False, None)
+			long by nature: True
+			accented: True
+		syllable: mi
+			long by position: (False, None)
+			long by nature: False
+			accented: False
+		syllable: ne
+			long by position: (False, None)
+			long by nature: False
+			accented: False
+
+
+	word: ōceanō
+		syllable: ō
+			long by position: (False, None)
+			long by nature: True
+			accented: False
+		syllable: ce
+			long by position: (False, None)
+			long by nature: False
+			accented: True
+		syllable: a
+			long by position: (False, None)
+			long by nature: False
+			accented: False
+		syllable: nō
+			long by position: (False, None)
+			long by nature: True
+			accented: False
+
+
+	word: fīnibus
+		syllable: fī
+			long by position: (False, None)
+			long by nature: True
+			accented: True
+		syllable: ni
+			long by position: (False, None)
+			long by nature: False
+			accented: False
+		syllable: bus
+			long by position: (True, None)
+			long by nature: False
+			accented: False
+
+
+	word: belgārum
+		syllable: bel
+			long by position: (True, None)
+			long by nature: False
+			accented: False
+		syllable: gā
+			long by position: (False, None)
+			long by nature: True
+			accented: True
+		syllable: rum
+			long by position: (False, None)
+			long by nature: False
+			accented: False
+
+
+	word: attingit
+		syllable: at
+			long by position: (True, None)
+			long by nature: False
+			accented: True
+		syllable: tin
+			long by position: (True, None)
+			long by nature: False
+			accented: False
+		syllable: git
+			long by position: (False, None)
+			long by nature: False
+			accented: False
+
+
+	word: etiam
+		syllable: e
+			long by position: (False, None)
+			long by nature: False
+			accented: True
+		syllable: ti
+			long by position: (False, None)
+			long by nature: False
+			accented: False
+		syllable: am
+			long by position: (False, None)
+			long by nature: False
+			accented: False
+
+
+	word: ab
+		syllable: ab
+			long by position: (True, None)
+			long by nature: False
+			accented: True
+
+
+	word: sēquanīs
+		syllable: sē
+			long by position: (False, None)
+			long by nature: True
+			accented: True
+		syllable: qua
+			long by position: (False, None)
+			long by nature: False
+			accented: False
+		syllable: nīs
+			long by position: (False, None)
+			long by nature: True
+			accented: False
+
+
+	word: et
+		syllable: et
+			long by position: (False, None)
+			long by nature: False
+			accented: True
+
+
+	word: helvētiīs
+		syllable: hel
+			long by position: (True, None)
+			long by nature: False
+			accented: False
+		syllable: vē
+			long by position: (False, None)
+			long by nature: True
+			accented: True
+		syllable: ti
+			long by position: (False, None)
+			long by nature: False
+			accented: False
+		syllable: īs
+			long by position: (True, None)
+			long by nature: True
+			accented: False
+
+
+	word: flūmen
+		syllable: flū
+			long by position: (False, None)
+			long by nature: True
+			accented: True
+		syllable: men
+			long by position: (True, None)
+			long by nature: False
+			accented: False
+
+
+	word: rhēnum
+		syllable: rhē
+			long by position: (False, None)
+			long by nature: True
+			accented: True
+		syllable: num
+			long by position: (True, None)
+			long by nature: False
+			accented: False
+
+
+	word: vergit
+		syllable: ver
+			long by position: (True, None)
+			long by nature: False
+			accented: True
+		syllable: git
+			long by position: (False, None)
+			long by nature: False
+			accented: False
+
+
+	word: ad
+		syllable: ad
+			long by position: (True, None)
+			long by nature: False
+			accented: True
+
+
+	word: septentriōnēs
+		syllable: sep
+			long by position: (True, None)
+			long by nature: False
+			accented: False
+		syllable: ten
+			long by position: (True, None)
+			long by nature: False
+			accented: False
+		syllable: tri
+			long by position: (False, None)
+			long by nature: False
+			accented: False
+		syllable: ō
+			long by position: (False, None)
+			long by nature: True
+			accented: True
+		syllable: nēs
+			long by position: (False, None)
+			long by nature: True
+			accented: False
+
+
+
+
+
+    \end{Verbatim}
+
+
+    % Add a bibliography block to the postdoc
+    
+    
+    
+    \end{document}
