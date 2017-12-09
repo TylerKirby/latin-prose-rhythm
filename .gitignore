@@ -3,3 +3,5 @@ venv
 .vscode
 .cache
 __pycache__
+.DS_Store
+.ipynb_checkpoints
