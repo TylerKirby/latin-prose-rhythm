@@ -99,6 +99,7 @@ def test_tokenize_syllables():
     test3 = preprocessor3._tokenize_syllables("audītū")
     test4 = preprocessor3._tokenize_syllables("conjiciō")
     test5 = preprocessor3._tokenize_syllables("ā")
+    test6 = preprocessor3._tokenize_syllables('appelantur')
     # syllable and index
     assert test1[0]["syllable"] == "mi"
     assert test1[0]["index"] == 0
@@ -155,6 +156,10 @@ def test_tokenize_syllables():
     assert test4[2]["accented"] == False
     assert test4[3]["accented"] == False
     assert test5[0]["accented"] == True
+    assert test6[0]['accented'] == False
+    assert test6[1]['accented'] == False
+    assert test6[2]['accented'] == True
+    assert test6[3]['accented'] == False
     # long by position
     assert test1[0]["long_by_position"] == (False, None)
     assert test1[1]["long_by_position"] == (False, None)

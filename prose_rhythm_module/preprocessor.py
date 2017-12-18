@@ -140,17 +140,6 @@ class Preprocessor(object):
             # is long by nature
             syllable_dict["long_by_nature"] = True if any(long in syllables[i] for long in longs) else False
 
-            # is accented
-            if len(syllables) > 2 and i == len(syllables) - 2:
-                if syllable_dict["long_by_nature"]:
-                    syllable_dict["accented"] = True
-                else:
-                    syllable_tokens[i - 1]["accented"] = True
-            elif len(syllables) == 2 and i == 0 or len(syllables) == 1:
-                syllable_dict["accented"] = True
-
-            syllable_dict["accented"] = False if "accented" not in syllable_dict else True
-
             # long by position intra word
             if i < len(syllables) - 1 and syllable_dict["syllable"][-1] in self.CONSONANTS:
                 if syllable_dict["syllable"][-1] in self.DOUBLE_CONSONANTS or syllables[i + 1][0] in self.CONSONANTS:
@@ -168,6 +157,17 @@ class Preprocessor(object):
                 syllable_dict["long_by_position"] = (False, None)
 
             syllable_tokens.append(syllable_dict)
+
+            # is accented
+            if len(syllables) > 2 and i == len(syllables) - 2:
+                if syllable_dict["long_by_nature"] or syllable_dict["long_by_position"][0]:
+                    syllable_dict["accented"] = True
+                else:
+                    syllable_tokens[i - 1]["accented"] = True
+            elif len(syllables) == 2 and i == 0 or len(syllables) == 1:
+                syllable_dict["accented"] = True
+
+            syllable_dict["accented"] = False if "accented" not in syllable_dict else True
 
         return syllable_tokens
 
@@ -217,6 +217,7 @@ class Preprocessor(object):
                     # current word begins 2 consonants
                     tokens[i - 1]["syllables"][-1]["long_by_position"] = (True, None)
 
+
             tokens.append(word_dict)
 
         return tokens
@@ -255,4 +256,5 @@ class Preprocessor(object):
 if __name__ == "__main__":
     test_text = "Galliā est omnīs dīvīsa Cn. Caesar P. Curio Sex. Funnyname in partēs trēs quārum ūnam incolunt Belgae aliam Aquītānī tertiam quī ipsōrum lingua Celtae nostra Gallī appellantur. hī omnēs linguā īnstitūtīs lēgibus inter sē differunt. Gallōs ab Aquītānīs Garunna flūmen ā Belgīs Matrona et Sēquana dīvidit. hōrum omnium fortissimī sunt Belgae proptereā quod ā cultū atque hūmānitāte prōvinciae longissimē absunt minimēque ad eōs mercātōrēs saepe commeant atque ea quae ad effēminandōs animōs pertinent important proximīque sunt Germānīs quī trāns Rhēnum incolunt quibuscum continenter bellum gerunt. quā dē causā Helvētiī quoque reliquōs Gallōs virtūte praecēdunt quod ferē cotīdiānīs proeliīs cum Germānīs contendunt cum aut suīs fīnibus eōs prohibent aut ipsī in eōrum fīnibus bellum gerunt. eōrum ūna pars quam Gallōs obtinēre dictum est initium capit ā flūmine Rhodanō continētur Garunna flūmine Ōceanō fīnibus Belgārum attingit etiam ab Sēquanīs et Helvētiīs flūmen Rhēnum vergit ad septentriōnēs."
     test_class = Preprocessor(test_text, [".", ";"])
-    print(test_class.tokenize())
+    # print(test_class.tokenize())
+    syll = [print(syll) for syll in test_class._tokenize_syllables('effeminandos')]
