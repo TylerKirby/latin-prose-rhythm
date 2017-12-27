@@ -29,7 +29,7 @@ class Preprocessor(object):
                        'Vol.', 'Vop.', 'Pl.']
 
     def __init__(self, text, punctuation=['.', '?', '!', ';', ':'], title='No Title'):
-        self.text = text
+        self.text = text.lower()
         self.punctuation = punctuation
         self.title = title
 
@@ -237,7 +237,7 @@ class Preprocessor(object):
         for abbrev in self.ABBREV:
             self.text = self.text.replace(abbrev, 'ABBREV')
 
-        clean_text = re.sub(r'[^a-z.\sāēīōū]', '', self._i_u_to_j_v())
+        clean_text = re.sub(r'[^a-z.\sāēīōū]', '', self.text)
 
         tokenized_sentences = [sentence.strip() for sentence in clean_text.split(default_seperator) if sentence.strip() is not '']
 
