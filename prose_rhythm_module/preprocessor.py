@@ -29,7 +29,7 @@ class Preprocessor(object):
                        'Vol.', 'Vop.', 'Pl.']
 
     def __init__(self, text, punctuation=['.', '?', '!', ';', ':'], title='No Title'):
-        self.text = text.lower()
+        self.text = text
         self.punctuation = punctuation
         self.title = title
 
@@ -194,7 +194,7 @@ class Preprocessor(object):
             word_dict['syllables_count'] = len(word_dict['syllables'])
 
             # is elidable
-            if i != 0 and word_dict['syllables'][0]['syllable'][0] in self.VOWELS:
+            if i != 0 and word_dict['syllables'][0]['syllable'][0] in self.VOWELS or i != 0 and word_dict['syllables'][0]['syllable'][0] == 'h':
                 last_syll_prev_word = tokens[i - 1]['syllables'][-1]
                 if last_syll_prev_word['syllable'][-1] in self.SHORT_VOWELS:
                     last_syll_prev_word['elide'] = (True, 'weak')
@@ -237,7 +237,8 @@ class Preprocessor(object):
         for abbrev in self.ABBREV:
             self.text = self.text.replace(abbrev, 'ABBREV')
 
-        clean_text = re.sub(r'[^a-z.\sāēīōū]', '', self.text)
+        lower_text = self.text.lower()
+        clean_text = re.sub(r'[^a-z.\sāēīōū]', '', lower_text)
 
         tokenized_sentences = [sentence.strip() for sentence in clean_text.split(default_seperator) if sentence.strip() is not '']
 
@@ -254,7 +255,6 @@ class Preprocessor(object):
 
 
 if __name__ == '__main__':
-    test_text = 'Galliā est omnīs dīvīsa Cn. Caesar P. Curio Sex. Funnyname in partēs trēs quārum ūnam incolunt Belgae aliam Aquītānī tertiam quī ipsōrum lingua Celtae nostra Gallī appellantur. hī omnēs linguā īnstitūtīs lēgibus inter sē differunt. Gallōs ab Aquītānīs Garunna flūmen ā Belgīs Matrona et Sēquana dīvidit. hōrum omnium fortissimī sunt Belgae proptereā quod ā cultū atque hūmānitāte prōvinciae longissimē absunt minimēque ad eōs mercātōrēs saepe commeant atque ea quae ad effēminandōs animōs pertinent important proximīque sunt Germānīs quī trāns Rhēnum incolunt quibuscum continenter bellum gerunt. quā dē causā Helvētiī quoque reliquōs Gallōs virtūte praecēdunt quod ferē cotīdiānīs proeliīs cum Germānīs contendunt cum aut suīs fīnibus eōs prohibent aut ipsī in eōrum fīnibus bellum gerunt. eōrum ūna pars quam Gallōs obtinēre dictum est initium capit ā flūmine Rhodanō continētur Garunna flūmine Ōceanō fīnibus Belgārum attingit etiam ab Sēquanīs et Helvētiīs flūmen Rhēnum vergit ad septentriōnēs.'
+    test_text = 'Galliāque humanitate est omnīs dīvīsa Cn. Caesar P. Curio Sex. Funnyname in partēs trēs quārum ūnam incolunt Belgae aliam Aquītānī tertiam quī ipsōrum lingua Celtae nostra Gallī appellantur. hī omnēs linguā īnstitūtīs lēgibus inter sē differunt. Gallōs ab Aquītānīs Garunna flūmen ā Belgīs Matrona et Sēquana dīvidit. hōrum omnium fortissimī sunt Belgae proptereā quod ā cultū atque hūmānitāte prōvinciae longissimē absunt minimēque ad eōs mercātōrēs saepe commeant atque ea quae ad effēminandōs animōs pertinent important proximīque sunt Germānīs quī trāns Rhēnum incolunt quibuscum continenter bellum gerunt. quā dē causā Helvētiī quoque reliquōs Gallōs virtūte praecēdunt quod ferē cotīdiānīs proeliīs cum Germānīs contendunt cum aut suīs fīnibus eōs prohibent aut ipsī in eōrum fīnibus bellum gerunt. eōrum ūna pars quam Gallōs obtinēre dictum est initium capit ā flūmine Rhodanō continētur Garunna flūmine Ōceanō fīnibus Belgārum attingit etiam ab Sēquanīs et Helvētiīs flūmen Rhēnum vergit ad septentriōnēs.'
     test_class = Preprocessor(test_text, ['.', ';'])
-    # print(test_class.tokenize())
-    syll = [print(syll) for syll in test_class._tokenize_syllables('effeminandos')]
+    print(test_class.tokenize())
