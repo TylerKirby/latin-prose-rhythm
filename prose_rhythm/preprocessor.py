@@ -35,6 +35,23 @@ class Preprocessor(object):
         self.punctuation = punctuation
         self.title = title
 
+    def __str__(self):
+        tokens = self.tokenize()
+        print(self.title)
+        print("\n")
+        for i in range(0, len(tokens["text"])):
+            print("Sentence {0}: {1}".format(i + 1, tokens["text"][i]["plain_text_sentence"]))
+            for word in tokens["text"][i]["structured_sentence"]:
+                print("\tword: {0}".format(word["word"]))
+                for syllable in word["syllables"]:
+                    print("\t\tsyllable: {0}".format(syllable["syllable"]))
+                    print("\t\t\tlong by position: {0}".format(syllable["long_by_position"]))
+                    print("\t\t\tlong by nature: {0}".format(syllable["long_by_nature"]))
+                    print("\t\t\taccented: {0}".format(syllable["accented"]))
+                    print("\t\t\telide: {0}".format(syllable["elide"]))
+                print("\n")
+            print("\n")
+
     def _tokenize_syllables(self, word):
         '''
         Tokenize syllables for word.
@@ -116,11 +133,12 @@ class Preprocessor(object):
             # is elidable
             if i != 0 and word_dict['syllables'][0]['syllable'][0] in self.VOWELS or i != 0 and word_dict['syllables'][0]['syllable'][0] == 'h':
                 last_syll_prev_word = tokens[i - 1]['syllables'][-1]
-                if last_syll_prev_word['syllable'][-1] in self.SHORT_VOWELS:
-                    last_syll_prev_word['elide'] = (True, 'weak')
-                elif last_syll_prev_word['syllable'][-1] in self.LONG_VOWELS and self.DIPHTHONGS or last_syll_prev_word['syllable'][-1] == 'm':
+                if last_syll_prev_word['syllable'][-1] in self.LONG_VOWELS or last_syll_prev_word['syllable'][-1] == 'm':
                     last_syll_prev_word['elide'] = (True, 'strong')
-
+                elif len(last_syll_prev_word['syllable']) > 1 and last_syll_prev_word['syllable'][-2:] in self.DIPHTHONGS:
+                    last_syll_prev_word['elide'] = (True, 'strong')
+                elif last_syll_prev_word['syllable'][-1] in self.SHORT_VOWELS:
+                    last_syll_prev_word['elide'] = (True, 'weak')
             # long by position inter word
             if i > 0 and tokens[i - 1]['syllables'][-1]['syllable'][-1] in self.CONSONANTS and word_dict['syllables'][0]['syllable'][0] in self.CONSONANTS:
                 # previous word ends in consonant and current word begins with consonant
@@ -165,17 +183,20 @@ class Preprocessor(object):
 
 
 if __name__ == '__main__':
-    test_text = "Galliā est omnīs dīvīsa in partēs trēs quārum ūnam incolunt Belgae aliam Aquītānī tertiam quī ipsōrum " \
-                "lingua Celtae nostra Gallī appellantur. hī omnēs linguā īnstitūtīs lēgibus inter sē differunt. Gallōs" \
-                " ab Aquītānīs Garunna flūmen ā Belgīs Matrona et Sēquana dīvidit. hōrum omnium fortissimī sunt Belgae " \
-                "proptereā quod ā cultū atque hūmānitāte prōvinciae longissimē absunt minimēque ad eōs mercātōrēs " \
-                "saepe commeant atque ea quae ad effēminandōs animōs pertinent important proximīque sunt Germānīs " \
-                "quī trāns Rhēnum incolunt quibuscum continenter bellum gerunt. quā dē causā Helvētiī quoque reliquōs" \
-                " Gallōs virtūte praecēdunt quod ferē cotīdiānīs proeliīs cum Germānīs contendunt cum aut suīs fīnibus" \
-                " eōs prohibent aut ipsī in eōrum fīnibus bellum gerunt. eōrum ūna pars quam Gallōs obtinēre dictum est" \
-                " initium capit ā flūmine Rhodanō continētur Garunna flūmine Ōceanō fīnibus Belgārum attingit etiam " \
-                "ab Sēquanīs et Helvētiīs flūmen Rhēnum vergit ad  septentriōnēs. Belgae ab extrēmīs Galliae" \
-                " fīnibus oriuntur pertinent ad īnferiōrem partem flūminis Rhēnī spectant in septentriōnem et" \
-                " orientem sōlem."
-    test_sentences = test_text.split('.')
-    print(Preprocessor(test_text).tokenize())
+    # test_text = "Galliā est omnīs dīvīsa in partēs trēs quārum ūnam incolunt Belgae aliam Aquītānī tertiam quī ipsōrum " \
+    #             "lingua Celtae nostra Gallī appellantur. hī omnēs linguā īnstitūtīs lēgibus inter sē differunt. Gallōs" \
+    #             " ab Aquītānīs Garunna flūmen ā Belgīs Matrona et Sēquana dīvidit. hōrum omnium fortissimī sunt Belgae " \
+    #             "proptereā quod ā cultū atque hūmānitāte prōvinciae longissimē absunt minimēque ad eōs mercātōrēs " \
+    #             "saepe commeant atque ea quae ad effēminandōs animōs pertinent important proximīque sunt Germānīs " \
+    #             "quī trāns Rhēnum incolunt quibuscum continenter bellum gerunt. quā dē causā Helvētiī quoque reliquōs" \
+    #             " Gallōs virtūte praecēdunt quod ferē cotīdiānīs proeliīs cum Germānīs contendunt cum aut suīs fīnibus" \
+    #             " eōs prohibent aut ipsī in eōrum fīnibus bellum gerunt. eōrum ūna pars quam Gallōs obtinēre dictum est" \
+    #             " initium capit ā flūmine Rhodanō continētur Garunna flūmine Ōceanō fīnibus Belgārum attingit etiam " \
+    #             "ab Sēquanīs et Helvētiīs flūmen Rhēnum vergit ad  septentriōnēs. Belgae ab extrēmīs Galliae" \
+    #             " fīnibus oriuntur pertinent ad īnferiōrem partem flūminis Rhēnī spectant in septentriōnem et" \
+    #             " orientem sōlem."
+    # test_sentences = test_text.split('.')
+    # print(Preprocessor(test_text).tokenize())
+    test_ae_test = "Gallae est."
+    test = Preprocessor(test_ae_test)
+    test.__str__()
