@@ -128,6 +128,10 @@ def test_tokenize_words():
     assert test1[2]['syllables'][-1]['elide'] == (True, 'weak')
     assert test1[4]['syllables'][-1]['elide'] == (True, 'strong')
     assert test2[0]['syllables'][-1]['elide'] ==(True, 'weak')
+    test3 = preprocessor3._tokenize_words('Gallae est.')
+    assert test3[0]['syllables'][-1]['elide'] == (True, 'strong')
+    test4 = preprocessor3._tokenize_words('Galliae haerum')
+    assert test4[0]['syllables'][-1]['elide'] == (True, 'strong')
     # long by position inter word
     test2 = preprocessor3._tokenize_words('puella est bona it con.')
     assert test2[3]['syllables'][-1]['long_by_position'] == (True, None)
