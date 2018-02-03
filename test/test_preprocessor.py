@@ -103,6 +103,10 @@ def test_tokenize_syllables():
     assert test6[1]['long_by_position'] == (False, 'mute+liquid')
     test7 = preprocessor3._tokenize_syllables('oblinō')
     assert test7[0]['long_by_position'] == (True, None)
+    # -gu digraph
+    test8 = preprocessor3._tokenize_syllables('lingua')
+    assert test8[0]["syllable"] == "lin"
+    assert test8[1]["syllable"] == "gua"
 
 def test_tokenize_words():
     test1 = preprocessor3._tokenize_words('mihi conjiciō ivi it quam optāram auditū dedērunt te miror antōnī quorum.')
