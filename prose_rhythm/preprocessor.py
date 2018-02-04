@@ -174,7 +174,8 @@ class Preprocessor(object):
         for sentence in tokenized_sentences:
             sentence_dict = {}
             sentence_dict['contains_abbrev'] = True if 'abbrev' in sentence else False
-            sentence = re.sub(r'\sabbrev\s', ' ', sentence)
+            sentence = re.sub(r'abbrev', '', sentence)
+            sentence = re.sub(r'[ ]{2,}', ' ', sentence)
             sentence_dict['plain_text_sentence'] = sentence
             sentence_dict['structured_sentence'] = self._tokenize_words(sentence)
             tokenized_text.append(sentence_dict)
@@ -183,20 +184,24 @@ class Preprocessor(object):
 
 
 if __name__ == '__main__':
-    # test_text = "Galliā est omnīs dīvīsa in partēs trēs quārum ūnam incolunt Belgae aliam Aquītānī tertiam quī ipsōrum " \
-    #             "lingua Celtae nostra Gallī appellantur. hī omnēs linguā īnstitūtīs lēgibus inter sē differunt. Gallōs" \
-    #             " ab Aquītānīs Garunna flūmen ā Belgīs Matrona et Sēquana dīvidit. hōrum omnium fortissimī sunt Belgae " \
-    #             "proptereā quod ā cultū atque hūmānitāte prōvinciae longissimē absunt minimēque ad eōs mercātōrēs " \
-    #             "saepe commeant atque ea quae ad effēminandōs animōs pertinent important proximīque sunt Germānīs " \
-    #             "quī trāns Rhēnum incolunt quibuscum continenter bellum gerunt. quā dē causā Helvētiī quoque reliquōs" \
-    #             " Gallōs virtūte praecēdunt quod ferē cotīdiānīs proeliīs cum Germānīs contendunt cum aut suīs fīnibus" \
-    #             " eōs prohibent aut ipsī in eōrum fīnibus bellum gerunt. eōrum ūna pars quam Gallōs obtinēre dictum est" \
-    #             " initium capit ā flūmine Rhodanō continētur Garunna flūmine Ōceanō fīnibus Belgārum attingit etiam " \
-    #             "ab Sēquanīs et Helvētiīs flūmen Rhēnum vergit ad  septentriōnēs. Belgae ab extrēmīs Galliae" \
-    #             " fīnibus oriuntur pertinent ad īnferiōrem partem flūminis Rhēnī spectant in septentriōnem et" \
-    #             " orientem sōlem."
-    # test_sentences = test_text.split('.')
-    # print(Preprocessor(test_text).tokenize())
-    test_ae_test = "Gallae est."
-    test = Preprocessor(test_ae_test)
-    test.__str__()
+    test_text = "Galliā est omnīs dīvīsa in partēs trēs quārum ūnam incolunt Belgae aliam Aquītānī tertiam quī ipsōrum " \
+                "lingua Celtae nostra Gallī appellantur. hī omnēs linguā īnstitūtīs lēgibus inter sē differunt. Gallōs" \
+                " ab Aquītānīs Garunna flūmen ā Belgīs Matrona et Sēquana dīvidit. hōrum omnium fortissimī sunt Belgae " \
+                "proptereā quod ā cultū atque hūmānitāte prōvinciae longissimē absunt minimēque ad eōs mercātōrēs " \
+                "saepe commeant atque ea quae ad effēminandōs animōs pertinent important proximīque sunt Germānīs " \
+                "quī trāns Rhēnum incolunt quibuscum continenter bellum gerunt. quā dē causā Helvētiī quoque reliquōs" \
+                " Gallōs virtūte praecēdunt quod ferē cotīdiānīs proeliīs cum Germānīs contendunt cum aut suīs fīnibus" \
+                " eōs prohibent aut ipsī in eōrum fīnibus bellum gerunt. eōrum ūna pars quam Gallōs obtinēre dictum est" \
+                " initium capit ā flūmine Rhodanō continētur Garunna flūmine Ōceanō fīnibus Belgārum attingit etiam " \
+                "ab Sēquanīs et Helvētiīs flūmen Rhēnum vergit ad  septentriōnēs. Belgae ab extrēmīs Galliae" \
+                " fīnibus oriuntur pertinent ad īnferiōrem partem flūminis Rhēnī spectant in septentriōnem et" \
+                " orientem sōlem."
+    test_text2 = "Aquītānia ā Garunnā flūmine ad Pȳrēnaeōs montēs et eam partem Ōceanī quae est ad Hispāniam pertinet " \
+                 "spectat inter occāsum sōlis et septentriōnēs. Apud Helvētiōs longē nōbilissimus fuit et dītissimus" \
+                 " Orgetorix. is M. Messāla et P. M. Pīsōne cōnsulibus rēgnī cupiditāte inductus conjūrātiōnem " \
+                 "nōbilitātis fēcit et cīvitātī persuāsit ut dē fīnibus suīs cum omnibus cōpiīs exīrent perfacile " \
+                 "esse cum virtūte omnibus praestārent tōtīus Galliae imperiō potīrī."
+    # Preprocessor(test_text).__str__()
+    # test = Preprocessor(test_ae_test)
+    # test.__str__()
+    Preprocessor(test_text2).__str__()
