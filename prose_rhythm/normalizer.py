@@ -44,6 +44,7 @@ class Normalizer(object):
         if (self.replace_abbrev):
             self.text = self._replace_abbreviations()
 
+        self.text = re.sub(r'M{0,4}(CM|CD|D?C{0,3})(XC|XL|L?X{0,3})(IX|IV|V?I{0,3})', '', self.text)
         self.text = self.text.lower()
         self.text = re.sub(r'[^a-z.\sāēīōū]', '', self.text)
         self.text = re.sub(r'\s{2}', ' ', self.text)
