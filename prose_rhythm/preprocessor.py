@@ -28,12 +28,6 @@ class Preprocessor(object): # pylint: disable=too-few-public-methods
     NASALS = ["m", "n"]
     SESTS = ["sc", "sm", "sp", "st", "z"]
 
-    ABBREV = ["Agr.", "Ap.", "A.", "K.", "D.", "F.", "C.",
-              "Cn.", "L.", "Mam.", "M\'", "M.", "N.", "Oct.",
-              "Opet.", "Post.", "Pro.", "P.", "Q.", "Sert.",
-              "Ser.", "Sex.", "S.", "St.", "Ti.", "T.", "V.",
-              "Vol.", "Vop.", "Pl."]
-
     def __init__(self, text, punctuation=None, title="No Title"):
         self.text = text
         self.punctuation = [".", "?", "!", ";", ":"] if punctuation is None else punctuation
