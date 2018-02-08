@@ -162,8 +162,10 @@ def test_tokenize_words_elision():
 
 def test_tokenize_words_long_by_position():
     # long by position inter word
-    test2 = preprocessor3._tokenize_words("puella est bona it con.")
-    assert test2[3]["syllables"][-1]["long_by_position"] == (True, None)
+    test = preprocessor3._tokenize_words("puella est bona it con.")
+    assert test[3]["syllables"][-1]["long_by_position"] == (True, None)
+    test2 = preprocessor3._tokenize_words("Commeant ad.")
+    assert test2[0]["syllables"][-1]["long_by_position"] == (True, None)
 
 
 def test_tokenize_words_sests():
