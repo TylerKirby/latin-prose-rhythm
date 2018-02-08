@@ -33,6 +33,16 @@ class Normalizer(object):
             self.text = self.text.replace(abbrev, "abbrev")
         return self.text
 
+    def _remove_roman_numerals(self):
+        self.text = re.sub(r"M{0,4}(CM|CD|D?C{0,3})(XC|XL|L?X{0,3})(IX|IV|V?I{0,3})",
+                             "", self.text)
+        return self.text
+
+    def _remove_extra_white_space(self):
+        self.text = re.sub(r"\s{2,}", " ", self.text)
+        self.text = re.sub(r"^\s", "", self.text)
+        return self.text
+
     def normalize(self):
         """
         Normalize text.
@@ -47,10 +57,9 @@ class Normalizer(object):
         if self.replace_abbrev:
             self.text = self._replace_abbreviations()
 
-        self.text = re.sub(r"M{0,4}(CM|CD|D?C{0,3})(XC|XL|L?X{0,3})(IX|IV|V?I{0,3})", "", self.text)
+        self.text = self._remove_roman_numerals()
         self.text = self.text.lower()
-        self.text = re.sub(r"[^a-z.\sāēīōū]", "", self.text)
-        self.text = re.sub(r"\s{2}", " ", self.text)
+        self.text = self._remove_extra_white_space()
         return self.text
 
 if __name__ == "__main__":

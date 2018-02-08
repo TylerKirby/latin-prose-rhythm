@@ -94,6 +94,9 @@ class Preprocessor(object): # pylint: disable=too-few-public-methods
                     syllable_dict["long_by_position"] = (True, None)
                 else:
                     syllable_dict["long_by_position"] = (False, None)
+            elif len(syllable_dict["syllable"]) > 2 and  syllable_dict["syllable"][-1] in self.CONSONANTS and \
+                syllable_dict["syllable"][-2] in self.CONSONANTS and syllable_dict["syllable"][-3] in self.VOWELS:
+                syllable_dict["long_by_position"] = (True, None)
             else:
                 syllable_dict["long_by_position"] = (False, None)
 
