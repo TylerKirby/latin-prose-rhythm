@@ -128,7 +128,7 @@ class Preprocessor(object): # pylint: disable=too-few-public-methods
         :return: list
         """
         tokens = []
-        split_sent = sentence.split(" ")
+        split_sent = [word for word in sentence.split(" ") if word != '']
         for i, word in enumerate(split_sent):
             # basic properties
             word_dict = {"word": split_sent[i], "index": i}
@@ -197,7 +197,9 @@ class Preprocessor(object): # pylint: disable=too-few-public-methods
         for sentence in tokenized_sentences:
             sentence_dict = {}
             sentence_dict["contains_abbrev"] = True if "abbrev" in sentence else False
+            sentence_dict["contains_numeral"] = True if "roman_numeral" in sentence else False
             sentence = re.sub(r"abbrev", "", sentence)
+            sentence = re.sub(r"roman_numeral", "", sentence)
             sentence = re.sub(r"[ ]{2,}", " ", sentence)
             sentence_dict["plain_text_sentence"] = sentence
             sentence_dict["structured_sentence"] = self._tokenize_words(sentence)
@@ -207,5 +209,6 @@ class Preprocessor(object): # pylint: disable=too-few-public-methods
 
 
 if __name__ == "__main__":
-    TEST = "sē differunt.commeant est."
-    Preprocessor(TEST).__str__()
+    TEST = "XII sē differunt.commeant est."
+    tokens = Preprocessor(TEST).tokenize()
+    print(tokens)
