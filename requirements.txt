@@ -1,0 +1,2 @@
+cltk==0.1.83
+pydash
