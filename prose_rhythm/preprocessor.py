@@ -64,7 +64,7 @@ class Preprocessor(object): # pylint: disable=too-few-public-methods
         :return: list
         """
         syllable_tokens = []
-        syllables = Syllabifier().syllabify(word)
+        syllables = Normalizer().syllabify(word)
 
         longs = self.LONG_VOWELS + self.DIPHTHONGS
 
