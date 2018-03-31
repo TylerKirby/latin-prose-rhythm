@@ -43,4 +43,5 @@ class Analyze(object):
 
 
 if __name__ == "__main__":
-    pass
+    test_rhythms = ["-u-u--ux", "--u--u-x", "-u-u-u-x"]
+    print()

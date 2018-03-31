@@ -48,16 +48,6 @@ class Normalizer(object):
         text = re.sub(r"^\s", "", text)
         return text
 
-    @staticmethod
-    def syllabify(word):
-        syllable_data_path = os.path.join(os.path.dirname(__file__), 'syllables.json')
-        with open(syllable_data_path) as file:
-            syllable_data = json.load(file)
-        if word in list(syllable_data.keys()):
-            return syllable_data[word]
-        else:
-            return Syllabifier().syllabify(word)
-
     def normalize(self, text):
         """
         Normalize text.
