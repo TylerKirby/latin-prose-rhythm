@@ -42,6 +42,25 @@ class Analyze(object):
         return clausulae
 
 
+    def rhythm_dict(self, rhythms):
+        total_rhythms = len(rhythms)
+        root = "x"
+
+        rhythm_dict = { i:[] for i in range(1, len(rhythms[0]))}
+        for rhythm in rhythms:
+            rhythm = rhythm[:-1]
+            for key, char in enumerate(rhythm):
+                key += 1
+                rhythm_dict[key].append(char)
+
+        for key, temp_rhythms in rhythm_dict.items():
+            long_count = temp_rhythms.count("-")
+            percent_long = long_count / total_rhythms
+            rhythm_dict[key] = format(percent_long, '.2f')
+
+        return rhythm_dict
+
+
 if __name__ == "__main__":
     test_rhythms = ["-u-u--ux", "--u--u-x", "-u-u-u-x"]
-    print()
+    print(Analyze().rhythm_dict(test_rhythms))
