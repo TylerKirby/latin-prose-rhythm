@@ -32,6 +32,7 @@ class Preprocessor(object): # pylint: disable=too-few-public-methods
         self.text = text
         self.punctuation = [".", "?", "!", ";", ":"] if punctuation is None else punctuation
         self.title = title
+        self.syllabifier = Syllabifier()
 
     def __str__(self):
         tokens = self.tokenize()
@@ -64,7 +65,7 @@ class Preprocessor(object): # pylint: disable=too-few-public-methods
         :return: list
         """
         syllable_tokens = []
-        syllables = Syllabifier().syllabify(word)
+        syllables = self.syllabifier.syllabify(word)
 
         longs = self.LONG_VOWELS + self.DIPHTHONGS
 
@@ -130,6 +131,8 @@ class Preprocessor(object): # pylint: disable=too-few-public-methods
         tokens = []
         split_sent = [word for word in sentence.split(" ") if word != '']
         for i, word in enumerate(split_sent):
+            if len(word) == 1 and word not in self.VOWELS:
+                break
             # basic properties
             word_dict = {"word": split_sent[i], "index": i}
 
@@ -137,7 +140,6 @@ class Preprocessor(object): # pylint: disable=too-few-public-methods
             word_dict["syllables"] = self._tokenize_syllables(split_sent[i])
             word_dict["syllables_count"] = len(word_dict["syllables"])
 
-            # is elidable
             if i != 0 and word_dict["syllables"][0]["syllable"][0] in \
                     self.VOWELS or i != 0 and \
                     word_dict["syllables"][0]["syllable"][0] == "h":
@@ -175,7 +177,6 @@ class Preprocessor(object): # pylint: disable=too-few-public-methods
                     # current word begins 2 consonants
                     tokens[i - 1]["syllables"][-1]["long_by_position"] = (True, None)
 
-
             tokens.append(word_dict)
 
         return tokens
@@ -187,7 +188,7 @@ class Preprocessor(object): # pylint: disable=too-few-public-methods
         [ [{word: puella, syllables: [...], index: 0}, ... ], ... ]
         :return:list
         """
-        normalized_text = Normalizer(self.text).normalize()
+        normalized_text = Normalizer().normalize(self.text)
         default_punc = "."
         tokenized_sentences = [sentence.strip() for sentence in
                                normalized_text.split(default_punc) if

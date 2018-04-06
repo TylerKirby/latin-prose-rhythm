@@ -16,6 +16,7 @@ class Analyze(object):
         self.clausula_length = clausula_length
         self.include_short_clausula = include_short_clausula
 
+    # TODO: Ignore rhythms with abbrev and roman numerals
     def get_rhythms(self, tokens):
         """
         Return a flat list of rhythms.
@@ -44,6 +45,7 @@ class Analyze(object):
 
     def rhythm_dict(self, rhythms):
         total_rhythms = len(rhythms)
+        print(total_rhythms)
         root = "x"
 
         rhythm_dict = { i:[] for i in range(1, len(rhythms[0]))}
