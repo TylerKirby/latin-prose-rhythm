@@ -6,6 +6,7 @@ Module assumes that texts are preprocessed before analyzing.
 """
 
 from prose_rhythm.preprocessor import Preprocessor
+import pprint
 
 class Analyze(object):
     """
@@ -42,6 +43,31 @@ class Analyze(object):
 
         return clausulae
 
+    def add_to_empty_tree(self, tree, new_node):
+        for k, v in tree.items():
+            if isinstance(v, list) and len(v) == 0:
+                v.append(new_node)
+                return tree
+            elif isinstance(v, list) and len(v) != 0:
+                return self.add_to_empty_tree(v, new_node)
+
+
+    def make_rhythm_tree(self, rhythms):
+        tokens = [token[::-1] for token in rhythms]
+        height = max(len(token) for token in tokens)
+        number_of_nodes = (2 ** height) - 1
+        number_of_iter = len(tokens)
+
+        tree = {"syllable_quantity": "x", "frequency": len(tokens), "probability": 100, "children": {}}
+
+        for index, token in enumerate(tokens):
+            if index == 0:
+                for index, char in enumerate(token[1:]):
+                    tree["children"][char] = 1
+
+        return tree
+
+
 
     def rhythm_dict(self, rhythms):
         total_rhythms = len(rhythms)
@@ -64,5 +90,7 @@ class Analyze(object):
 
 
 if __name__ == "__main__":
-    test_rhythms = ["-u-u--ux", "--u--u-x", "-u-u-u-x"]
-    print(Analyze().rhythm_dict(test_rhythms))
+    test_rhythms1 = ["-u-x", "--ux", "uu-x"]
+    test_rhythms2 = ["u-u--u-x", "-uu---ux", "u-u-uu-x"]
+    pp = pprint.PrettyPrinter(indent=2)
+    pp.pprint(Analyze().make_rhythm_tree(test_rhythms1))
