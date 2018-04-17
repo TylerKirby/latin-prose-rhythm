@@ -43,51 +43,6 @@ class Analyze(object):
 
         return clausulae
 
-    def add_to_empty_tree(self, tree, new_node):
-        for k, v in tree.items():
-            if isinstance(v, list) and len(v) == 0:
-                v.append(new_node)
-                return tree
-            elif isinstance(v, list) and len(v) != 0:
-                return self.add_to_empty_tree(v, new_node)
-
-
-    def make_rhythm_tree(self, rhythms):
-        tokens = [token[::-1] for token in rhythms]
-        height = max(len(token) for token in tokens)
-        number_of_nodes = (2 ** height) - 1
-        number_of_iter = len(tokens)
-
-        tree = {"syllable_quantity": "x", "frequency": len(tokens), "probability": 100, "children": {}}
-
-        for index, token in enumerate(tokens):
-            if index == 0:
-                for index, char in enumerate(token[1:]):
-                    tree["children"][char] = 1
-
-        return tree
-
-
-
-    def rhythm_dict(self, rhythms):
-        total_rhythms = len(rhythms)
-        print(total_rhythms)
-        root = "x"
-
-        rhythm_dict = { i:[] for i in range(1, len(rhythms[0]))}
-        for rhythm in rhythms:
-            rhythm = rhythm[:-1]
-            for key, char in enumerate(rhythm):
-                key += 1
-                rhythm_dict[key].append(char)
-
-        for key, temp_rhythms in rhythm_dict.items():
-            long_count = temp_rhythms.count("-")
-            percent_long = long_count / total_rhythms
-            rhythm_dict[key] = format(percent_long, '.2f')
-
-        return rhythm_dict
-
 
 if __name__ == "__main__":
     test_rhythms1 = ["-u-x", "--ux", "uu-x"]
