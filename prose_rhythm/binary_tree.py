@@ -94,12 +94,12 @@ class Tree:
                         curr_node = curr_node.short
 
     def calculate_probability(self):
-        nodes = [node.__dict__ for node in self.root if node.rhythm != "x"]
+        nodes = [node.__dict__ for node in self.root]
         for node in self.root:
             node = node.__dict__
             parent_node = [n for n in nodes if n["id"] == node["parent_id"]]
             if len(parent_node) == 1:
-                node["probability"] = node["frequency"] / parent_node[0]["frequency"]
+                node["probability"] = round(node["frequency"] / parent_node[0]["frequency"], 5)
 
 
 if __name__ == "__main__":
