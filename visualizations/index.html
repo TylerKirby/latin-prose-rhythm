@@ -1,7 +1,10 @@
 <!DOCTYPE html>
 <meta charset="utf-8">
 <style> /* set the CSS */
-    
+body {
+  background-color: #ccc
+}
+
 .node circle {
   fill: #fff;
   stroke: steelblue;
@@ -16,22 +19,21 @@
 
 .link {
   fill: none;
-  stroke: #ccc;
+  stroke: #000;
   stroke-width: 2px;
 }
 
 </style>
 
 <body>
-<p>hey</p>
 <!-- load the d3.js library -->      
-<script src="//d3js.org/d3.v4.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/d3/4.13.0/d3.js"></script>
 <script>
 
 // set the dimensions and margins of the diagram
 var margin = {top: 20, right: 90, bottom: 30, left: 90},
-  width = 660 - margin.left - margin.right,
-  height = 500 - margin.top - margin.bottom;
+  width = 1000 - margin.left - margin.right,
+  height = 4500 - margin.top - margin.bottom;
 
 // declares a tree layout and assigns the size
 var treemap = d3.tree()
@@ -94,7 +96,6 @@ d3.json("caesar_civil_war.json", function(error, treeData) {
     .text(function(d) { return d.data.name; });
 
 });
-    
 </script>
 </body>
 

@@ -36,7 +36,13 @@ class Node:
             yield from self.long
 
     def json_repr(self):
-        return {'name': self.rhythm, 'probability': self.probability, 'children': [self.short, self.long]}
+        name = "{} {}".format(self.rhythm, self.probability)
+        children = []
+        if self.short is not None:
+            children.append(self.short)
+        if self.long is not None:
+            children.append(self.long)
+        return {'name': name, 'children': children}
 
     def to_json(self):
         """
@@ -106,10 +112,6 @@ class Tree:
 
 
 if __name__ == "__main__":
-    test_rhythms1 = ["-u-x", "--ux", "uu-x"]
     tree = Tree()
-    tree.add(test_rhythms1[0])
-    tree.add(test_rhythms1[1])
-    tree.add(test_rhythms1[2])
     tree.calculate_probability()
     print(tree.to_json())
