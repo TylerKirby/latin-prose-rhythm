@@ -35,12 +35,15 @@ class Node:
         if self.long:
             yield from self.long
 
+    def json_repr(self):
+        return {'name': self.rhythm, 'probability': self.probability, 'children': [self.short, self.long]}
+
     def to_json(self):
         """
         Return JSON string of node.
         :return: JSON node
         """
-        return json.dumps(self.__dict__, default=lambda o: o.__dict__)
+        return json.dumps(self.json_repr(), default=lambda o: o.json_repr())
 
 class Tree:
     """
