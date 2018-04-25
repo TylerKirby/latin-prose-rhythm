@@ -1,0 +1,139 @@
+{
+  "name": "x 0",
+  "children": [
+    {
+      "name": "u 0.5",
+      "children": [
+        {
+          "name": "- 1.0",
+          "children": [
+            {
+              "name": "- 1.0",
+              "children": [
+                {
+                  "name": "- 1.0",
+                  "children": [
+                    {
+                      "name": "u 0.33333",
+                      "children": [
+                        {
+                          "name": "u 1.0",
+                          "children": [
+                            {
+                              "name": "u 1.0",
+                              "children": []
+                            }
+                          ]
+                        }
+                      ]
+                    },
+                    {
+                      "name": "- 0.66667",
+                      "children": [
+                        {
+                          "name": "u 0.5",
+                          "children": [
+                            {
+                              "name": "u 1.0",
+                              "children": []
+                            }
+                          ]
+                        },
+                        {
+                          "name": "- 0.5",
+                          "children": [
+                            {
+                              "name": "u 1.0",
+                              "children": []
+                            }
+                          ]
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "- 0.5",
+      "children": [
+        {
+          "name": "u 1.0",
+          "children": [
+            {
+              "name": "u 0.66667",
+              "children": [
+                {
+                  "name": "u 0.5",
+                  "children": [
+                    {
+                      "name": "- 1.0",
+                      "children": [
+                        {
+                          "name": "u 1.0",
+                          "children": [
+                            {
+                              "name": "- 1.0",
+                              "children": []
+                            }
+                          ]
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "name": "- 0.5",
+                  "children": [
+                    {
+                      "name": "u 1.0",
+                      "children": [
+                        {
+                          "name": "- 1.0",
+                          "children": [
+                            {
+                              "name": "- 1.0",
+                              "children": []
+                            }
+                          ]
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "name": "- 0.33333",
+              "children": [
+                {
+                  "name": "- 1.0",
+                  "children": [
+                    {
+                      "name": "u 1.0",
+                      "children": [
+                        {
+                          "name": "- 1.0",
+                          "children": [
+                            {
+                              "name": "u 1.0",
+                              "children": []
+                            }
+                          ]
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}
