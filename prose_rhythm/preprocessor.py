@@ -197,19 +197,22 @@ class Preprocessor(object): # pylint: disable=too-few-public-methods
         tokenized_text = []
         for sentence in tokenized_sentences:
             sentence_dict = {}
-            sentence_dict["contains_abbrev"] = True if "abbrev" in sentence else False
             sentence_dict["contains_numeral"] = True if "roman_numeral" in sentence else False
             sentence = re.sub(r"abbrev", "", sentence)
             sentence = re.sub(r"roman_numeral", "", sentence)
             sentence = re.sub(r"[ ]{2,}", " ", sentence)
             sentence_dict["plain_text_sentence"] = sentence
             sentence_dict["structured_sentence"] = self._tokenize_words(sentence)
+            syllables = [word['syllables'] for word in sentence_dict["structured_sentence"]]
+            syllables = [syll['syllable'] for syllable in syllables for syll in syllable]
+            sentence_dict["contains_abbrev"] = True if "00000" in syllables[-8:] else False
+            print(sentence_dict['contains_abbrev'])
             tokenized_text.append(sentence_dict)
 
         return {"title": self.title, "text": tokenized_text}
 
 
 if __name__ == "__main__":
-    TEST = "XII sē differunt.commeant est."
+    TEST = "Puer est Agr. mallus?"
     tokens = Preprocessor(TEST).tokenize()
     print(tokens)

@@ -33,7 +33,7 @@ class Normalizer(object):
         :return:
         """
         for abbrev in self.abbrev:
-            text = text.replace(abbrev, "abbrev")
+            text = text.replace(abbrev, "00000")
         return text
 
 
@@ -68,4 +68,6 @@ class Normalizer(object):
         return text
 
 if __name__ == "__main__":
-    print(Normalizer("test").syllabify("fuit"))
+   test = 'Puer bona est Agr. malus?'
+   normalizer = Normalizer()
+   print(normalizer.normalize(test))
