@@ -13,7 +13,7 @@ class Analyze(object):
     Analyze Latin prose rhythms.
     """
 
-    def __init__(self, clausula_length=8, include_short_clausula=True):
+    def __init__(self, clausula_length=8, include_short_clausula=False):
         self.clausula_length = clausula_length
         self.include_short_clausula = include_short_clausula
 
@@ -36,7 +36,7 @@ class Analyze(object):
                             else:
                                 sentence_clausula = 'u' + sentence_clausula
                 sentence_clausula = sentence_clausula[:-1] + 'x'
-                clausulae.append(sentence_clausula)
+                clausulae.append((sentence['plain_text_sentence'], sentence_clausula))
 
         if not self.include_short_clausula:
             return [clausula for clausula in clausulae if len(clausula) == self.clausula_length]

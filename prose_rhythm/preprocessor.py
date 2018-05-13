@@ -190,9 +190,7 @@ class Preprocessor(object): # pylint: disable=too-few-public-methods
         """
         normalized_text = Normalizer().normalize(self.text)
         default_punc = "."
-        tokenized_sentences = [sentence.strip() for sentence in
-                               normalized_text.split(default_punc) if
-                               sentence.strip() is not ""]
+        tokenized_sentences = normalized_text.split('.')
 
         tokenized_text = []
         for sentence in tokenized_sentences:
