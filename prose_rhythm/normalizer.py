@@ -5,10 +5,6 @@ Normalize Latin text for preprocessing.
 The module assume that the text is already macronized and is utf 8 encoded.
 """
 import regex as re
-import json
-import os
-
-from cltk.prosody.latin.Syllabifier import Syllabifier
 
 DEFAULT_PUNC = [".", "?", "!", ";", ":"]
 DEFAULT_ABBREV = ["Agr.", "Ap.", "A.", "K.", "D.", "F.", "C.",
@@ -16,6 +12,7 @@ DEFAULT_ABBREV = ["Agr.", "Ap.", "A.", "K.", "D.", "F.", "C.",
                   "Opet.", "Post.", "Pro.", "P.", "Q.", "Sert.",
                   "Ser.", "Sex.", "S.", "St.", "Ti.", "T.", "V.",
                   "Vol.", "Vop.", "Pl."]
+
 
 class Normalizer(object):
     """
@@ -36,10 +33,9 @@ class Normalizer(object):
             text = text.replace(abbrev, "00000")
         return text
 
-
     @staticmethod
     def _replace_roman_numerals(text):
-        text = re.sub(r"\s[IīVXLCDMiīvxlcdm]+[\s\.]", "roman_numeral", text)
+        text = re.sub(r"\s?[IīVXLCDMiīvxlcdm]+[\s\.]", " roman_numeral ", text)
         return text
 
     @staticmethod
@@ -67,7 +63,8 @@ class Normalizer(object):
         text = self._remove_extra_white_space(text)
         return text
 
+
 if __name__ == "__main__":
-   test = 'Puer bona est Agr. malus?'
-   normalizer = Normalizer()
-   print(normalizer.normalize(test))
+    test = 'Puer bona est Agr. malus?'
+    normalizer = Normalizer()
+    print(normalizer.normalize(test))
