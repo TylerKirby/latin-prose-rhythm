@@ -189,7 +189,6 @@ class Preprocessor(object): # pylint: disable=too-few-public-methods
         :return:list
         """
         normalized_text = Normalizer().normalize(self.text)
-        default_punc = "."
         tokenized_sentences = normalized_text.split('.')
 
         tokenized_text = []
@@ -204,7 +203,6 @@ class Preprocessor(object): # pylint: disable=too-few-public-methods
             syllables = [word['syllables'] for word in sentence_dict["structured_sentence"]]
             syllables = [syll['syllable'] for syllable in syllables for syll in syllable]
             sentence_dict["contains_abbrev"] = True if "00000" in syllables[-8:] else False
-            print(sentence_dict['contains_abbrev'])
             tokenized_text.append(sentence_dict)
 
         return {"title": self.title, "text": tokenized_text}
