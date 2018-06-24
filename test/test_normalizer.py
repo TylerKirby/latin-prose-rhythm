@@ -14,15 +14,21 @@ def test_replace_abbreviations():
 
 def test_replace_roman_numerals():
     text_with_numerals = "XII Puer CCC vivat."
-    text_without_numerals = " roman_numeral Puer roman_numeral vivat."
+    text_without_numerals = "roman_numeral Puer roman_numeral vivat."
     assert Normalizer()._replace_roman_numerals(text_with_numerals) == text_without_numerals
+
+
+def test_numerals_in_words():
+    text = "Cui dono. Puer vīs."
+    target = "Cui dono. Puer vīs."
+    assert Normalizer()._replace_roman_numerals(text) == target
 
 
 def test_remove_extra_white_space():
     test_with_extra_white_space = " Puer putat vivat  puella   puer."
     test_without_extra_white_space = "Puer putat vivat puella puer."
     assert Normalizer()._remove_extra_white_space(test_with_extra_white_space) == \
-           test_without_extra_white_space
+        test_without_extra_white_space
 
 
 def test_normalizer():

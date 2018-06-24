@@ -35,7 +35,8 @@ class Normalizer(object):
 
     @staticmethod
     def _replace_roman_numerals(text):
-        text = re.sub(r"\s?[IīVXLCDMiīvxlcdm]+[\s\.]", " roman_numeral ", text)
+        text = re.sub(r"^[IīVXLCDMiīvxlcdm]+[\s\.]", "roman_numeral ", text)
+        text = re.sub(r"\s[IīVXLCDMiīvxlcdm]+[\s\.]", " roman_numeral ", text)
         return text
 
     @staticmethod
