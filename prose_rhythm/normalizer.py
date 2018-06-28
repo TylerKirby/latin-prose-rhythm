@@ -45,6 +45,19 @@ class Normalizer(object):
         text = re.sub(r"^\s", "", text)
         return text
 
+    @staticmethod
+    def _remove_word_enjambments(text):
+        tokens = [token for token in text.split(' ') if token != '']
+        words = []
+        for index, token in enumerate(tokens):
+            if token.endswith('-\n'):
+                word = token[:-2] + tokens[index+1]
+                del tokens[index+1]
+                words.append(word)
+            else:
+                words.append(token)
+        return ' '.join(words)
+
     def normalize(self, text):
         """
         Normalize text.
@@ -61,11 +74,14 @@ class Normalizer(object):
 
         text = self._replace_roman_numerals(text)
         text = text.lower()
+        text = self._remove_word_enjambments(text)
         text = self._remove_extra_white_space(text)
         return text
 
 
 if __name__ == "__main__":
-    test = 'Puer bona est Agr. malus?'
+    test = """quōcumque incīdērunt, veterem cōnsuētūdinem forī et pristī-
+    num mōrem jūdiciōrum requīrunt. Nōn enim corōna cōn-
+    sessus vester cīnctus est, ut solēbat;"""
     normalizer = Normalizer()
-    print(normalizer.normalize(test))
+    print(normalizer._remove_word_enjambments(test))

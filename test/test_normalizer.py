@@ -31,6 +31,14 @@ def test_remove_extra_white_space():
         test_without_extra_white_space
 
 
+def test_remove_word_enjambments():
+    text = """quōcumque incīdērunt, veterem cōnsuētūdinem forī et pristī-
+    num mōrem jūdiciōrum requīrunt. Nōn enim corōna cōn-
+    sessus vester cīnctus est, ut solēbat;"""
+    target = "quōcumque incīdērunt, veterem cōnsuētūdinem forī et pristīnum mōrem jūdiciōrum requīrunt. Nōn enim corōna cōnsessus vester cīnctus est, ut solēbat;"
+    assert Normalizer()._remove_word_enjambments(text) == target
+
+
 def test_normalizer():
     text = "III. O tempora o morae!   Galliā, est Besta Agr. rogat?"
     normalized_text = "roman_numeral o tempora o morae. galliā, est besta 00000 rogat."
