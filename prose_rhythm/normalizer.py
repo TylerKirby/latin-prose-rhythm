@@ -47,16 +47,8 @@ class Normalizer(object):
 
     @staticmethod
     def _remove_word_enjambments(text):
-        tokens = [token for token in text.split(' ') if token != '']
-        words = []
-        for index, token in enumerate(tokens):
-            if token.endswith('-\n'):
-                word = token[:-2] + tokens[index+1]
-                del tokens[index+1]
-                words.append(word)
-            else:
-                words.append(token)
-        return ' '.join(words)
+        tokens = [word.replace('-\n', '') for word in text.split(' ')]
+        return ' '.join(tokens)
 
     def normalize(self, text):
         """
@@ -80,8 +72,10 @@ class Normalizer(object):
 
 
 if __name__ == "__main__":
-    test = """quōcumque incīdērunt, veterem cōnsuētūdinem forī et pristī-
-    num mōrem jūdiciōrum requīrunt. Nōn enim corōna cōn-
-    sessus vester cīnctus est, ut solēbat;"""
+    test = """posse, tamen haec novī jūdicī nova fōrma terret oculōs quī, 
+quōcumque incīdērunt, veterem cōnsuētūdinem forī et pristī-
+num mōrem jūdiciōrum requīrunt. Nōn enim corōna cōn-
+sessus vester cīnctus est, ut solēbat; nōn ūsitātā frequentiā 
+"""
     normalizer = Normalizer()
     print(normalizer._remove_word_enjambments(test))

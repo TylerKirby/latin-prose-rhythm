@@ -32,10 +32,8 @@ def test_remove_extra_white_space():
 
 
 def test_remove_word_enjambments():
-    text = """quōcumque incīdērunt, veterem cōnsuētūdinem forī et pristī-
-    num mōrem jūdiciōrum requīrunt. Nōn enim corōna cōn-
-    sessus vester cīnctus est, ut solēbat;"""
-    target = "quōcumque incīdērunt, veterem cōnsuētūdinem forī et pristīnum mōrem jūdiciōrum requīrunt. Nōn enim corōna cōnsessus vester cīnctus est, ut solēbat;"
+    text = "prī-\nnum"
+    target = "prīnum"
     assert Normalizer()._remove_word_enjambments(text) == target
 
 

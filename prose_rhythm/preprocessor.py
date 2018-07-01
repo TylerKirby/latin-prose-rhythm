@@ -33,6 +33,7 @@ class Preprocessor(object): # pylint: disable=too-few-public-methods
         self.punctuation = [".", "?", "!", ";", ":"] if punctuation is None else punctuation
         self.title = title
         self.syllabifier = Syllabifier()
+        self.normalizer = Normalizer()
 
     def __str__(self):
         tokens = self.tokenize()
@@ -188,7 +189,8 @@ class Preprocessor(object): # pylint: disable=too-few-public-methods
         [ [{word: puella, syllables: [...], index: 0}, ... ], ... ]
         :return:list
         """
-        normalized_text = Normalizer().normalize(self.text)
+
+        normalized_text = self.normalizer.normalize(self.text)
         tokenized_sentences = normalized_text.split('.')
 
         tokenized_text = []
