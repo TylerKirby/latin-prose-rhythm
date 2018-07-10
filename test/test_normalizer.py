@@ -24,6 +24,13 @@ def test_numerals_in_words():
     assert Normalizer()._replace_roman_numerals(text) == target
 
 
+def test_vim_not_numeral():
+    text = "Non vim puer."
+    assert Normalizer()._replace_roman_numerals(text) == text
+    text_start_with_vim = "Vim puer non."
+    assert Normalizer()._replace_roman_numerals(text_start_with_vim) == text_start_with_vim
+
+
 def test_remove_extra_white_space():
     test_with_extra_white_space = " Puer putat vivat  puella   puer."
     test_without_extra_white_space = "Puer putat vivat puella puer."

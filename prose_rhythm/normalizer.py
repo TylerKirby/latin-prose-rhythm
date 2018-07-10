@@ -35,8 +35,8 @@ class Normalizer(object):
 
     @staticmethod
     def _replace_roman_numerals(text):
-        text = re.sub(r"^[IīVXLCDMiīvxlcdm]+[\s\.]", "roman_numeral ", text)
-        text = re.sub(r"\s[IīVXLCDMiīvxlcdm]+[\s\.]", " roman_numeral ", text)
+        text = re.sub(r"^(?![vV]im)[IīVXLCDMiīvxlcdm]+[\s\.](?!vim)", "roman_numeral ", text)
+        text = re.sub(r"\s(?![vV]im)[IīVXLCDMiīvxlcdm]+[\s\.]", " roman_numeral ", text)
         return text
 
     @staticmethod
@@ -72,10 +72,4 @@ class Normalizer(object):
 
 
 if __name__ == "__main__":
-    test = """posse, tamen haec novī jūdicī nova fōrma terret oculōs quī, 
-quōcumque incīdērunt, veterem cōnsuētūdinem forī et pristī-
-num mōrem jūdiciōrum requīrunt. Nōn enim corōna cōn-
-sessus vester cīnctus est, ut solēbat; nōn ūsitātā frequentiā 
-"""
     normalizer = Normalizer()
-    print(normalizer._remove_word_enjambments(test))
