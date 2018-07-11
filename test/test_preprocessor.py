@@ -130,7 +130,7 @@ def test_tokenize_syllables_mute_plus_liquid():
     test7 = preprocessor3._tokenize_syllables("oblinō")
     assert test7[0]["long_by_position"] == (True, None)
     gl_not_mute_liquid = preprocessor3._tokenize_syllables("neglēxit")
-    assert gl_not_mute_liquid[1]["long_by_position"] == (True, None)
+    assert gl_not_mute_liquid[0]["long_by_position"] == (True, None)
 
 
 def test_tokenize_words():
