@@ -24,7 +24,7 @@ class Preprocessor(object): # pylint: disable=too-few-public-methods
     CONSONANTS = SINGLE_CONSONANTS + DOUBLE_CONSONANTS
     DIGRAPHS = ["ch", "ph", "th", "qu"]
     LIQUIDS = ["r", "l"]
-    MUTES = ["b", "p", "d", "t", "g", "c"]
+    MUTES = ["b", "p", "d", "t", "c"]
     NASALS = ["m", "n"]
     SESTS = ["sc", "sm", "sp", "st", "z"]
 
