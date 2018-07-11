@@ -146,9 +146,15 @@ def test_tokenize_words():
     assert test1[0]["syllables"] == preprocessor3._tokenize_syllables("mihi")
     assert test1[1]["syllables_count"] == 4
     assert test1[3]["syllables_count"] == 1
+
+
 def test_tokenize_words_elision():
     test1 = preprocessor3._tokenize_words("mihi conjiciō ivi it quam optāram auditū dedērunt te miror antōnī quorum.")
     test2 = preprocessor3._tokenize_words("Galliaque humanitate.")
+    test3 = preprocessor3._tokenize_words("Gallae est.")
+    test4 = preprocessor3._tokenize_words("Galliae haerum.")
+    test5 = preprocessor3._tokenize_words("pūblicā armāre.")
+    test6 = preprocessor3._tokenize_words("quem habētis.")
 
     # elision
     assert test1[0]["syllables"][-1]["elide"] == (False, None)
@@ -157,10 +163,10 @@ def test_tokenize_words_elision():
     assert test1[2]["syllables"][-1]["elide"] == (True, "weak")
     assert test1[4]["syllables"][-1]["elide"] == (True, "strong")
     assert test2[0]["syllables"][-1]["elide"] == (True, "weak")
-    test3 = preprocessor3._tokenize_words("Gallae est.")
     assert test3[0]["syllables"][-1]["elide"] == (True, "strong")
-    test4 = preprocessor3._tokenize_words("Galliae haerum")
     assert test4[0]["syllables"][-1]["elide"] == (True, "strong")
+    assert test5[0]["syllables"][-1]["elide"] == (True, "strong")
+    assert test6[0]["syllables"][-1]["elide"][0] == True
 
 
 def test_tokenize_words_long_by_position():
