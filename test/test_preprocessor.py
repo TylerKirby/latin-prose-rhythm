@@ -166,7 +166,7 @@ def test_tokenize_words_elision():
     assert test3[0]["syllables"][-1]["elide"] == (True, "strong")
     assert test4[0]["syllables"][-1]["elide"] == (True, "strong")
     assert test5[0]["syllables"][-1]["elide"] == (True, "strong")
-    assert test6[0]["syllables"][-1]["elide"][0] == True
+    assert test6[0]["syllables"][-1]["elide"][0]
 
 
 def test_tokenize_words_long_by_position():
