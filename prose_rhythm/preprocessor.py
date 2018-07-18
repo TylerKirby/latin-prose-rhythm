@@ -6,7 +6,8 @@ Process normalized Latin text into an annotated data set of prosimetric informat
 import regex as re
 
 from cltk.prosody.latin.Syllabifier import Syllabifier
-from prose_rhythm.normalizer import Normalizer
+from normalizer import Normalizer
+
 
 class Preprocessor(object): # pylint: disable=too-few-public-methods
     """
