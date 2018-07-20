@@ -4,7 +4,7 @@ Analyze Latin prose rhythms.
 
 Module assumes that texts are preprocessed before analyzing.
 """
-from prose_rhythm.preprocessor import Preprocessor
+from preprocessor import Preprocessor
 
 
 class Analyze(object):
@@ -49,7 +49,7 @@ class Analyze(object):
                 flat_syllables = [syllable for word in syllables for syllable in word]
                 flat_syllables = self.process_syllables(flat_syllables)
                 for syllable in flat_syllables:
-                    if len(sentence_clausula) < self.clausula_length:
+                    if len(sentence_clausula) < self.clausula_length - 1:
                         if syllable['long_by_nature'] or syllable['long_by_position'][0]:
                             sentence_clausula.append('-')
                         else:
@@ -61,9 +61,8 @@ class Analyze(object):
 
 
 if __name__ == "__main__":
-    not_elided = "multitūdinis auctōritāte pūblicā armāre."
+    not_elided = "sī quem habētis, dēpōnite."
     preprocessor = Preprocessor(text=not_elided)
     analysis = Analyze()
     tokens = preprocessor.tokenize()
     print(analysis.get_rhythms(tokens))
-\
