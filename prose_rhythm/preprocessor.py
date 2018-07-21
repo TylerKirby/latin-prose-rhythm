@@ -6,7 +6,7 @@ Process normalized Latin text into an annotated data set of prosimetric informat
 import regex as re
 
 from cltk.prosody.latin.Syllabifier import Syllabifier
-from normalizer import Normalizer
+from prose_rhythm.normalizer import Normalizer
 
 
 class Preprocessor(object): # pylint: disable=too-few-public-methods
@@ -209,9 +209,3 @@ class Preprocessor(object): # pylint: disable=too-few-public-methods
             tokenized_text.append(sentence_dict)
 
         return {"title": self.title, "text": tokenized_text}
-
-
-if __name__ == "__main__":
-    TEST = "Puer est Agr. mallus?"
-    tokens = Preprocessor(TEST).tokenize()
-    print(tokens)

@@ -4,7 +4,6 @@ Analyze Latin prose rhythms.
 
 Module assumes that texts are preprocessed before analyzing.
 """
-from preprocessor import Preprocessor
 
 
 class Analyze(object):
@@ -15,25 +14,16 @@ class Analyze(object):
     def __init__(self, clausula_length=8):
         self.clausula_length = clausula_length
 
-    @staticmethod
-    def filter_elided_syllables(flat_syllable_list):
-        i = 0
-        while i < len(flat_syllable_list):
-            if flat_syllable_list[i]['elide'][0]:
-                del flat_syllable_list[i+1]
-            i += 1
-        return flat_syllable_list
-
     def process_syllables(self, flat_syllable_list):
         """
         Return flat list of syllables with final syllable
         removed and list reversed. Elided syllables
         are removed as well
         """
-        flat_syllable_list = self.filter_elided_syllables(flat_syllable_list)[:-1]
-        return flat_syllable_list[::-1]
+        remove_elided = [syll for syll in flat_syllable_list if not syll['elide'][0]]
+        processed_sylls = remove_elided[:-1]
+        return processed_sylls[::-1]
 
-    # TODO Rewrite to account for elision
     def get_rhythms(self, tokens):
         """
         Return a flat list of rhythms.
@@ -58,11 +48,3 @@ class Analyze(object):
             sentence_clausula.append('x')
             clausulae.append((sentence['plain_text_sentence'], ''.join(sentence_clausula)))
         return clausulae[:-1]
-
-
-if __name__ == "__main__":
-    not_elided = "sī quem habētis, dēpōnite."
-    preprocessor = Preprocessor(text=not_elided)
-    analysis = Analyze()
-    tokens = preprocessor.tokenize()
-    print(analysis.get_rhythms(tokens))
