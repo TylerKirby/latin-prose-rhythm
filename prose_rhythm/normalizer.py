@@ -69,7 +69,3 @@ class Normalizer(object):
         text = self._remove_word_enjambments(text)
         text = self._remove_extra_white_space(text)
         return text
-
-
-if __name__ == "__main__":
-    normalizer = Normalizer()
