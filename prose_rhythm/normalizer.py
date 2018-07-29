@@ -11,7 +11,7 @@ DEFAULT_ABBREV = ["Agr.", "Ap.", "A.", "K.", "D.", "F.", "C.",
                   "Cn.", "L.", "Mam.", "M\'", "M.", "N.", "Oct.",
                   "Opet.", "Post.", "Pro.", "P.", "Q.", "Sert.",
                   "Ser.", "Sex.", "S.", "St.", "Ti.", "T.", "V.",
-                  "Vol.", "Vop.", "Pl."]
+                  "Vol.", "Vop.", "Pl.", "tr.", "pl.", "Sp."]
 
 
 class Normalizer(object):
@@ -46,6 +46,10 @@ class Normalizer(object):
         return text
 
     @staticmethod
+    def _replace_underscores(text):
+        return text.replace('_', ' ')
+
+    @staticmethod
     def _remove_word_enjambments(text):
         tokens = [word.replace('-\n', '') for word in text.split(' ')]
         return ' '.join(tokens)
@@ -64,6 +68,7 @@ class Normalizer(object):
         if self.replace_abbrev:
             text = self._replace_abbreviations(text)
 
+        text = self._replace_underscores(text)
         text = self._replace_roman_numerals(text)
         text = text.lower()
         text = self._remove_word_enjambments(text)

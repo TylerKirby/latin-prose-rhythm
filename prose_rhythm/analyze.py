@@ -5,6 +5,8 @@ Analyze Latin prose rhythms.
 Module assumes that texts are preprocessed before analyzing.
 """
 
+from prose_rhythm.preprocessor import Preprocessor
+
 
 class Analyze(object):
     """
@@ -34,7 +36,7 @@ class Analyze(object):
         clausulae = []
         for sentence in tokens['text']:
             sentence_clausula = []
-            if not sentence['contains_numeral'] and not sentence['contains_abbrev']:
+            if not sentence['contains_abbrev']:
                 syllables = [word['syllables'] for word in sentence['structured_sentence']]
                 flat_syllables = [syllable for word in syllables for syllable in word]
                 flat_syllables = self.process_syllables(flat_syllables)
@@ -48,3 +50,13 @@ class Analyze(object):
             sentence_clausula.append('x')
             clausulae.append((sentence['plain_text_sentence'], ''.join(sentence_clausula)))
         return clausulae[:-1]
+
+
+if __name__ == '__main__':
+    text = """et suō jūre possit?, 
+sed praesidiō esse, ut intellegātis contrā hesternam illam 
+contiōnem licēre vōbīs quod sentiātis līberē jūdicāre. """
+    p = Preprocessor(text=text)
+    a = Analyze()
+    tokens = p.tokenize()
+    r = a.get_rhythms(tokens)
