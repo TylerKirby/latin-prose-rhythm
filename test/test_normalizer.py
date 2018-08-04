@@ -58,3 +58,9 @@ def test_normalizer():
     text = "III. O tempora o morae!   Gal-\nliā, est Besta Agr. rogat?"
     normalized_text = "roman_numeral o tempora o morae. galliā, est besta 00000 rogat."
     assert normalizer.normalize(text) == normalized_text
+
+
+def test_hicc_hocc():
+    text = "Puer hic amat hoc puellam."
+    target = "puer hicc amat hocc puellam."
+    assert normalizer.normalize(text) == target
