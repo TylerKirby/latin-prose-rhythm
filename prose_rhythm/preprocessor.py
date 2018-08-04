@@ -82,7 +82,10 @@ class Preprocessor(object): # pylint: disable=too-few-public-methods
             # long by position intra word
             if i < len(syllables) - 1 and \
                     syllable_dict["syllable"][-1] in self.CONSONANTS:
-                if syllable_dict["syllable"][-1] in self.DOUBLE_CONSONANTS or \
+                if syllable_dict["syllable"][-1] == "t" and syllables[i + 1][0] == "r":
+                    syllable_dict["long_by_position"] = \
+                        (False, "mute+liquid")
+                elif syllable_dict["syllable"][-1] in self.DOUBLE_CONSONANTS or \
                         syllables[i + 1][0] in self.CONSONANTS:
                     syllable_dict["long_by_position"] = (True, None)
                 else:
