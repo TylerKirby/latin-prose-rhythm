@@ -41,6 +41,7 @@ class Normalizer(object):
 
     @staticmethod
     def _remove_extra_white_space(text):
+        text = text.replace('\n', ' ')
         text = re.sub(r"\s{2,}", " ", text)
         text = re.sub(r"^\s", "", text)
         return text
@@ -51,8 +52,8 @@ class Normalizer(object):
 
     @staticmethod
     def _remove_word_enjambments(text):
-        tokens = [word.replace('-\n', '') for word in text.split(' ')]
-        return ' '.join(tokens)
+        tokens = [word.replace('- ', '').replace('-\n', '') for word in text.split(' ')]
+        return ' '.join(tokens).replace('- ', '')
 
     def normalize(self, text):
         """
