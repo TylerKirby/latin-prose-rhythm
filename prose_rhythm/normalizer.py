@@ -73,7 +73,8 @@ class Normalizer(object):
                    .replace('hoc', 'hocc')\
                    .replace('\'', '')\
                    .replace('\"', '')\
-                   .replace('_,', '')
+                   .replace('_,', '')\
+                   .replace('Vnde', 'Unde')
         text = self._replace_underscores(text)
         text = self._replace_roman_numerals(text)
         text = text.lower()

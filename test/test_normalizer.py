@@ -76,3 +76,9 @@ def test_underscore_punc():
     text = """Quo puer?_, est puella."""
     target = "quo puer. est puella."
     assert normalizer.normalize(text) == target
+
+
+def test_unde():
+    text = "Vnde?"
+    target = "unde."
+    assert normalizer.normalize(text) == target
