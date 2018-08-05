@@ -70,3 +70,9 @@ def test_remove_quotes():
     text = """Puella dicit: 'Quo puer est?'"""
     target = "puella dicit. quo puer est."
     assert normalizer.normalize(text) == target
+
+
+def test_underscore_punc():
+    text = """Quo puer?_, est puella."""
+    target = "quo puer. est puella."
+    assert normalizer.normalize(text) == target

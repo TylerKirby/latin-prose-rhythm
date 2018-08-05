@@ -72,7 +72,8 @@ class Normalizer(object):
         text = text.replace('hic', 'hicc')\
                    .replace('hoc', 'hocc')\
                    .replace('\'', '')\
-                   .replace('\"', '')
+                   .replace('\"', '')\
+                   .replace('_,', '')
         text = self._replace_underscores(text)
         text = self._replace_roman_numerals(text)
         text = text.lower()
