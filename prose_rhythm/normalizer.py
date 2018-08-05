@@ -69,7 +69,10 @@ class Normalizer(object):
         if self.replace_abbrev:
             text = self._replace_abbreviations(text)
 
-        text = text.replace('hic', 'hicc').replace('hoc', 'hocc')
+        text = text.replace('hic', 'hicc')\
+                   .replace('hoc', 'hocc')\
+                   .replace('\'', '')\
+                   .replace('\"', '')
         text = self._replace_underscores(text)
         text = self._replace_roman_numerals(text)
         text = text.lower()

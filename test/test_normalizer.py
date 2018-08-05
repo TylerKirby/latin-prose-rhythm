@@ -64,3 +64,9 @@ def test_hicc_hocc():
     text = "Puer hic amat hoc puellam."
     target = "puer hicc amat hocc puellam."
     assert normalizer.normalize(text) == target
+
+
+def test_remove_quotes():
+    text = """Puella dicit: 'Quo puer est?'"""
+    target = "puella dicit. quo puer est."
+    assert normalizer.normalize(text) == target
