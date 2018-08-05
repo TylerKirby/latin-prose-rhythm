@@ -58,7 +58,7 @@ def test_pro_milone_1_6():
 
       '-u----ux'),
 
-     (' nam sī umquam dē bonīs et fortibus virīs, sī umquam dē bene meritīs cīvibus potestās vōbīs jūdicandī fuit, sī dēnique umquam locus amplissimōrum ōrdinum dēlēctīs virīs datus est ut sua studia ergā fortīs et bonōs cīvīs, quae voltū et verbīs saepe significāssent, rē et sententiīs dēclārārent, hoc profectō tempore eam potestātem omnem vōs habētis ut statuātis utrum nōs quī semper vestrae auctōritātī dēditī fuimus semper miserī lūgeāmus an diū vexātī ā perditissimīs cīvibus alīquandō per vōs ac per vestram fidem, virtūtem sapientiamque recreēmur',
+     (' nam sī umquam dē bonīs et fortibus virīs, sī umquam dē bene meritīs cīvibus potestās vōbīs jūdicandī fuit, sī dēnique umquam locus amplissimōrum ōrdinum dēlēctīs virīs datus est ut sua studia ergā fortīs et bonōs cīvīs, quae voltū et verbīs saepe significāssent, rē et sententiīs dēclārārent, hocc profectō tempore eam potestātem omnem vōs habētis ut statuātis utrum nōs quī semper vestrae auctōritātī dēditī fuimus semper miserī lūgeāmus an diū vexātī ā perditissimīs cīvibus alīquandō per vōs ac per vestram fidem, virtūtem sapientiamque recreēmur',
 
       '-u-uuu-x'),
 
@@ -74,11 +74,11 @@ def test_pro_milone_1_6():
 
       'u---u--x'),
 
-     (' nisi oculīs vīderītis īnsidiās mīlōnī ā clōdiō esse factās, nec dēprecātūrī sumus ut crīmen hoc nōbīs propter multa praeclārā in rem pūblicam merita condōnētis, nec postulātūrī ut, quia mors 00000 clōdī salūs vestra fuerit, idcircō eam virtūtī milōnis potius quam populī rōmānī fēlīcitātī adsignētis',
+     (' nisi oculīs vīderītis īnsidiās mīlōnī ā clōdiō esse factās, nec dēprecātūrī sumus ut crīmen hocc nōbīs propter multa praeclārā in rem pūblicam merita condōnētis, nec postulātūrī ut, quia mors 00000 clōdī salūs vestra fuerit, idcircō eam virtūtī milōnis potius quam populī rōmānī fēlīcitātī adsignētis',
 
       '--u----x'),
 
-     (' sīn illīus īnsidiae clāriōrēs hāc lūce fuerint, tum dēnique obsecrābō obtestāborque vōs, jūdicēs, sī cētera āmīsimus, hoc nōbīs saltem ut relinquātur, vītam ab inimīcōrum audācia tēlīsque ut impūne liceat dēfendere',
+     (' sīn illīus īnsidiae clāriōrēs hāc lūce fuerint, tum dēnique obsecrābō obtestāborque vōs, jūdicēs, sī cētera āmīsimus, hocc nōbīs saltem ut relinquātur, vītam ab inimīcōrum audācia tēlīsque ut impūne liceat dēfendere',
 
       'uuu---ux')
     ]
