@@ -17,7 +17,7 @@ class Preprocessor(object): # pylint: disable=too-few-public-methods
     SHORT_VOWELS = ["a", "e", "i", "o", "u", "y"]
     LONG_VOWELS = ["ā", "ē", "ī", "ō", "ū"]
     VOWELS = SHORT_VOWELS + LONG_VOWELS
-    DIPHTHONGS = ["ae", "au", "ei", "eu", "oe", "ui"]
+    DIPHTHONGS = ["ae", "au", "ei", "oe", "ui"]
 
     SINGLE_CONSONANTS = ["b", "c", "d", "g", "k", "l", "m", "n", "p", "q", "r",
                          "s", "t", "v", "f", "j"]
