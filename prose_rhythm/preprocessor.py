@@ -76,8 +76,13 @@ class Preprocessor(object): # pylint: disable=too-few-public-methods
             syllable_dict = {"syllable": syllables[i], "index": i, "elide": (False, None)}
 
             # is long by nature
-            syllable_dict["long_by_nature"] = True if \
-                any(long in syllables[i] for long in longs) else False
+            if any(long in syllables[i] for long in longs):
+                if syllables[i][:3] != "qui":
+                    syllable_dict["long_by_nature"] = True
+                else:
+                    syllable_dict["long_by_nature"] = False
+            else:
+                syllable_dict["long_by_nature"] = False
 
             # long by position intra word
             if i < len(syllables) - 1 and \

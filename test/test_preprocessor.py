@@ -73,6 +73,9 @@ def test_tokenize_syllables_long_by_nature():
     assert test4[3]["long_by_nature"] == True
     assert test5[0]["long_by_nature"] == True
 
+    qui_example = preprocessor3._tokenize_syllables("quid")
+    assert qui_example[0]["long_by_nature"] == False
+
 
 def test_tokenize_syllables_accent():
     test1 = preprocessor3._tokenize_syllables("mihi")
