@@ -25,7 +25,8 @@ class Preprocessor(object): # pylint: disable=too-few-public-methods
     CONSONANTS = SINGLE_CONSONANTS + DOUBLE_CONSONANTS
     DIGRAPHS = ["ch", "ph", "th", "qu"]
     LIQUIDS = ["r", "l"]
-    MUTES = ["b", "p", "d", "t", "c"]
+    MUTES = ["b", "p", "d", "t", "c", "g"]
+    MUTE_LIQUID_EXCEPTIONS = ["gl", "bl"]
     NASALS = ["m", "n"]
     SESTS = ["sc", "sm", "sp", "st", "z"]
 
@@ -87,7 +88,7 @@ class Preprocessor(object): # pylint: disable=too-few-public-methods
             # long by position intra word
             if i < len(syllables) - 1 and \
                     syllable_dict["syllable"][-1] in self.CONSONANTS:
-                if syllable_dict["syllable"][-1] == "t" and syllables[i + 1][0] == "r":
+                if syllable_dict["syllable"][-1] in self.MUTES and syllables[i + 1][0] in self.LIQUIDS and syllable_dict["syllable"][-1]+syllables[i + 1][0] not in self.MUTE_LIQUID_EXCEPTIONS:
                     syllable_dict["long_by_position"] = \
                         (False, "mute+liquid")
                 elif syllable_dict["syllable"][-1] in self.DOUBLE_CONSONANTS or \
@@ -97,7 +98,7 @@ class Preprocessor(object): # pylint: disable=too-few-public-methods
                     syllable_dict["long_by_position"] = (False, None)
             elif i < len(syllables) - 1 and syllable_dict["syllable"][-1] in \
                     self.VOWELS and len(syllables[i + 1]) > 1:
-                if syllables[i + 1][0] in self.MUTES and syllables[i + 1][1] in self.LIQUIDS:
+                if syllables[i + 1][0] in self.MUTES and syllables[i + 1][1] in self.LIQUIDS and syllables[i + 1][0]+syllables[i + 1][1] not in self.MUTE_LIQUID_EXCEPTIONS:
                     syllable_dict["long_by_position"] = \
                         (False, "mute+liquid")
                 elif syllables[i + 1][0] in self.CONSONANTS and syllables[i + 1][1] in \
