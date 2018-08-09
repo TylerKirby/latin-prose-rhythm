@@ -2,122 +2,27 @@
 Unit tests for Analyze class
 """
 from prose_rhythm.analyze import Analyze
+from prose_rhythm.preprocessor import Preprocessor
 
 analyze = Analyze()
 
 
 def test_get_rhythms_elision():
-    test_tokens = {'title': 'No Title',
-                   'text': [{'contains_numeral': False,
-                             'plain_text_sentence': 'sī quem habētis dēpōnite',
-                             'structured_sentence': [{'word': 'sī',
-                                                      'index': 0,
-                                                      'syllables': [{'syllable': 'sī',
-                                                                     'index': 0,
-                                                                     'elide': (False, None),
-                                                                     'long_by_nature': True,
-                                                                     'long_by_position': (False, None),
-                                                                     'accented': True}],
-                                                      'syllables_count': 1},
-                                                     {'word': 'quem',
-                                                      'index': 1,
-                                                      'syllables': [{'syllable': 'quem',
-                                                                     'index': 0,
-                                                                     'elide': (True, 'strong'),
-                                                                     'long_by_nature': False,
-                                                                     'long_by_position': (False, None),
-                                                                     'accented': True}],
-                                                      'syllables_count': 1},
-                                                     {'word': 'habētis',
-                                                      'index': 2,
-                                                      'syllables': [{'syllable': 'ha',
-                                                                     'index': 0,
-                                                                     'elide': (False, None),
-                                                                     'long_by_nature': False,
-                                                                     'long_by_position': (False, None),
-                                                                     'accented': False},
-                                                                    {'syllable': 'bē',
-                                                                     'index': 1,
-                                                                     'elide': (False, None),
-                                                                     'long_by_nature': True,
-                                                                     'long_by_position': (False, None),
-                                                                     'accented': True},
-                                                                    {'syllable': 'tis',
-                                                                     'index': 2,
-                                                                     'elide': (False, None),
-                                                                     'long_by_nature': False,
-                                                                     'long_by_position': (True, None),
-                                                                     'accented': False}],
-                                                      'syllables_count': 3},
-                                                     {'word': 'dēpōnite',
-                                                      'index': 3,
-                                                      'syllables': [{'syllable': 'dē',
-                                                                     'index': 0,
-                                                                     'elide': (False, None),
-                                                                     'long_by_nature': True,
-                                                                     'long_by_position': (False, None),
-                                                                     'accented': False},
-                                                                    {'syllable': 'pō',
-                                                                     'index': 1,
-                                                                     'elide': (False, None),
-                                                                     'long_by_nature': True,
-                                                                     'long_by_position': (False, None),
-                                                                     'accented': True},
-                                                                    {'syllable': 'ni',
-                                                                     'index': 2,
-                                                                     'elide': (False, None),
-                                                                     'long_by_nature': False,
-                                                                     'long_by_position': (False, None),
-                                                                     'accented': False},
-                                                                    {'syllable': 'te',
-                                                                     'index': 3,
-                                                                     'elide': (False, None),
-                                                                     'long_by_nature': False,
-                                                                     'long_by_position': (False, None),
-                                                                     'accented': False}],
-                                                      'syllables_count': 4}],
-                             'contains_abbrev': False},
-                            {'contains_numeral': False,
-                             'plain_text_sentence': '',
-                             'structured_sentence': [],
-                             'contains_abbrev': False}]}
+    test = Preprocessor(text='sī quem habētis dēpōnite.').tokenize()
     correct = [('sī quem habētis dēpōnite', '-u----ux')]
-    assert analyze.get_rhythms(test_tokens) == correct
-    test_tokens = {'title': 'No Title', 'text': [
-        {'contains_numeral': False, 'plain_text_sentence': 'esse ōrātiōnī locum', 'structured_sentence': [
-            {'word': 'exīstimārem', 'index': 0, 'syllables': [
-                {'syllable': 'ex', 'index': 0, 'elide': (False, None), 'long_by_nature': False,
-                 'long_by_position': (True, None), 'accented': False},
-                {'syllable': 'īs', 'index': 1, 'elide': (False, None), 'long_by_nature': True,
-                 'long_by_position': (True, None), 'accented': False},
-                {'syllable': 'ti', 'index': 2, 'elide': (False, None), 'long_by_nature': False,
-                 'long_by_position': (False, None), 'accented': False},
-                {'syllable': 'mā', 'index': 3, 'elide': (False, None), 'long_by_nature': True,
-                 'long_by_position': (False, None), 'accented': True},
-                {'syllable': 'rem', 'index': 4, 'elide': (True, 'strong'), 'long_by_nature': False,
-                 'long_by_position': (False, None), 'accented': False}], 'syllables_count': 5},
-            {'word': 'esse', 'index': 1, 'syllables': [
-                {'syllable': 'es', 'index': 0, 'elide': (False, None), 'long_by_nature': False,
-                 'long_by_position': (True, None), 'accented': True},
-                {'syllable': 'se', 'index': 1, 'elide': (True, 'weak'), 'long_by_nature': False,
-                 'long_by_position': (False, None), 'accented': False}], 'syllables_count': 2},
-            {'word': 'ōrātiōnī', 'index': 2, 'syllables': [
-                {'syllable': 'ō', 'index': 0, 'elide': (False, None), 'long_by_nature': True,
-                 'long_by_position': (False, None), 'accented': False},
-                {'syllable': 'rā', 'index': 1, 'elide': (False, None), 'long_by_nature': True,
-                 'long_by_position': (False, None), 'accented': False},
-                {'syllable': 'ti', 'index': 2, 'elide': (False, None), 'long_by_nature': False,
-                 'long_by_position': (False, None), 'accented': False},
-                {'syllable': 'ō', 'index': 3, 'elide': (False, None), 'long_by_nature': True,
-                 'long_by_position': (False, None), 'accented': True},
-                {'syllable': 'nī', 'index': 4, 'elide': (False, None), 'long_by_nature': True,
-                 'long_by_position': (False, None), 'accented': False}], 'syllables_count': 5},
-            {'word': 'locum', 'index': 3, 'syllables': [
-                {'syllable': 'lo', 'index': 0, 'elide': (False, None), 'long_by_nature': False,
-                 'long_by_position': (False, None), 'accented': True},
-                {'syllable': 'cum', 'index': 1, 'elide': (False, None), 'long_by_nature': False,
-                 'long_by_position': (False, None), 'accented': False}], 'syllables_count': 2}],
-         'contains_abbrev': False},
-        {'contains_numeral': False, 'plain_text_sentence': '', 'structured_sentence': [], 'contains_abbrev': False}]}
+    assert analyze.get_rhythms(test) == correct
+    test = Preprocessor(text='esse ōrātiōnī locum.').tokenize()
     correct = [('esse ōrātiōnī locum', '---u--ux')]
-    assert analyze.get_rhythms(test_tokens) == correct
+    assert analyze.get_rhythms(test) == correct
+
+
+def test_eu_not_diphthong():
+    test = Preprocessor(text='locō superiōre impetum.').tokenize()
+    correct = [('locō superiōre impetum', '-uuu--ux')]
+    assert analyze.get_rhythms(test) == correct
+
+
+def test_io_not_j():
+    test = Preprocessor(text='sententiīs esse pereundum.').tokenize()
+    correct = [('sententiīs esse pereundum', 'u--uuu-x')]
+    assert analyze.get_rhythms(test) == correct
