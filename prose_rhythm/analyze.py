@@ -6,6 +6,7 @@ Module assumes that texts are preprocessed before analyzing.
 """
 
 from prose_rhythm.preprocessor import Preprocessor
+from collections import Counter
 
 
 class Analyze(object):
@@ -26,7 +27,7 @@ class Analyze(object):
         processed_sylls = remove_elided[:-1]
         return processed_sylls[::-1]
 
-    def get_rhythms(self, tokens):
+    def get_rhythms(self, tokens, include_sentence=True):
         """
         Return a flat list of rhythms.
         Desired clausula length is passed as a parameter. Clausula shorter than the specified
@@ -48,15 +49,31 @@ class Analyze(object):
                             sentence_clausula.append('u')
             sentence_clausula = sentence_clausula[::-1]
             sentence_clausula.append('x')
-            clausulae.append((sentence['plain_text_sentence'], ''.join(sentence_clausula)))
+            if include_sentence:
+                clausulae.append((sentence['plain_text_sentence'], ''.join(sentence_clausula)))
+            else:
+                clausulae.append(''.join(sentence_clausula))
         return clausulae[:-1]
+
+    def rhythm_frequency(self, rhythms):
+        """
+        Return total number of rhythms, excluded clausulae, and counts of each rhythm type.
+        :param rhythms: output of get_rhythms(tokens, include_sentence=False)
+        :return: dict of stats
+        """
+        rhythm_count = dict(Counter(rhythms).most_common())
+        rhythm_count.pop('x', None)
+        rhythm_count['total_clausulae'] = len(rhythms)
+        rhythm_count['excluded_clausulae'] = len([r for r in rhythms if r == 'x'])
+        return rhythm_count
 
 
 if __name__ == '__main__':
-    text = """et suō jūre possit?, 
+    text = """et suō jūre possit?
 sed praesidiō esse, ut intellegātis contrā hesternam illam 
 contiōnem licēre vōbīs quod sentiātis līberē jūdicāre. """
     p = Preprocessor(text=text)
     a = Analyze()
     tokens = p.tokenize()
-    r = a.get_rhythms(tokens)
+    r = a.get_rhythms(tokens, include_sentence=False)
+    print(a.rhythm_frequency(r))
