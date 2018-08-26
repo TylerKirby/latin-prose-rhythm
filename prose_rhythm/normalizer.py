@@ -19,17 +19,12 @@ class Normalizer(object):
     Normalizes Latin text for preprocessing module.
     """
 
-    def __init__(self, punctuation=None, replace_abbrev=True, abbrev=None):
-        self.punctuation = DEFAULT_PUNC if punctuation is None else punctuation
-        self.replace_abbrev = replace_abbrev
-        self.abbrev = DEFAULT_ABBREV if abbrev is None else abbrev
-
     def _replace_abbreviations(self, text):
         """
         Replace abbreviations
         :return:
         """
-        for abbrev in self.abbrev:
+        for abbrev in DEFAULT_ABBREV:
             text = text.replace(abbrev, "00000")
         return text
 
@@ -63,11 +58,10 @@ class Normalizer(object):
         """
         default_seperator = "."
 
-        for punc in self.punctuation:
+        for punc in DEFAULT_PUNC:
             text = text.replace(punc, default_seperator)
 
-        if self.replace_abbrev:
-            text = self._replace_abbreviations(text)
+        text = self._replace_abbreviations(text)
 
         text = text.replace('hic', 'hicc')\
                    .replace('hoc', 'hocc')\
