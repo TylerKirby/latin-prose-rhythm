@@ -82,3 +82,9 @@ def test_unde():
     text = "Vnde?"
     target = "unde."
     assert normalizer.normalize(text) == target
+
+
+def test_paren():
+    text = "Puella (puer), amat."
+    target = "puella puer, amat."
+    assert normalizer.normalize(text) == target
