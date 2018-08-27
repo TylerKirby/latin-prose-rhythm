@@ -14,7 +14,7 @@ class Analyze(object):
     Analyze Latin prose rhythms.
     """
 
-    def __init__(self, clausula_length=8):
+    def __init__(self, clausula_length=13):
         self.clausula_length = clausula_length
 
     def process_syllables(self, flat_syllable_list):
