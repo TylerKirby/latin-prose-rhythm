@@ -1,0 +1,16 @@
+10 September 2018
+Hi Tyler,
+This explains the “Clausula patterns” document.
+I’ve grouped our clausulae into 6 big headings, these taken from D. H. Berry’s Pro Sulla commentary (pp. 51–2). No matter how we classify them, we may face an eventual challenge from a peer reviewer, and Berry’s at least a widely recognized authority.
+I’ve then sub-divided the 6 big headings into a variety of possible resolution schemes. There is a method to this madness: essentially I have allowed all resolutions to a depth of 2; that is to say, you can resolve either 1 or 2 longs but no more. Beyond 2 resolutions, the permutations become ridiculous, and I suggest for now that we not worry about them.
+There are a couple of special categories of resolution, namely choriambic and epitrite resolutions of the first cretic/molossus. I’ve counted each of these categories as 1 resolution and permitted a further single sub-resolution within them.
+Can you implement tables based on these patterns? We want to be able to put numbers next to each pattern of longs and shorts. That is to say, the pure cretic-trochaic gets one number:
+	pure cretic-trochaic, -u- -x: 27 occurrences
+Each resolution gets another number:
+	resolved cretic-trochaic, pattern uuu- -x: 22 occurrences
+And so on and so forth. We’ll then want to be able to get totals and sub-totals for all the patterns. So all cretic-trochaics with one resolution has a sub-total, all with two resolutions has a sub-total, and so forth. Basically each heading in the document should be able to have a total or sub-total attached to it.
+I realize this is complicated, and it’s also quite important that we get it right and implement it absolutely precisely and consistently. So don’t hesitate to ask questions about anything you’re unsure of.
+It’s also more than possible (likely, even) that I’ve made a mistake in typing all this up. If you notice anything odd or inconsistent, query it!
+The good news: once this is implemented successfully, we’re in a sense almost done. We can then generate data for any text we want to analyze.
+With thanks and best wishes,
+Tom

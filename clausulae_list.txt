@@ -1,0 +1,143 @@
+10 September 2018
+Prose rhythm patterns for tabular analysis
+	•	Cretic-trochaic
+	•	Pure: -u- -x
+	•	1 resolution
+	•	uuu- -x
+	•	-uuu -x
+	•	-u- uux
+	•	2 resolutions
+	•	uuuuu -x
+	•	uuu- uux
+	•	-uuu uux
+	•	3 resolutions: EXCLUDE
+	•	Choriambic resolution
+	•	-uu- -x
+	•	Sub-resolutions
+	•	1 resolution
+	•	uuuu- -x
+	•	-uuuu -x
+	•	-uu- uux
+	•	2 resolutions and beyond: EXCLUDE
+	•	Epitrite resolution
+	•	-u-- -x
+	•	Sub-resolutions
+	•	1 resolution
+	•	uuu-- -x
+	•	-uuu- -x
+	•	-u-uu -x
+	•	-u-- uux
+	•	2 resolutions and beyond: EXCLUDE
+	•	Double-cretic/molossus-cretic
+	•	Pure double-cretic: -u- -ux
+	•	Pure molossus-cretic: --- -ux
+	•	1 resolution
+	•	uuu- -ux
+	•	-uuu -ux
+	•	-u- uuux
+	•	2 resolutions
+	•	uuuuu -ux
+	•	uuu- uuux
+	•	-uuu uuux
+	•	3 resolutions and beyond: EXCLUDE
+	•	Choriambic resolution
+	•	-uu- -ux
+	•	Sub-resolutions:
+	•	1 resolution
+	•	uuuu- -ux
+	•	-uuuu -ux
+	•	-uu- uuux
+	•	2 resolutions and beyond: EXCLUDE
+	•	Epitrite resolution
+	•	-u-- -ux
+	•	Sub-resolutions:
+	•	1 resolution
+	•	uuu-- -ux
+	•	-uuu- -ux
+	•	-u-uu -ux
+	•	-u-- uuux
+	•	2 resolutions and beyond: EXCLUDE
+	•	Cretic-double-trochee/molossus-double-trochee
+	•	Pure cretic-double-trochee: -u- -u-x
+	•	Pure molossus-double-trochee: --- -u-x
+	•	1 resolution
+	•	uuu- -u-x
+	•	-uxx -u-x
+	•	-u- uuu-x
+	•	-u- -uuux
+	•	2 resolutions
+	•	uuuuu -u-x
+	•	uuu- uuu-x
+	•	uuu- -uuux
+	•	-uuu uuu-x
+	•	-uuu -uuux
+	•	-u- uuuuux
+	•	3 resolutions and beyond: EXCLUDE
+	•	Choriambic resolution
+	•	-uu- -u-x
+	•	Sub-resolutions:
+	•	1 resolution
+	•	uuuu- -u-x
+	•	-uuuu -u-x
+	•	-uu- uuu-x
+	•	-uu- -uuux
+	•	2 resolutions and beyond: EXCLUDE
+	•	Epitrite resolution
+	•	-u-- -u-x
+	•	Sub-resolutions:
+	•	1 resolution
+	•	uuu-- -u-x
+	•	-uuu- -u-x
+	•	-u-uu -u-x
+	•	-u-- uuu-x
+	•	-u-- -uuux
+	•	2 resolutions and beyond: EXCLUDE
+	•	Cretic-hypodochmiac/molossus-hypodochmiac 
+	•	Pure cretic-hypodochmiac: -u- -u-ux 
+	•	Pure molossus-hypodochmiac: --- -u-ux
+	•	1 resolution
+	•	uuu- -u-ux
+	•	-uuuu -u-ux
+	•	-u- uuuu-ux
+	•	-u- -uuuux
+	•	2 resolutions
+	•	uuuuu -u-ux
+	•	uuu- uuu-ux
+	•	uuu- -uuuux
+	•	-uuu uuu-ux
+	•	-uuu -uuuux
+	•	-u- uuuuuux
+	•	Choriambic resolution
+	•	-uu- -u-ux
+	•	Subresolutions
+	•	1 resolution
+	•	uuuu- -u-ux
+	•	-uuuu -u-ux
+	•	-uu- uuu-ux
+	•	-uu- -uuuux
+	•	2 resolutions and beyond: EXCLUDE
+	•	Epitrite resolution
+	•	-u-- -u-ux
+	•	Subresolutions
+	•	1 resolution
+	•	uuu-- -u-ux
+	•	-uuu- -u-ux
+	•	-u-uu -u-ux
+	•	-u-- uuu-ux
+	•	-u-- -uuuux
+	•	2 resolutions and beyond: EXCLUDE
+	•	Iambic and trochaic rhythms
+	•	-u- -u-u-x
+	•	-u- -u-u-ux
+	•	-u- -u-u-u-x
+	•	-u- -u-u-u-ux
+	•	Spondaic and dactylic rhythms
+	•	--- -u
+	•	--- --x 
+	•	-u- --x
+	•	-u- ---x
+	•	--- ---x
+	•	-uu- -x
+	•	-u- -uuux
+	•	-u- -uu-x
+
