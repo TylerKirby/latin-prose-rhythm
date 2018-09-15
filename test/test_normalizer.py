@@ -52,6 +52,10 @@ def test_remove_word_enjambments():
     text = "Puella eun- dem puer."
     target = "Puella eundem puer."
     assert normalizer._remove_word_enjambments(text) == target
+    text = "tardissimē iūdī-\n  cātur."
+    target = "tardissimē iūdīcātur."
+    assert normalizer._remove_word_enjambments(text) == target
+
 
 
 def test_normalizer():

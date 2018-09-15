@@ -45,8 +45,8 @@ class Normalizer(object):
     def _replace_underscores(text):
         return text.replace('_', ' ')
 
-    @staticmethod
-    def _remove_word_enjambments(text):
+    def _remove_word_enjambments(self, text):
+        text = self._remove_extra_white_space(text)
         tokens = [word.replace('- ', '').replace('-\n', '') for word in text.split(' ')]
         return ' '.join(tokens).replace('- ', '')
 
@@ -69,6 +69,7 @@ class Normalizer(object):
                    .replace('\"', '')\
                    .replace('_,', '')\
                    .replace('Vnde', 'Unde')\
+                   .replace('vnde', 'unde')\
                    .replace('(', '')\
                    .replace(')', '')\
                    .replace('[', '')\
