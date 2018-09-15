@@ -37,7 +37,7 @@ class Analyze(object):
         clausulae = []
         for sentence in tokens['text']:
             sentence_clausula = []
-            if not sentence['contains_abbrev']:
+            if not sentence['contains_abbrev'] and not sentence['contains_bracket_text']:
                 syllables = [word['syllables'] for word in sentence['structured_sentence']]
                 flat_syllables = [syllable for word in syllables for syllable in word]
                 flat_syllables = self.process_syllables(flat_syllables)

@@ -214,7 +214,8 @@ class Preprocessor(object): # pylint: disable=too-few-public-methods
             sentence_dict["structured_sentence"] = self._tokenize_words(sentence)
             syllables = [word['syllables'] for word in sentence_dict["structured_sentence"]]
             syllables = [syll['syllable'] for syllable in syllables for syll in syllable]
-            sentence_dict["contains_abbrev"] = True if "00000" in syllables[-8:] else False
+            sentence_dict["contains_abbrev"] = True if "00000" in syllables[-13:] else False
+            sentence_dict["contains_bracket_text"] = True if "11111" in syllables[-13:] else False
             tokenized_text.append(sentence_dict)
 
         return {"title": self.title, "text": tokenized_text}

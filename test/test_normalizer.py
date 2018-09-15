@@ -19,6 +19,10 @@ def test_replace_roman_numerals():
     text_without_numerals = "roman_numeral Puer roman_numeral vivat."
     assert normalizer._replace_roman_numerals(text_with_numerals) == text_without_numerals
 
+def test_replace_brackets():
+    text = "neque saucius <factus>."
+    target = "neque saucius 11111."
+    assert normalizer.normalize(text) == target
 
 def test_numerals_in_words():
     text = "Cui dono. Puer vīs."

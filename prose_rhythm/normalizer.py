@@ -35,6 +35,10 @@ class Normalizer(object):
         return text
 
     @staticmethod
+    def _replace_bracket_text(text):
+        return re.sub(r"<.*>", "11111", text)
+
+    @staticmethod
     def _remove_extra_white_space(text):
         text = text.replace('\n', ' ')
         text = re.sub(r"\s{2,}", " ", text)
@@ -57,6 +61,8 @@ class Normalizer(object):
         :return: normalized text
         """
         default_seperator = "."
+
+        text = self._replace_bracket_text(text)
 
         for punc in DEFAULT_PUNC:
             text = text.replace(punc, default_seperator)
