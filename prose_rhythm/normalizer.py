@@ -7,7 +7,7 @@ The module assume that the text is already macronized and is utf 8 encoded.
 import regex as re
 
 DEFAULT_PUNC = [".", "?", "!", ";", ":"]
-DEFAULT_ABBREV = ["Agr.", "Ap.", "A.", "K.", "D.", "F.", "C.",
+DEFAULT_ABBREV = ["Agr.", "Ap.", "A.", "Ā.", "K.", "D.", "F.", "C.",
                   "Cn.", "L.", "Mam.", "M\'", "M.", "N.", "Oct.",
                   "Opet.", "Post.", "Pro.", "P.", "Q.", "Sert.",
                   "Ser.", "Sex.", "S.", "St.", "Ti.", "T.", "V.",
