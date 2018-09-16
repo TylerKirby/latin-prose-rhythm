@@ -25,4 +25,4 @@ for path in tqdm(text_paths):
     df = df.append(text_df, sort=True)
 
 df = df.fillna(0)
-df.to_csv('cicero_rhythms.csv')
+df.to_csv('../data/cicero_rhythms.csv')

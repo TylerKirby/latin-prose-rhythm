@@ -5,7 +5,7 @@ text_path = '/Users/tyler/Datasets/phi-macronized/cicero/'
 
 texts = [text[:-4].replace('_', ' ') for text in os.listdir(text_path)]
 
-rhythm_data = pd.read_csv('../data/cicero_rhythms_v1.csv')
+rhythm_data = pd.read_csv('../data/cicero_rhythms.csv')
 rhythm_data = rhythm_data.drop(columns=['Unnamed: 0'])
 rhythm_data.head()
 
