@@ -76,6 +76,7 @@ class Normalizer(object):
                    .replace('_,', '')\
                    .replace('Vnde', 'Unde')\
                    .replace('vnde', 'unde')\
+                   .replace('qvid', 'quid')\
                    .replace('(', '')\
                    .replace(')', '')\
                    .replace('[', '')\
