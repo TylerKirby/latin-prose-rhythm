@@ -36,7 +36,7 @@ class Normalizer(object):
 
     @staticmethod
     def _replace_bracket_text(text):
-        return re.sub(r"<.*>", "11111", text)
+        return re.sub(r"<.*>|\[.*\]", "11111", text)
 
     @staticmethod
     def _remove_extra_white_space(text):
