@@ -19,10 +19,10 @@ for path in tqdm(text_paths):
     tokens = Preprocessor(text=text).tokenize()
     rhythms = analyze.get_rhythms(tokens, include_sentence=False)
     text_dict = analyze.rhythm_frequency(rhythms)
-    text_dict['title'] = title
-    text_dict['author'] = 'Cicero'
     text_df = pd.DataFrame(text_dict, index=[0])
+    total = len(rhythms)
+    text_df['total'] = total
     df = df.append(text_df, sort=True)
 
 df = df.fillna(0)
-df.to_csv('../data/cicero_rhythms.csv')
+df.to_csv('../data/cicero_rhythms.csv', index=None)
