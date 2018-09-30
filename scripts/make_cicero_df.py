@@ -208,7 +208,7 @@ add_rhythm_col('iambic/trochaic', '-u--u-u-u-ux')
 add_res_total_col('iambic/trochaic total', 'iambic/trochaic')
 
 # spondaic and dactylic
-add_rhythm_col('spondaic/dactylic', '----u')
+add_rhythm_col('spondaic/dactylic', '----x')
 add_rhythm_col('spondaic/dactylic', '-----x ')
 add_rhythm_col('spondaic/dactylic', '-u---x')
 add_rhythm_col('spondaic/dactylic', '-u----x')
