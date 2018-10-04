@@ -69,6 +69,19 @@ add_rhythm_total_col('double/molossus-cretic pure+res total', [
     'double/molossus-cretic 2 res total'
 ])
 
+add_rhythm_col('double/molossus-cretic molossus not chor 1 res', 'uu---ux')
+add_rhythm_col('double/molossus-cretic molossus not chor 1 res', '--uu-ux')
+add_rhythm_col('double/molossus-cretic molossus not chor 1 res', '---uuux')
+add_rhythm_col('double/molossus-cretic molossus not chor 2 res', 'uu-uu-ux')
+add_rhythm_col('double/molossus-cretic molossus not chor 2 res', 'uu--uuux')
+add_rhythm_col('double/molossus-cretic molossus not chor 2 res', '--uuuuux')
+add_res_total_col('double/molossus-cretic molossus not chor 1 res total', 'double/molossus-cretic molossus not chor 1 res')
+add_res_total_col('double/molossus-cretic molossus not chor 2 res total', 'double/molossus-cretic molossus not chor 2 res')
+add_rhythm_total_col('double/molossus-cretic molossus not chor total', [
+    'double/molossus-cretic molossus not chor 1 res total',
+    'double/molossus-cretic molossus not chor 2 res total',
+])
+
 add_rhythm_col('double/molossus-cretic chor res', '-uu--ux')
 add_rhythm_col('double/molossus-cretic chor 1 res', 'uuuu--ux')
 add_rhythm_col('double/molossus-cretic chor 1 res', '-uuuu-ux')
@@ -93,7 +106,8 @@ add_rhythm_total_col('double/molossus-cretic ep total', [
 add_rhythm_total_col('double/molossus-cretic total', [
     'double/molossus-cretic pure+res total',
     'double/molossus-cretic chor total',
-    'double/molossus-cretic ep total'
+    'double/molossus-cretic ep total',
+    'double/molossus-cretic molossus not chor total'
 ])
 
 # cretic/molossus-double-trochee
@@ -117,6 +131,22 @@ add_rhythm_total_col('cretic/molossus-double-trochee pure+res total', [
     'cretic/molossus-double-trochee pure molossus-double-trochee (----u-x)',
     'cretic/molossus-double-trochee 1 res total',
     'cretic/molossus-double-trochee 2 res total'
+])
+
+add_rhythm_col('cretic/molossus-double-trochee molossus not chor 1 res', 'uu---u-x')
+add_rhythm_col('cretic/molossus-double-trochee molossus not chor 1 res', '--uu-u-x')
+add_rhythm_col('cretic/molossus-double-trochee molossus not chor 1 res', '---uuu-x')
+add_rhythm_col('cretic/molossus-double-trochee molossus not chor 1 res', '----uuux')
+add_rhythm_col('cretic/molossus-double-trochee molossus not chor 2 res', 'uu-uu-u-x')
+add_rhythm_col('cretic/molossus-double-trochee molossus not chor 2 res', 'uu--uuu-x')
+add_rhythm_col('cretic/molossus-double-trochee molossus not chor 2 res', 'uu---uuux')
+add_rhythm_col('cretic/molossus-double-trochee molossus not chor 2 res', '--uuuuu-x')
+add_rhythm_col('cretic/molossus-double-trochee molossus not chor 2 res', '--uu-uuux')
+add_res_total_col('cretic/molossus-double-trochee molossus not chor 1 res total', 'cretic/molossus-double-trochee molossus not chor 1 res')
+add_res_total_col('cretic/molossus-double-trochee molossus not chor 2 res total', 'cretic/molossus-double-trochee molossus not chor 2 res')
+add_rhythm_total_col('cretic/molossus-double-trochee molossus not chor total', [
+    'cretic/molossus-double-trochee molossus not chor 1 res total',
+    'cretic/molossus-double-trochee molossus not chor 2 res total',
 ])
 
 add_rhythm_col('cretic/molossus-double-trochee chor res', '-uu--u-x')
@@ -145,7 +175,8 @@ add_rhythm_total_col('cretic/molossus-double-trochee ep total', [
 add_rhythm_total_col('cretic/molossus-double-trochee total', [
     'cretic/molossus-double-trochee pure+res total',
     'cretic/molossus-double-trochee chor total',
-    'cretic/molossus-double-trochee ep total'
+    'cretic/molossus-double-trochee ep total',
+    'cretic/molossus-double-trochee molossus not chor total'
 ])
 
 # cretic/molossus-hypodochmiac
@@ -169,6 +200,23 @@ add_rhythm_total_col('cretic/molossus-hypodochmiac pure+res total', [
     'cretic/molossus-hypodochmiac pure molossus-hypodochmiac (----u-ux)',
     'cretic/molossus-hypodochmiac 1 res total',
     'cretic/molossus-hypodochmiac 2 res total'
+])
+
+add_rhythm_col('cretic/molossus-hypodochmiac molossus not chor 1 res', '-uu--u-ux')
+add_rhythm_col('cretic/molossus-hypodochmiac molossus not chor 1 res', '--uu-u-ux')
+add_rhythm_col('cretic/molossus-hypodochmiac molossus not chor 1 res', '---uuu-ux')
+add_rhythm_col('cretic/molossus-hypodochmiac molossus not chor 1 res', '----uuuux')
+add_rhythm_col('cretic/molossus-hypodochmiac molossus not chor 2 res', 'uu-uu-u-ux')
+add_rhythm_col('cretic/molossus-hypodochmiac molossus not chor 2 res', 'uu--uuu-ux')
+add_rhythm_col('cretic/molossus-hypodochmiac molossus not chor 2 res', 'uu---uuuux')
+add_rhythm_col('cretic/molossus-hypodochmiac molossus not chor 2 res', '--uuuuu-ux')
+add_rhythm_col('cretic/molossus-hypodochmiac molossus not chor 2 res', '--uu-uuuux')
+add_rhythm_col('cretic/molossus-hypodochmiac molossus not chor 2 res', '---uuuuuux')
+add_res_total_col('cretic/molossus-hypodochmiac molossus not chor 1 res total', 'cretic/molossus-hypodochmiac molossus not chor 1 res')
+add_res_total_col('cretic/molossus-hypodochmiac molossus not chor 2 res total', 'cretic/molossus-hypodochmiac molossus not chor 2 res')
+add_rhythm_total_col('cretic/molossus-hypodochmiac molossus not chor total', [
+    'cretic/molossus-hypodochmiac molossus not chor 1 res total',
+    'cretic/molossus-hypodochmiac molossus not chor 2 res total',
 ])
 
 add_rhythm_col('cretic/molossus-hypodochmiac chor res', '-uu--u-ux')
@@ -197,7 +245,8 @@ add_rhythm_total_col('cretic/molossus-hypodochmiac ep total', [
 add_rhythm_total_col('cretic/molossus-hypodochmiac total', [
     'cretic/molossus-hypodochmiac pure+res total',
     'cretic/molossus-hypodochmiac chor total',
-    'cretic/molossus-hypodochmiac ep total'
+    'cretic/molossus-hypodochmiac ep total',
+    'cretic/molossus-hypodochmiac molossus not chor total'
 ])
 
 # iambic and trochaic
@@ -209,13 +258,7 @@ add_res_total_col('iambic/trochaic total', 'iambic/trochaic')
 
 # spondaic and dactylic
 add_rhythm_col('spondaic/dactylic', '----x')
-add_rhythm_col('spondaic/dactylic', '-----x ')
-add_rhythm_col('spondaic/dactylic', '-u---x')
-add_rhythm_col('spondaic/dactylic', '-u----x')
-add_rhythm_col('spondaic/dactylic', '------x')
-add_rhythm_col('spondaic/dactylic', '-uu--x')
-add_rhythm_col('spondaic/dactylic', '-u--uuux')
-add_rhythm_col('spondaic/dactylic', '-u--uu-x')
+add_rhythm_col('spondaic/dactylic heroic', '-uu-x')
 add_res_total_col('spondaic/dactylic total', 'spondaic/dactylic')
 
 df.to_csv('../data/cicero_df.csv', index=None)
