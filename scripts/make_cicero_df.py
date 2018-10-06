@@ -9,10 +9,12 @@ rhythm_data = pd.read_csv('../data/cicero_rhythms.csv')
 
 df = pd.DataFrame({ 'title': texts })
 df['total clausulae'] = rhythm_data['total']
+rhythms = []
 
 def add_rhythm_col(col_name, rhythm):
     rhythm_df = rhythm_data[[col for col in rhythm_data.columns if rhythm in col]].copy()
     df['{} ({})'.format(col_name, rhythm)] = rhythm_df.sum(axis=1)
+    rhythms.append(rhythm)
 
 def add_res_total_col(col_name, res_names):
     df[col_name] = df[[col for col in df.columns if res_names in col]].copy().sum(axis=1)
@@ -262,3 +264,4 @@ add_rhythm_col('spondaic/dactylic heroic', '-uu-x')
 add_res_total_col('spondaic/dactylic total', 'spondaic/dactylic')
 
 df.to_csv('../data/cicero_df.csv', index=None)
+print(rhythms)
