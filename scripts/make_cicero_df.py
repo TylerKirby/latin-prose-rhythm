@@ -101,7 +101,6 @@ add_rhythm_col('double/molossus-cretic ep res', '-u---ux')
 add_rhythm_col('double/molossus-cretic ep 1 res', 'uuu---ux')
 add_rhythm_col('double/molossus-cretic ep 1 res', '-uuu--ux')
 add_rhythm_col('double/molossus-cretic ep 1 res', '-u-uu-ux')
-add_rhythm_col('double/molossus-cretic ep 1 res', '-u--uuux')
 add_res_total_col('double/molossus-cretic ep 1 res total', 'double/molossus-cretic ep 1 res')
 add_rhythm_total_col('double/molossus-cretic ep total', [
     'double/molossus-cretic ep res (-u---ux)',
@@ -207,7 +206,7 @@ add_rhythm_total_col('cretic/molossus-hypodochmiac pure+res total', [
     'cretic/molossus-hypodochmiac 2 res total'
 ])
 
-add_rhythm_col('cretic/molossus-hypodochmiac molossus not chor 1 res', '-uu--u-ux')
+add_rhythm_col('cretic/molossus-hypodochmiac molossus not chor 1 res', 'uu---u-ux')
 add_rhythm_col('cretic/molossus-hypodochmiac molossus not chor 1 res', '--uu-u-ux')
 add_rhythm_col('cretic/molossus-hypodochmiac molossus not chor 1 res', '---uuu-ux')
 add_rhythm_col('cretic/molossus-hypodochmiac molossus not chor 1 res', '----uuuux')
@@ -226,7 +225,6 @@ add_rhythm_total_col('cretic/molossus-hypodochmiac molossus not chor total', [
 
 add_rhythm_col('cretic/molossus-hypodochmiac chor res', '-uu--u-ux')
 add_rhythm_col('cretic/molossus-hypodochmiac chor 1 res', 'uuuu--u-ux')
-add_rhythm_col('cretic/molossus-hypodochmiac chor 1 res', '-uuuu-u-ux')
 add_rhythm_col('cretic/molossus-hypodochmiac chor 1 res', '-uu-uuu-ux')
 add_rhythm_col('cretic/molossus-hypodochmiac chor 1 res', '-uu--uuuux')
 add_res_total_col('cretic/molossus-hypodochmiac chor 1 res total', 'cretic/molossus-hypodochmiac chor 1 res')
@@ -236,7 +234,6 @@ add_rhythm_total_col('cretic/molossus-hypodochmiac chor total', [
 ])
 
 add_rhythm_col('cretic/molossus-hypodochmiac ep res', '-u---u-ux')
-add_rhythm_col('cretic/molossus-hypodochmiac ep 1 res', 'uuu---u-ux')
 add_rhythm_col('cretic/molossus-hypodochmiac ep 1 res', '-uuu--u-ux')
 add_rhythm_col('cretic/molossus-hypodochmiac ep 1 res', '-u-uu-u-ux')
 add_rhythm_col('cretic/molossus-hypodochmiac ep 1 res', '-u--uuu-ux')
