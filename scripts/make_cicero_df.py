@@ -12,12 +12,10 @@ df['total clausulae'] = rhythm_data['total']
 df['total_excluded'] = rhythm_data['total_excluded']
 df['abbrev_excluded'] = rhythm_data['abbrev_excluded']
 df['bracket_excluded'] = rhythm_data['bracket_excluded']
-rhythms = []
 
 def add_rhythm_col(col_name, rhythm):
     rhythm_df = rhythm_data[[col for col in rhythm_data.columns if rhythm in col]].copy()
     df['{} ({})'.format(col_name, rhythm)] = rhythm_df.sum(axis=1)
-    rhythms.append(rhythm)
 
 def add_res_total_col(col_name, res_names):
     df[col_name] = df[[col for col in df.columns if res_names in col]].copy().sum(axis=1)

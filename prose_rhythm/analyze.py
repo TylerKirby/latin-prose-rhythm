@@ -62,7 +62,7 @@ class Analyze(object):
                 clausulae.append((sentence['plain_text_sentence'], ''.join(sentence_clausula)))
             else:
                 clausulae.append(''.join(sentence_clausula))
-        clausulae = [r for r in clausulae if r != 'x']
+        clausulae = clausulae[:-1]
         clausulae.append(excluded)
         clausulae.append(abbrev_excluded)
         clausulae.append(bracket_excluded)
