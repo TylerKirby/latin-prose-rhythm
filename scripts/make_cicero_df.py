@@ -9,6 +9,9 @@ rhythm_data = pd.read_csv('../data/cicero_rhythms.csv')
 
 df = pd.DataFrame({ 'title': texts })
 df['total clausulae'] = rhythm_data['total']
+df['total_excluded'] = rhythm_data['total_excluded']
+df['abbrev_excluded'] = rhythm_data['abbrev_excluded']
+df['bracket_excluded'] = rhythm_data['bracket_excluded']
 rhythms = []
 
 def add_rhythm_col(col_name, rhythm):
