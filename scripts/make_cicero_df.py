@@ -11,7 +11,7 @@ rhythm_data = pd.read_csv('../data/cicero_rhythms.csv')
 rhythm_types = []
 
 df = pd.DataFrame({ 'title': texts })
-df['total clausulae'] = rhythm_data['total']
+df['total_clausulae'] = rhythm_data['total']
 df['total_excluded'] = rhythm_data['total_excluded']
 df['abbrev_excluded'] = rhythm_data['abbrev_excluded']
 df['bracket_excluded'] = rhythm_data['bracket_excluded']
@@ -20,12 +20,15 @@ def add_rhythm_col(col_name, rhythm):
     rhythm_df = rhythm_data[[col for col in rhythm_data.columns if rhythm in col]].copy()
     df['{} ({})'.format(col_name, rhythm)] = rhythm_df.sum(axis=1)
     rhythm_types.append(rhythm)
+    print('Creating column {} ({})'.format(col_name, rhythm))
 
 def add_res_total_col(col_name, res_names):
     df[col_name] = df[[col for col in df.columns if res_names in col]].copy().sum(axis=1)
+    print('Combing columns {} into column {}'.format([col for col in df.columns if res_names in col], col_name))
 
 def add_rhythm_total_col(col_name, col_names):
     df[col_name] = df[col_names].copy().sum(axis=1)
+    print('Combing columns {} into column {}'.format(col_names, col_name))
 
 # Cretic-trochee
 add_rhythm_col('cretic-trochee', '-u--x')
