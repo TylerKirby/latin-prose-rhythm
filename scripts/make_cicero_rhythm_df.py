@@ -22,7 +22,7 @@ for path in tqdm(text_paths):
     text_df = pd.DataFrame(text_dict, index=[0])
     total = len(rhythms)
     text_df['total'] = total - 3
-    text_df['total_exlcuded'] = text_dict['total_excluded']
+    text_df['total_excluded'] = text_dict['total_excluded']
     text_df['abbrev_excluded'] = text_dict['abbrev_excluded']
     text_df['bracket_excluded'] = text_dict['bracket_excluded']
     df = df.append(text_df, sort=True)
