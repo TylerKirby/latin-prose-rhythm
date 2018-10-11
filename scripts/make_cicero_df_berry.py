@@ -1,3 +1,8 @@
+"""
+Script to transform raw Cicero data into Berry typology numbers.
+Duplicate categories are currently commented out.
+"""
+
 import os
 import collections
 import pandas as pd
@@ -265,7 +270,7 @@ add_rhythm_col('spondaic/dactylic', '----x')
 add_rhythm_col('spondaic/dactylic heroic', '-uu-x')
 add_res_total_col('spondaic/dactylic total', 'spondaic/dactylic')
 
-df.to_csv('../data/cicero_df.csv', index=None)
+df.to_csv('../data/cicero_df_berry.csv', index=None)
 
 duplicates = [item for item, count in collections.Counter(rhythm_types).items() if count > 1]
 if len(duplicates) > 0:
