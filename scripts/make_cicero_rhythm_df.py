@@ -25,6 +25,7 @@ for path in tqdm(text_paths):
     text_df['total_excluded'] = text_dict['total_excluded']
     text_df['abbrev_excluded'] = text_dict['abbrev_excluded']
     text_df['bracket_excluded'] = text_dict['bracket_excluded']
+    text_df['short_excluded'] = text_dict['short_excluded']
     df = df.append(text_df, sort=True)
 
 df = df.fillna(0)

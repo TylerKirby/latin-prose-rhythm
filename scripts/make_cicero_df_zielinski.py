@@ -20,6 +20,7 @@ df['total_clausulae'] = rhythm_data['total']
 df['total_excluded'] = rhythm_data['total_excluded']
 df['abbrev_excluded'] = rhythm_data['abbrev_excluded']
 df['bracket_excluded'] = rhythm_data['bracket_excluded']
+df['short_excluded'] = rhythm_data['short_excluded']
 
 def add_rhythm_col(col_name, rhythm):
     rhythm_df = rhythm_data[[col for col in rhythm_data.columns if rhythm in col]].copy()

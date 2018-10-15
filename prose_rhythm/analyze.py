@@ -38,9 +38,11 @@ class Analyze(object):
         excluded = 0
         abbrev_excluded = 0
         bracket_excluded = 0
+        short_clausulae = 0
         for sentence in tokens['text']:
             sentence_clausula = []
-            if not sentence['contains_abbrev'] and not sentence['contains_bracket_text']:
+            syllable_count = len([word['syllables'] for word in sentence['structured_sentence']])
+            if not sentence['contains_abbrev'] and not sentence['contains_bracket_text'] and syllable_count > 3:
                 syllables = [word['syllables'] for word in sentence['structured_sentence']]
                 flat_syllables = [syllable for word in syllables for syllable in word]
                 flat_syllables = self.process_syllables(flat_syllables)
@@ -56,6 +58,8 @@ class Analyze(object):
                     abbrev_excluded += 1
                 if sentence['contains_bracket_text']:
                     bracket_excluded += 1
+                if syllable_count > 0 and syllable_count < 4:
+                    short_clausulae += 1
             sentence_clausula = sentence_clausula[::-1]
             sentence_clausula.append('x')
             if include_sentence:
@@ -66,6 +70,7 @@ class Analyze(object):
         clausulae.append(excluded)
         clausulae.append(abbrev_excluded)
         clausulae.append(bracket_excluded)
+        clausulae.append(short_clausulae)
         return clausulae
 
     def rhythm_frequency(self, rhythms):
@@ -74,13 +79,14 @@ class Analyze(object):
         :param rhythms: output of get_rhythms(tokens, include_sentence=False)
         :return: dict of stats
         """
-        rhythm_tokens = rhythms[:-3]
+        rhythm_tokens = rhythms[:-4]
         rhythm_count = dict(Counter(rhythm_tokens).most_common())
         rhythm_count.pop('x', None)
         rhythm_count['total_clausulae'] = len(rhythm_tokens)
-        rhythm_count['total_excluded'] = rhythms[-3]
-        rhythm_count['abbrev_excluded'] = rhythms[-2]
-        rhythm_count['bracket_excluded'] = rhythms[-1]
+        rhythm_count['total_excluded'] = rhythms[-4]
+        rhythm_count['abbrev_excluded'] = rhythms[-3]
+        rhythm_count['bracket_excluded'] = rhythms[-2]
+        rhythm_count['short_excluded'] = rhythms[-1]
         return rhythm_count
 
 
