@@ -80,7 +80,8 @@ def test_pro_milone_1_6():
 
      (' sīn illīus īnsidiae clāriōrēs hāc lūce fuerint, tum dēnique obsecrābō obtestāborque vōs, jūdicēs, sī cētera āmīsimus, hocc nōbīs saltem ut relinquātur, vītam ab inimīcōrum audācia tēlīsque ut impūne liceat dēfendere',
 
-      '--u--uuu---ux')
+      '--u--uuu---ux'),
+        0, 0, 0
     ]
     preprocess = Preprocessor(text=text)
     tokens = preprocess.tokenize()

@@ -9,20 +9,20 @@ analyze = Analyze()
 
 def test_get_rhythms_elision():
     test = Preprocessor(text='sī quem habētis dēpōnite.').tokenize()
-    correct = [('sī quem habētis dēpōnite', '-u----ux')]
+    correct = [('sī quem habētis dēpōnite', '-u----ux'), 0, 0, 0]
     assert analyze.get_rhythms(test) == correct
     test = Preprocessor(text='esse ōrātiōnī locum.').tokenize()
-    correct = [('esse ōrātiōnī locum', '---u--ux')]
+    correct = [('esse ōrātiōnī locum', '---u--ux'), 0, 0, 0]
     assert analyze.get_rhythms(test) == correct
 
 
 def test_eu_not_diphthong():
     test = Preprocessor(text='locō superiōre impetum.').tokenize()
-    correct = [('locō superiōre impetum', 'u-uuu--ux')]
+    correct = [('locō superiōre impetum', 'u-uuu--ux'), 0, 0, 0]
     assert analyze.get_rhythms(test) == correct
 
 
 def test_io_not_j():
     test = Preprocessor(text='sententiīs esse pereundum.').tokenize()
-    correct = [('sententiīs esse pereundum', '--u--uuu-x')]
+    correct = [('sententiīs esse pereundum', '--u--uuu-x'), 0, 0, 0]
     assert analyze.get_rhythms(test) == correct
