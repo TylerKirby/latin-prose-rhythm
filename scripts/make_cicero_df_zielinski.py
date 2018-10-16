@@ -33,9 +33,13 @@ def add_res_total_col(col_name, res_names):
 def add_rhythm_total_col(col_name, col_names):
     df[col_name] = df[col_names].copy().sum(axis=1)
 
-def add_ex_rhythm_col(col_name, rhythm, ex_rhythm):
+def add_ex_rhythm_col(col_name, rhythm, ex_rhythms):
     rhythm_cols = [col for col in rhythm_data.columns if rhythm in col]
-    ex_rhythm_cols = [col for col in rhythm_data.columns if ex_rhythm in col]
+    ex_cols = []
+    for e in ex_rhythms:
+        ex_rhythm_cols = [col for col in rhythm_data.columns if e in col]
+        ex_cols.append(ex_rhythm_cols)
+    ex_rhythm_cols = [item for sublist in ex_cols for item in sublist]
     diff_cols = [r for r in rhythm_cols if r not in ex_rhythm_cols]
     rhythm_df = rhythm_data[diff_cols].copy()
     df['{} ({})'.format(col_name, rhythm)] = rhythm_df.sum(axis=1)
@@ -64,17 +68,27 @@ add_rhythm_col('double/molossus-cretic ep res', '-u---ux')
 
 # Double trochee
 add_rhythm_col('double trochee', '-u-x')
-add_ex_rhythm_col('double trochee 1 res', 'uuu-x', '-uuu-x')
-add_ex_rhythm_col('double trochee 1 res', '-uuux', '---uuux')
+add_ex_rhythm_col('double trochee 1 res', 'uuu-x', ['-uuu-x'])
+add_ex_rhythm_col('double trochee 1 res', '-uuux', ['---uuux', '-u-uuux'])
 
 # Hypodochmiac
 add_rhythm_col('hypodochmiac', '-u-ux')
-add_rhythm_col('hypodochmiac 1 res', 'uuuu-ux')
+add_rhythm_col('hypodochmiac 1 res', 'uuu-ux')
 add_rhythm_col('hypodochmiac 1 res', '-uuuux')
 
 # Spondaic and dactylic
 add_rhythm_col('spondaic', '---x')
 add_rhythm_col('heroic', '-uu-x')
+
+# First paeon
+add_ex_rhythm_col('first paeon', '-uux', ['-u-uux'])
+
+# Choriamb trochee
+add_rhythm_col('choriamb trochee', '-uu--x')
+
+# Short sequence
+add_rhythm_col('short sequence', 'uuuuux')
+
 
 df.to_csv('../data/cicero_df_zielinski.csv', index=None)
 
