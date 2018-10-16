@@ -89,6 +89,9 @@ add_rhythm_col('choriamb trochee', '-uu--x')
 # Short sequence
 add_rhythm_col('short sequence', 'uuuuux')
 
+df['total_artistic'] = df.drop(columns=['total_clausulae', 'total_excluded', 'abbrev_excluded', 'bracket_excluded', 'short_excluded']).sum(axis=1)
+df['percent_artistic'] = (df['total_clausulae'] - df['total_excluded']) / df['total_artistic']
+
 
 df.to_csv('../data/cicero_df_zielinski.csv', index=None)
 
