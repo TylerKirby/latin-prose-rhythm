@@ -73,7 +73,8 @@ add_ex_rhythm_col('double trochee 1 res', '-uuux', ['---uuux', '-u-uuux'])
 
 # Hypodochmiac
 add_rhythm_col('hypodochmiac', '-u-ux')
-add_rhythm_col('hypodochmiac 1 res', 'uuu-ux')
+add_ex_rhythm_col('hypodochmiac 1 res', 'uuu-ux', ['-uuu-ux'])
+# add_rhythm_col('hypodochmiac 1 res', 'uuu-ux')
 add_rhythm_col('hypodochmiac 1 res', '-uuuux')
 
 # Spondaic and dactylic
@@ -90,7 +91,7 @@ add_rhythm_col('choriamb trochee', '-uu--x')
 add_rhythm_col('short sequence', 'uuuuux')
 
 df['total_artistic'] = df.drop(columns=['total_clausulae', 'total_excluded', 'abbrev_excluded', 'bracket_excluded', 'short_excluded']).sum(axis=1)
-df['percent_artistic'] = (df['total_clausulae'] - df['total_excluded']) / df['total_artistic']
+df['percent_artistic'] = df['total_artistic'] / (df['total_clausulae'] - df['total_excluded'])
 
 
 df.to_csv('../data/cicero_df_zielinski.csv', index=None)
@@ -101,3 +102,5 @@ if len(duplicates) > 0:
     print(duplicates)
 else:
     print('No duplicates found.')
+
+

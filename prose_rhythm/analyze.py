@@ -53,13 +53,15 @@ class Analyze(object):
                         else:
                             sentence_clausula.append('u')
             else:
-                excluded += 1
                 if sentence['contains_abbrev']:
                     abbrev_excluded += 1
+                    excluded += 1
                 if sentence['contains_bracket_text']:
                     bracket_excluded += 1
+                    excluded += 1
                 if syllable_count > 0 and syllable_count < 4:
                     short_clausulae += 1
+                    excluded += 1
             sentence_clausula = sentence_clausula[::-1]
             sentence_clausula.append('x')
             if include_sentence:
