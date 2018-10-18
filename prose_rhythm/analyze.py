@@ -41,7 +41,7 @@ class Analyze(object):
         short_clausulae = 0
         for sentence in tokens['text']:
             sentence_clausula = []
-            syllable_count = len([word['syllables'] for word in sentence['structured_sentence']])
+            syllable_count = sum([word['syllables_count'] for word in sentence['structured_sentence']])
             if not sentence['contains_abbrev'] and not sentence['contains_bracket_text'] and syllable_count > 3:
                 syllables = [word['syllables'] for word in sentence['structured_sentence']]
                 flat_syllables = [syllable for word in syllables for syllable in word]
