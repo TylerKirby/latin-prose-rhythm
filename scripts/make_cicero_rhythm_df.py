@@ -21,11 +21,12 @@ for path in tqdm(text_paths):
     text_dict = analyze.rhythm_frequency(rhythms)
     text_df = pd.DataFrame(text_dict, index=[0])
     total = len(rhythms)
-    text_df['total'] = total - 4
+    text_df['total'] = total - 5
     text_df['total_excluded'] = text_dict['total_excluded']
     text_df['abbrev_excluded'] = text_dict['abbrev_excluded']
     text_df['bracket_excluded'] = text_dict['bracket_excluded']
     text_df['short_excluded'] = text_dict['short_excluded']
+    text_df['other_excluded'] = text_dict['other_excluded']
     df = df.append(text_df, sort=True)
 
 df = df.fillna(0)
