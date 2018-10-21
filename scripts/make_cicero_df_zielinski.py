@@ -25,7 +25,6 @@ df['short_excluded'] = rhythm_data['short_excluded']
 def add_rhythm_col(col_name, rhythm):
     rhythm_df = rhythm_data[[col for col in rhythm_data.columns if rhythm in col]].copy()
     df['{} ({})'.format(col_name, rhythm)] = rhythm_df.sum(axis=1)
-    rhythm_types.append(rhythm)
 
 def add_res_total_col(col_name, res_names):
     df[col_name] = df[[col for col in df.columns if res_names in col]].copy().sum(axis=1)
@@ -43,7 +42,6 @@ def add_ex_rhythm_col(col_name, rhythm, ex_rhythms):
     diff_cols = [r for r in rhythm_cols if r not in ex_rhythm_cols]
     rhythm_df = rhythm_data[diff_cols].copy()
     df['{} ({})'.format(col_name, rhythm)] = rhythm_df.sum(axis=1)
-    rhythm_types.append(rhythm)
 
 # Cretic trochee
 add_rhythm_col('cretic-trochee', '-u--x')
@@ -95,12 +93,3 @@ df['misc_clausulae'] = (df['total_clausulae'] - df['total_excluded']) - df['tota
 df['percent_clausulae'] = (df['total_artistic'] + df['misc_clausulae']) / (df['total_clausulae'] - df['total_excluded'])
 
 df.to_csv('../data/cicero_df_zielinski.csv', index=None)
-
-duplicates = [item for item, count in collections.Counter(rhythm_types).items() if count > 1]
-if len(duplicates) > 0:
-    print('You have duplicate rhythms!')
-    print(duplicates)
-else:
-    print('No duplicates found.')
-
-

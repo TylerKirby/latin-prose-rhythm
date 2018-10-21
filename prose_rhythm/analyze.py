@@ -68,7 +68,7 @@ class Analyze(object):
             else:
                 clausulae.append(''.join(sentence_clausula))
         clausulae = clausulae[:-1]
-        clausulae.append(sum([abbrev_excluded, bracket_excluded, short_clausulae, other_excluded]))
+        clausulae.append(sum([abbrev_excluded, bracket_excluded, short_clausulae, other_excluded])-1)
         clausulae.append(abbrev_excluded)
         clausulae.append(bracket_excluded)
         clausulae.append(short_clausulae)
