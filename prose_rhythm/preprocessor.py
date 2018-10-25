@@ -165,28 +165,31 @@ class Preprocessor(object): # pylint: disable=too-few-public-methods
                 elif last_syll_prev_word["syllable"][-1] in self.SHORT_VOWELS:
                     last_syll_prev_word["elide"] = (True, "weak")
             # long by position inter word
-            if i > 0 and tokens[i - 1]["syllables"][-1]["syllable"][-1] in \
-                    self.CONSONANTS and \
-                    word_dict["syllables"][0]["syllable"][0] in self.CONSONANTS:
-                # previous word ends in consonant and current word begins with consonant
-                tokens[i - 1]["syllables"][-1]["long_by_position"] = (True, None)
-            elif i > 0 and tokens[i - 1]["syllables"][-1]["syllable"][-1] in \
-                    self.VOWELS and \
-                    word_dict["syllables"][0]["syllable"][0] in self.CONSONANTS:
-                # previous word ends in vowel and current word begins in consonant
-                if any(sest in word_dict["syllables"][0]["syllable"] for
-                       sest in self.SESTS):
-                    # current word begins with sest
-                    tokens[i - 1]["syllables"][-1]["long_by_position"] = (False, "sest")
-                elif word_dict["syllables"][0]["syllable"][0] in self.MUTES and \
-                        word_dict["syllables"][0]["syllable"][1] in self.LIQUIDS:
-                    # current word begins with mute + liquid
-                    tokens[i - 1]["syllables"][-1]["long_by_position"] = (False, "mute+liquid")
-                elif word_dict["syllables"][0]["syllable"][0] in \
-                        self.DOUBLE_CONSONANTS or\
-                        word_dict["syllables"][0]["syllable"][1] in self.CONSONANTS:
-                    # current word begins 2 consonants
+            try:
+                if i > 0 and tokens[i - 1]["syllables"][-1]["syllable"][-1] in \
+                        self.CONSONANTS and \
+                        word_dict["syllables"][0]["syllable"][0] in self.CONSONANTS:
+                    # previous word ends in consonant and current word begins with consonant
                     tokens[i - 1]["syllables"][-1]["long_by_position"] = (True, None)
+                elif i > 0 and tokens[i - 1]["syllables"][-1]["syllable"][-1] in \
+                        self.VOWELS and \
+                        word_dict["syllables"][0]["syllable"][0] in self.CONSONANTS:
+                    # previous word ends in vowel and current word begins in consonant
+                    if any(sest in word_dict["syllables"][0]["syllable"] for
+                           sest in self.SESTS):
+                        # current word begins with sest
+                        tokens[i - 1]["syllables"][-1]["long_by_position"] = (False, "sest")
+                    elif word_dict["syllables"][0]["syllable"][0] in self.MUTES and \
+                            word_dict["syllables"][0]["syllable"][1] in self.LIQUIDS:
+                        # current word begins with mute + liquid
+                        tokens[i - 1]["syllables"][-1]["long_by_position"] = (False, "mute+liquid")
+                    elif word_dict["syllables"][0]["syllable"][0] in \
+                            self.DOUBLE_CONSONANTS or\
+                            word_dict["syllables"][0]["syllable"][1] in self.CONSONANTS:
+                        # current word begins 2 consonants
+                        tokens[i - 1]["syllables"][-1]["long_by_position"] = (True, None)
+            except IndexError:
+                print(word)
 
             tokens.append(word_dict)
 

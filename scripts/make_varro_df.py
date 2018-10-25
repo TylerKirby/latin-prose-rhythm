@@ -1,19 +1,39 @@
-"""
-Script to transform raw Cicero data into Zielinski typology numbers.
-Duplicate categories are currently commented out.
-"""
-
 import os
-import collections
+import codecs
+from tqdm import tqdm
 import pandas as pd
 
-text_path = '/Users/tyler/Datasets/phi-macronized/cicero/'
+from prose_rhythm.preprocessor import Preprocessor
+from prose_rhythm.analyze import Analyze
 
-texts = [text[:-4].replace('_', ' ') for text in os.listdir(text_path)]
+cato_texts_path = '/Users/tyler/Datasets/phi-macronized/varro/'
+analyze = Analyze()
+text_paths = [cato_texts_path + p for p in os.listdir(cato_texts_path)]
 
-rhythm_data = pd.read_csv('../data/cicero_rhythms.csv')
+rhythm_data = pd.DataFrame()
 
-rhythm_types = []
+for path in tqdm(text_paths):
+    with codecs.open(path, encoding='utf-8', errors='ignore') as f:
+        text = f.read()
+    title = ' '.join([w.title() for w in path.split('/')[-1][:-4].split('_')])
+    tokens = Preprocessor(text=text).tokenize()
+    rhythms = analyze.get_rhythms(tokens, include_sentence=False)
+    text_dict = analyze.rhythm_frequency(rhythms)
+    text_df = pd.DataFrame(text_dict, index=[0])
+    total = len(rhythms)
+    text_df['total'] = total - 5
+    text_df['total_excluded'] = text_dict['total_excluded']
+    text_df['abbrev_excluded'] = text_dict['abbrev_excluded']
+    text_df['bracket_excluded'] = text_dict['bracket_excluded']
+    text_df['short_excluded'] = text_dict['short_excluded']
+    text_df['other_excluded'] = text_dict['other_excluded']
+    rhythm_data = rhythm_data.append(text_df, sort=True)
+
+rhythm_data = rhythm_data.fillna(0)
+rhythm_data.to_csv('../data/varro_rhythms.csv', index=None)
+rhythm_data = pd.read_csv('../data/varro_rhythms.csv')
+
+texts = [text[:-4].replace('_', ' ') for text in os.listdir(cato_texts_path)]
 
 df = pd.DataFrame({ 'title': texts })
 df['total_clausulae'] = rhythm_data['total']
@@ -92,4 +112,4 @@ df['total_artistic'] = df.drop(columns=['total_clausulae', 'total_excluded', 'ab
 df['misc_clausulae'] = (df['total_clausulae'] - df['total_excluded']) - df['total_artistic']
 df['percent_clausulae'] = (df['total_artistic'] + df['misc_clausulae']) / (df['total_clausulae'] - df['total_excluded'])
 
-df.to_csv('../data/cicero_df_zielinski.csv', index=None)
+df.to_csv('../data/varro_df.csv', index=None)
