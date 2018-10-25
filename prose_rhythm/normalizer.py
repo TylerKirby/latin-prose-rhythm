@@ -82,7 +82,10 @@ class Normalizer(object):
                    .replace('[', '')\
                    .replace(']', '')\
                    .replace('”', '')\
-                   .replace('†', '')
+                   .replace('†', '')\
+                   .replace('{', '')\
+                   .replace('}', '')\
+                   .replace('#', '')
         text = self._replace_underscores(text)
         text = self._replace_roman_numerals(text)
         text = text.lower()
