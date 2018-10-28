@@ -86,6 +86,8 @@ class Analyze(object):
         rhythm_count.pop('x', None)
         rhythm_count['total_clausulae'] = len(rhythm_tokens)
         rhythm_count['total_excluded'] = rhythms[-5]
+        if rhythm_count['total_excluded'] == -1:
+            rhythm_count['total_excluded'] = 0
         rhythm_count['abbrev_excluded'] = rhythms[-4]
         rhythm_count['bracket_excluded'] = rhythms[-3]
         rhythm_count['short_excluded'] = rhythms[-2]

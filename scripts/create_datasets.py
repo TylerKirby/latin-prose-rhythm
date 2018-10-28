@@ -46,8 +46,6 @@ if __name__ == '__main__':
     df = pd.DataFrame({ 'title': texts })
     df['total_clausulae'] = rhythm_data['total']
     df['total_excluded'] = rhythm_data['total_excluded']
-    if df['total_excluded'] == -1: # texts with no breaks
-        df['total_excluded'] = 0
     df['abbrev_excluded'] = rhythm_data['abbrev_excluded']
     df['bracket_excluded'] = rhythm_data['bracket_excluded']
     df['short_excluded'] = rhythm_data['short_excluded']
