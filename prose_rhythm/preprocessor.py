@@ -150,22 +150,21 @@ class Preprocessor(object): # pylint: disable=too-few-public-methods
             # syllables and syllables count
             word_dict["syllables"] = self._tokenize_syllables(split_sent[i])
             word_dict["syllables_count"] = len(word_dict["syllables"])
-
-            if i != 0 and word_dict["syllables"][0]["syllable"][0] in \
-                    self.VOWELS or i != 0 and \
-                    word_dict["syllables"][0]["syllable"][0] == "h":
-                last_syll_prev_word = tokens[i - 1]["syllables"][-1]
-                if last_syll_prev_word["syllable"][-1] in \
-                        self.LONG_VOWELS or \
-                        last_syll_prev_word["syllable"][-1] == "m":
-                    last_syll_prev_word["elide"] = (True, "strong")
-                elif len(last_syll_prev_word["syllable"]) > 1 and \
-                        last_syll_prev_word["syllable"][-2:] in self.DIPHTHONGS:
-                    last_syll_prev_word["elide"] = (True, "strong")
-                elif last_syll_prev_word["syllable"][-1] in self.SHORT_VOWELS:
-                    last_syll_prev_word["elide"] = (True, "weak")
-            # long by position inter word
             try:
+                if i != 0 and word_dict["syllables"][0]["syllable"][0] in \
+                        self.VOWELS or i != 0 and \
+                        word_dict["syllables"][0]["syllable"][0] == "h":
+                    last_syll_prev_word = tokens[i - 1]["syllables"][-1]
+                    if last_syll_prev_word["syllable"][-1] in \
+                            self.LONG_VOWELS or \
+                            last_syll_prev_word["syllable"][-1] == "m":
+                        last_syll_prev_word["elide"] = (True, "strong")
+                    elif len(last_syll_prev_word["syllable"]) > 1 and \
+                            last_syll_prev_word["syllable"][-2:] in self.DIPHTHONGS:
+                        last_syll_prev_word["elide"] = (True, "strong")
+                    elif last_syll_prev_word["syllable"][-1] in self.SHORT_VOWELS:
+                        last_syll_prev_word["elide"] = (True, "weak")
+                # long by position inter word
                 if i > 0 and tokens[i - 1]["syllables"][-1]["syllable"][-1] in \
                         self.CONSONANTS and \
                         word_dict["syllables"][0]["syllable"][0] in self.CONSONANTS:
