@@ -41,11 +41,13 @@ if __name__ == '__main__':
     rhythm_data.to_csv('../data/{}_rhythms.csv'.format(args.author), index=None)
     rhythm_data = pd.read_csv('../data/{}_rhythms.csv'.format(args.author))
 
-    texts = [text[:-4].replace('_', ' ') for text in os.listdir(text_path)]
+    texts = [text[:-4].replace('_', ' ') for text in os.listdir(text_path) if text[0] != '.']
 
     df = pd.DataFrame({ 'title': texts })
     df['total_clausulae'] = rhythm_data['total']
     df['total_excluded'] = rhythm_data['total_excluded']
+    if df['total_excluded'] == -1: # texts with no breaks
+        df['total_excluded'] = 0
     df['abbrev_excluded'] = rhythm_data['abbrev_excluded']
     df['bracket_excluded'] = rhythm_data['bracket_excluded']
     df['short_excluded'] = rhythm_data['short_excluded']
