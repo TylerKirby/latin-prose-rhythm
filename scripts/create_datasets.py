@@ -16,7 +16,7 @@ if __name__ == '__main__':
 
     text_path = '/Users/tyler/Datasets/phi-macronized/{}/'.format(args.author)
     analyze = Analyze()
-    text_paths = [text_path + p for p in os.listdir(text_path) if p[0] != '.']
+    text_paths = sorted([text_path + p for p in os.listdir(text_path) if p[0] != '.'])
 
     rhythm_data = pd.DataFrame()
 
@@ -41,7 +41,7 @@ if __name__ == '__main__':
     rhythm_data.to_csv('../data/{}_rhythms.csv'.format(args.author), index=None)
     rhythm_data = pd.read_csv('../data/{}_rhythms.csv'.format(args.author))
 
-    texts = [text[:-4].replace('_', ' ') for text in os.listdir(text_path) if text[0] != '.']
+    texts = sorted([text[:-4].replace('_', ' ') for text in os.listdir(text_path) if text[0] != '.'])
 
     df = pd.DataFrame({ 'title': texts })
     df['total_clausulae'] = rhythm_data['total']
