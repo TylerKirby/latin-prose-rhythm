@@ -1,0 +1,123 @@
+,genre,title,cretic-trochee (-u--x),cretic-trochee 1 res (uuu--x),cretic-trochee 1 res (-uuu-x),cretic-trochee 1 res (-u-uux),double/molossus-cretic pure double-cretic (-u--ux),double/molossus-cretic pure molossus-cretic (----ux),double/molossus-cretic 1 res (uuu--ux),double/molossus-cretic 1 res (-uuu-ux),double/molossus-cretic 1 res (-u-uuux),double/molossus-cretic molossus not chor 1 res (uu---ux),double/molossus-cretic molossus not chor 1 res (--uu-ux),double/molossus-cretic molossus not chor 1 res (---uuux),double/molossus-cretic chor res (-uu--ux),double/molossus-cretic ep res (-u---ux),double trochee (-u-x),double trochee 1 res (uuu-x),double trochee 1 res (-uuux),hypodochmiac (-u-ux),hypodochmiac 1 res (uuu-ux),hypodochmiac 1 res (-uuuux),spondaic (---x),heroic (-uu-x),first paeon (-uux),choriamb trochee (-uu--x),short sequence (uuuuux),misc_clausulae,author
+0,philosophy,academica,31,5,11,6,31,8,3,2,0,5,1,1,3,2,42,3,3,15,1,0,27,7,9,2,1,3,cicero
+1,,arati phaenomena,6,0,3,0,0,3,0,1,0,7,1,4,0,0,5,0,1,0,0,0,9,194,10,3,0,0,cicero
+2,,arati prognotica,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,9,0,0,0,0,cicero
+3,rhetoric,brutus,209,28,62,18,284,134,41,10,3,36,14,5,33,20,303,14,7,103,2,1,102,17,31,7,3,27,cicero
+4,,carmina fragmenta,0,0,0,0,1,15,2,0,0,6,2,4,11,7,5,1,1,1,0,0,8,54,3,3,0,1,cicero
+5,,cato maior de senectute,101,14,24,9,94,36,14,3,1,11,5,1,14,5,88,3,5,26,2,3,26,16,9,7,0,6,cicero
+6,,commentarii causarum,0,0,0,0,1,1,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,cicero
+7,philosophy,de divinatione,279,36,106,17,248,130,38,18,7,39,14,13,36,23,352,14,11,102,5,7,151,93,90,21,4,31,cicero
+8,speeches,de domo sua,137,16,51,11,61,35,11,4,1,13,4,4,5,8,223,11,2,42,2,1,52,13,14,5,1,17,cicero
+9,philosophy,de fato,47,6,13,3,42,25,7,2,2,6,7,2,9,1,63,3,1,24,0,1,29,9,10,8,2,8,cicero
+10,philosophy,de finibus,327,49,141,27,378,229,44,23,10,54,19,12,61,42,570,23,20,171,10,9,200,60,98,24,8,59,cicero
+11,speeches,de haruspicum responso,82,8,37,9,26,26,4,2,1,4,4,3,6,2,105,9,2,12,0,1,41,11,2,2,1,2,cicero
+12,rhetoric,de inventore,281,45,67,40,73,129,17,9,15,37,23,17,23,48,606,14,9,142,4,10,309,65,94,26,11,75,cicero
+13,,de iure civ in artem redig,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,1,0,0,0,0,0,0,0,0,cicero
+14,speeches,de lege agraria,167,12,35,17,58,60,7,3,2,12,8,6,9,9,190,4,4,52,3,0,71,16,18,5,0,21,cicero
+15,speeches,de lege agraria 1,23,2,6,4,12,13,2,0,0,2,0,2,1,1,44,0,0,10,1,0,13,0,1,0,0,5,cicero
+16,speeches,de lege agraria 2,131,8,26,10,35,38,4,3,2,10,7,3,8,7,130,4,3,38,1,0,49,15,16,5,0,11,cicero
+17,speeches,de lege agraria 3,13,2,3,3,11,9,1,0,0,0,1,1,0,1,16,0,1,4,1,0,9,1,1,0,0,5,cicero
+18,philosophy,de legibus,118,10,58,14,193,107,23,11,3,33,12,9,25,20,215,10,11,79,3,1,81,23,27,9,1,16,cicero
+19,philosophy,de natura deorum,320,52,135,24,288,125,34,20,4,32,22,16,41,25,457,24,12,138,3,2,149,89,59,22,9,18,cicero
+20,philosophy,de officiis,263,56,130,28,311,121,37,14,4,30,16,7,37,14,383,21,8,107,9,4,98,34,41,15,5,21,cicero
+21,rhetoric,de optimo genere oratorum,6,2,3,0,19,8,4,1,0,4,0,0,3,0,24,0,2,10,0,0,8,1,2,5,1,1,cicero
+22,rhetoric,de oratore,579,97,235,57,279,251,38,20,9,62,27,21,51,40,708,44,24,191,5,8,257,69,78,27,11,30,cicero
+23,rhetoric,de partitione oratoria,104,18,30,10,55,40,8,5,0,9,7,3,13,7,138,4,1,37,0,1,44,17,11,8,5,13,cicero
+24,speeches,de provinciis consularibus,48,3,31,4,21,19,3,2,0,4,1,2,3,3,71,3,5,4,0,0,17,4,3,1,0,2,cicero
+25,philosophy,de republica,118,18,48,15,188,120,21,9,5,33,16,1,30,14,171,6,9,83,2,3,89,19,37,9,3,53,cicero
+26,letters,epistula ad ocatianum,13,1,4,3,4,4,0,0,0,0,0,1,1,1,21,0,0,2,0,0,5,0,1,0,0,2,cicero
+27,letters,epistulae ad atticum,1039,211,325,231,912,798,156,65,41,195,107,92,195,201,1888,116,125,638,37,85,1486,340,654,233,103,313,cicero
+28,letters,epistulae ad atticum book 1,71,12,24,16,48,48,9,1,0,11,6,1,12,13,136,7,4,27,0,4,95,18,28,13,6,9,cicero
+29,letters,epistulae ad atticum book 10,64,7,21,9,55,42,11,1,3,5,8,4,14,16,133,10,7,39,4,8,86,22,47,15,4,17,cicero
+30,letters,epistulae ad atticum book 11,54,16,13,15,57,41,9,1,1,10,7,4,15,10,100,4,7,32,2,3,92,17,36,18,3,10,cicero
+31,letters,epistulae ad atticum book 12,80,18,32,26,72,68,15,5,3,22,7,8,19,15,164,12,11,61,2,2,86,35,46,17,9,27,cicero
+32,letters,epistulae ad atticum book 13,91,22,26,19,69,73,11,6,3,18,5,8,16,17,163,16,16,60,4,11,133,29,68,18,12,39,cicero
+33,letters,epistulae ad atticum book 14,71,17,24,8,67,38,10,1,0,12,7,6,9,15,110,10,10,37,6,6,87,17,38,9,4,20,cicero
+34,letters,epistulae ad atticum book 15,67,13,29,16,59,48,11,5,3,8,3,9,12,10,116,7,12,38,4,4,110,14,33,13,2,21,cicero
+35,letters,epistulae ad atticum book 16,62,8,20,7,59,41,13,4,1,9,12,8,10,16,99,6,8,30,2,9,77,21,48,18,4,32,cicero
+36,letters,epistulae ad atticum book 2,82,19,26,15,58,47,7,5,1,17,6,8,11,13,143,4,9,46,4,5,86,24,39,16,11,18,cicero
+37,letters,epistulae ad atticum book 3,48,8,9,11,22,38,2,2,2,6,4,1,9,9,66,5,3,19,1,2,67,22,20,7,3,10,cicero
+38,letters,epistulae ad atticum book 4,63,13,22,17,44,39,9,6,8,13,5,4,14,9,121,6,10,35,1,3,88,20,34,9,3,17,cicero
+39,letters,epistulae ad atticum book 5,43,10,21,14,63,51,6,5,1,12,8,3,14,16,91,4,6,43,1,6,112,17,47,13,3,16,cicero
+40,letters,epistulae ad atticum book 6,53,9,12,17,56,54,11,5,3,13,6,4,8,9,100,7,7,43,1,4,72,17,35,16,11,18,cicero
+41,letters,epistulae ad atticum book 7,77,14,15,18,71,68,10,5,2,20,11,8,11,15,122,9,5,48,4,4,107,17,56,25,10,28,cicero
+42,letters,epistulae ad atticum book 8,53,4,17,9,54,53,9,5,3,6,4,7,8,6,91,2,5,28,1,5,80,22,38,5,2,11,cicero
+43,letters,epistulae ad atticum book 9,60,21,14,14,58,49,13,8,7,13,8,9,13,12,133,7,5,52,0,9,108,28,41,21,16,20,cicero
+44,letters,epistulae ad brutum,71,17,23,9,61,40,6,7,1,10,5,3,7,12,86,7,5,33,1,4,44,22,31,4,3,10,cicero
+45,letters,epistulae ad brutum br,3,1,0,2,6,13,0,0,1,2,2,1,1,3,12,0,1,3,0,2,17,9,15,2,0,6,cicero
+46,letters,epistulae ad brutum ci,68,16,23,7,55,26,6,7,0,7,3,2,6,8,74,7,4,30,1,2,26,13,16,2,3,5,cicero
+47,letters,epistulae ad brutum spurious,5,1,2,2,7,10,0,2,1,2,3,0,2,4,8,0,0,3,0,2,27,13,13,4,2,2,cicero
+48,letters,epistulae ad familiares,876,142,283,150,718,479,97,54,38,120,83,44,146,145,1483,66,62,383,21,39,846,179,371,135,42,196,cicero
+49,letters,epistulae ad quintum fratrem,38,4,16,1,22,11,5,0,0,3,3,0,5,2,50,0,1,19,1,0,9,0,2,5,0,0,cicero
+50,letters,epistulae ad quintum fratrem. 1,132,23,38,35,70,91,12,13,1,24,7,8,34,16,206,12,16,52,4,11,152,28,51,11,7,32,cicero
+51,letters,epistulae fragmenta,12,1,5,5,15,8,0,2,1,1,0,1,5,1,16,0,0,4,1,1,11,1,10,5,0,2,cicero
+52,,facete dicta,5,1,0,0,1,2,0,0,0,1,0,1,0,2,4,2,0,0,0,1,7,0,5,0,1,0,cicero
+53,,hortensius,8,0,3,1,9,4,2,0,0,2,0,1,1,2,12,0,0,4,0,2,3,0,1,1,0,2,cicero
+54,speeches,in caecilium,66,7,15,10,29,30,3,1,0,8,3,2,3,4,70,1,1,16,0,1,23,8,6,4,0,6,cicero
+55,speeches,in catilinam,151,11,43,12,61,42,11,4,2,15,8,4,13,8,151,5,4,31,1,1,34,11,15,3,2,11,cicero
+56,speeches,in catilinam 1,43,1,15,4,16,11,5,1,0,4,1,0,6,3,35,0,1,16,0,1,7,8,4,1,1,6,cicero
+57,speeches,in catilinam 2,33,4,9,4,25,14,0,1,0,8,4,1,4,2,40,3,0,8,0,0,10,1,4,0,1,4,cicero
+58,speeches,in catilinam 3,42,5,8,1,9,8,4,0,1,2,1,1,2,2,36,0,2,2,0,0,12,2,3,2,0,1,cicero
+59,speeches,in catilinam 4,33,1,11,3,11,9,2,2,1,1,2,2,1,1,40,2,1,5,1,0,5,0,4,0,0,0,cicero
+60,speeches,in pisonem,130,20,23,10,51,36,8,2,1,6,6,2,5,8,175,2,3,30,0,3,56,13,13,4,0,12,cicero
+61,,in sallustinum,16,6,3,5,4,1,2,3,1,0,0,1,2,1,24,0,3,4,0,0,21,5,2,2,1,2,cicero
+62,speeches,in vatinium,39,1,18,4,18,16,1,1,0,3,2,0,2,3,50,3,0,7,0,0,18,0,2,1,1,0,cicero
+63,speeches,in verrem,1085,165,303,131,479,489,53,23,23,122,65,43,112,104,1450,51,50,353,7,23,629,144,186,93,19,128,cicero
+64,speeches,in verrem 1,39,7,18,8,19,18,1,0,1,6,2,0,5,2,48,0,1,19,2,1,25,9,5,4,0,3,cicero
+65,speeches,in verrem 2 1,163,21,48,26,66,89,11,2,2,23,12,4,16,18,208,6,11,63,0,6,127,19,37,16,5,18,cicero
+66,speeches,in verrem 2 2,194,35,56,22,95,92,8,6,6,25,16,8,30,17,260,13,3,76,1,3,114,31,46,26,3,24,cicero
+67,speeches,in verrem 2 3,245,45,66,32,123,113,16,10,3,28,23,18,22,31,426,18,10,84,2,3,168,37,46,20,5,36,cicero
+68,speeches,in verrem 2 4,215,26,53,22,86,98,9,4,6,25,8,9,22,21,243,7,10,60,1,6,90,28,26,13,1,24,cicero
+69,speeches,in verrem 2 5,229,31,62,21,90,79,8,1,5,15,4,4,17,15,265,7,15,51,1,4,105,20,26,14,5,23,cicero
+70,,incertorum librorum fragmenta,2,0,1,0,2,1,1,0,0,0,0,0,0,0,2,0,0,1,0,0,3,3,0,0,0,0,cicero
+71,philosophy,laelius de amicitia,98,13,44,13,89,31,11,5,1,6,6,3,11,6,106,3,2,25,1,1,44,7,11,4,2,8,cicero
+72,philosophy,lucullus,153,28,55,18,159,85,27,10,4,28,12,6,30,16,184,11,8,86,1,5,106,27,33,8,6,13,cicero
+73,,orationum depertiarum frr,48,8,9,6,20,21,1,2,1,2,2,1,6,7,69,4,5,19,3,1,30,11,14,4,2,11,cicero
+74,,orationum incertarum frr,4,1,1,0,3,4,2,1,0,0,0,0,0,0,6,0,0,5,0,0,4,1,1,0,0,0,cicero
+75,rhetoric,orator,149,34,53,19,220,96,29,16,3,28,17,2,25,17,202,14,6,102,1,4,78,28,20,9,2,15,cicero
+76,philosophy,paradoxa stoicorum,36,5,9,8,47,23,2,4,1,6,1,2,3,3,56,2,2,26,1,1,24,6,9,3,1,10,cicero
+77,speeches,philippicae,702,95,229,60,582,241,67,16,8,70,24,13,54,52,838,58,15,193,4,12,352,53,109,37,10,66,cicero
+78,speeches,philippicae 1,53,9,11,5,38,18,3,0,0,3,2,0,5,5,57,1,3,13,0,0,32,2,5,4,1,4,cicero
+79,speeches,philippicae 10,37,1,8,1,28,13,4,1,0,4,0,1,3,2,33,1,0,12,0,0,13,4,4,1,1,5,cicero
+80,speeches,philippicae 11,49,4,16,4,53,13,5,2,1,3,2,0,5,8,66,6,1,21,1,1,29,2,5,3,2,3,cicero
+81,speeches,philippicae 12,45,6,11,3,45,26,3,1,0,12,4,0,5,6,48,2,0,14,0,2,21,2,8,3,3,4,cicero
+82,speeches,philippicae 13,73,9,26,7,71,21,7,1,1,9,0,2,3,3,91,7,0,18,1,1,30,8,14,5,0,9,cicero
+83,speeches,philippicae 14,32,6,16,1,34,15,1,1,1,1,0,0,5,4,59,2,0,5,0,0,19,1,1,1,0,4,cicero
+84,speeches,philippicae 2,160,27,66,21,122,51,16,5,0,14,7,5,15,8,202,21,7,39,1,6,87,15,19,5,1,20,cicero
+85,speeches,philippicae 3,42,9,19,2,45,15,5,2,1,7,0,0,0,1,56,5,0,9,0,1,15,2,7,3,0,3,cicero
+86,speeches,philippicae 4,22,2,5,2,19,6,3,0,0,0,0,0,1,0,27,1,0,2,0,0,2,1,3,0,0,0,cicero
+87,speeches,philippicae 5,70,10,18,5,47,20,6,2,3,4,1,3,4,6,66,5,3,25,1,1,35,6,13,7,1,8,cicero
+88,speeches,philippicae 6,34,2,10,1,18,7,4,0,0,4,1,1,1,2,35,1,1,6,0,0,11,2,9,0,1,0,cicero
+89,speeches,philippicae 7,23,1,6,2,24,11,3,1,0,3,2,0,4,1,33,3,0,9,0,0,20,2,4,1,0,5,cicero
+90,speeches,philippicae 8,44,5,14,5,27,23,5,0,1,4,3,1,3,6,44,3,0,14,0,0,34,6,16,3,0,1,cicero
+91,speeches,philippicae 9,18,4,3,1,11,2,2,0,0,2,2,0,0,0,21,0,0,6,0,0,4,0,1,1,0,0,cicero
+92,,philosophicorum librorum frr,5,2,1,1,6,1,2,0,1,0,1,1,0,2,12,0,0,6,0,0,4,2,2,2,0,1,cicero
+93,speeches,post reditum ad populum,25,1,11,1,5,1,2,1,0,0,1,0,0,3,33,2,1,3,0,0,7,3,0,2,0,0,cicero
+94,speeches,post reditum in senatu,37,9,14,4,13,4,1,1,0,1,0,1,1,0,55,2,1,3,0,0,19,2,1,2,0,1,cicero
+95,speeches,pro archia,27,3,10,3,9,7,0,0,1,1,2,0,1,2,45,3,0,4,0,1,10,1,1,0,0,1,cicero
+96,speeches,pro balbo,76,5,23,7,26,15,2,2,0,2,0,2,1,3,120,2,3,5,0,1,18,2,7,0,0,0,cicero
+97,speeches,pro caecina,97,15,26,11,44,49,9,2,1,7,10,3,10,6,136,8,3,29,1,3,73,20,25,3,0,14,cicero
+98,speeches,pro caelio,110,9,33,8,45,26,4,3,0,8,3,2,8,9,153,6,3,15,1,3,30,9,15,0,4,7,cicero
+99,speeches,pro cluentio,247,23,64,23,69,80,18,9,7,14,6,16,20,20,284,10,6,64,3,4,127,23,21,11,4,26,cicero
+100,speeches,pro flacco,120,19,49,13,64,53,6,6,1,12,7,5,12,13,221,7,6,31,1,0,66,12,22,4,3,20,cicero
+101,speeches,pro fonteio,48,7,18,3,12,15,1,1,0,2,1,1,3,7,51,1,1,10,1,1,20,3,4,3,0,5,cicero
+102,speeches,pro lege manilia,87,6,31,5,13,10,1,2,0,0,0,1,4,5,84,2,0,5,0,0,22,3,2,1,0,0,cicero
+103,speeches,pro ligario,36,6,20,1,30,18,4,2,0,2,2,1,5,5,53,1,2,11,0,1,21,4,7,5,1,12,cicero
+104,speeches,pro marcello,21,4,8,1,28,7,8,1,0,4,0,1,1,0,34,1,0,15,0,0,8,0,0,2,0,1,cicero
+105,speeches,pro milone,97,5,31,10,70,46,5,4,0,13,8,3,14,5,152,9,1,26,1,1,53,15,11,6,2,10,cicero
+106,speeches,pro murena,93,16,44,16,48,57,6,2,2,14,7,6,16,5,144,6,3,30,0,2,51,7,16,3,2,12,cicero
+107,speeches,pro plancio,121,15,42,10,46,30,10,2,1,12,6,6,13,5,210,7,6,14,0,1,41,15,16,3,0,8,cicero
+108,speeches,pro quinctio,75,15,15,18,50,42,2,1,3,18,4,3,16,14,119,8,5,33,1,1,75,16,16,8,1,28,cicero
+109,speeches,pro rabirio perduellionis reo,32,3,8,1,5,18,0,1,0,2,3,1,4,2,37,2,0,6,0,0,16,3,4,0,0,1,cicero
+110,speeches,pro rabirio postumo,36,9,9,4,31,24,2,0,1,6,4,2,9,6,56,0,1,14,0,2,34,7,8,4,3,4,cicero
+111,speeches,pro rege deiotaro,50,4,14,1,40,21,9,3,0,1,0,1,4,3,49,2,0,9,0,0,21,2,8,2,1,2,cicero
+112,speeches,pro roscio amerino,79,28,35,19,60,72,14,5,0,18,10,10,17,15,181,12,8,36,2,4,80,23,31,14,8,29,cicero
+113,speeches,pro roscio comoedo,54,9,11,11,18,23,2,1,5,6,6,3,3,9,73,8,2,15,0,2,93,14,35,8,3,14,cicero
+114,speeches,pro scauro,40,3,14,3,14,8,2,0,0,2,0,0,0,1,52,1,2,1,1,1,20,1,6,1,1,8,cicero
+115,speeches,pro sestio,199,19,50,16,57,45,9,4,0,7,3,2,8,7,238,5,4,30,3,2,109,19,16,9,2,11,cicero
+116,speeches,pro sulla,106,6,28,11,42,38,2,1,3,11,3,2,5,7,126,6,3,15,0,2,47,7,11,8,1,8,cicero
+117,speeches,pro tullio,15,8,6,6,13,15,2,1,1,7,2,2,7,5,47,2,2,13,0,0,28,2,15,2,1,11,cicero
+118,,rhetorica ad herennium,304,57,74,55,68,97,13,15,15,31,18,19,23,40,714,42,29,114,7,15,368,92,131,55,8,38,cicero
+119,,timaeus,29,4,12,1,37,11,3,2,0,4,4,2,3,2,42,4,0,11,0,0,9,5,2,2,0,1,cicero
+120,,topica,54,12,18,12,80,44,6,5,2,8,6,5,14,13,103,8,5,31,4,2,60,15,21,7,5,19,cicero
+121,philosophy,tusculanae disputationes,411,69,156,50,462,221,64,29,16,76,25,19,54,56,618,32,18,216,9,8,274,96,116,35,13,65,cicero
