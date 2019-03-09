@@ -65,7 +65,7 @@ class Normalizer(object):
         """
         default_seperator = "."
 
-        # text = self._replace_bracket_text(text)
+        text = self._replace_bracket_and_dagger_text(text)
 
         for punc in DEFAULT_PUNC:
             text = text.replace(punc, default_seperator)
