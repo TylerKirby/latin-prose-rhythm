@@ -49,10 +49,10 @@ class Normalizer(object):
     def _replace_underscores(text):
         return text.replace('_', ' ')
 
-    def _remove_word_enjambments(self, text):
-        text = self._remove_extra_white_space(text)
-        tokens = [word.replace('- ', '').replace('-\n', '') for word in text.split(' ')]
-        return ' '.join(tokens).replace('- ', '')
+    # def _remove_word_enjambments(self, text):
+    #     text = self._remove_extra_white_space(text)
+    #     tokens = [word.replace('- ', '').replace('-\n', '') for word in text.split(' ')]
+    #     return ' '.join(tokens).replace('- ', '')
 
     def normalize(self, text):
         """
@@ -62,7 +62,7 @@ class Normalizer(object):
         """
         default_seperator = "."
 
-        text = self._replace_bracket_text(text)
+        # text = self._replace_bracket_text(text)
 
         for punc in DEFAULT_PUNC:
             text = text.replace(punc, default_seperator)
@@ -86,10 +86,12 @@ class Normalizer(object):
                    .replace('{', '')\
                    .replace('}', '')\
                    .replace('#', '')\
-                   .replace('*', '')
+                   .replace('*', '')\
+                   .replace('<', '')\
+                   .replace('>', '')
         text = self._replace_underscores(text)
         text = self._replace_roman_numerals(text)
         text = text.lower()
-        text = self._remove_word_enjambments(text)
+        # text = self._remove_word_enjambments(text)
         text = self._remove_extra_white_space(text)
         return text
