@@ -35,8 +35,11 @@ class Normalizer(object):
         return text
 
     @staticmethod
-    def _replace_bracket_text(text):
-        return re.sub(r"<.*>|\[.*\]", "11111", text)
+    def _replace_bracket_and_dagger_text(text):
+        text = text.replace('[', '11111')\
+                   .replace(']', '11111')\
+                   .replace('†', '11111')
+        return text
 
     @staticmethod
     def _remove_extra_white_space(text):
@@ -79,10 +82,7 @@ class Normalizer(object):
                    .replace('qvid', 'quid')\
                    .replace('(', '')\
                    .replace(')', '')\
-                   .replace('[', '')\
-                   .replace(']', '')\
                    .replace('”', '')\
-                   .replace('†', '')\
                    .replace('{', '')\
                    .replace('}', '')\
                    .replace('#', '')\
