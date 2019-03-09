@@ -36,9 +36,9 @@ class Normalizer(object):
 
     @staticmethod
     def _replace_bracket_and_dagger_text(text):
-        text = text.replace('[', '11111')\
-                   .replace(']', '11111')\
-                   .replace('†', '11111')
+        text = text.replace('[', ' 11111 ')\
+                   .replace(']', ' 11111 ')\
+                   .replace('†', ' 11111 ')
         return text
 
     @staticmethod
