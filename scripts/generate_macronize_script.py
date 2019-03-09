@@ -1,12 +1,16 @@
 import os
 
-PHI_DIR = '/Users/tyler/Datasets/phi-unicode/'
-OUTPUT_DIR = '/Users/tyler/Datasets/phi-macronized/'
+PATH = '/texts_for_analysis/'
 
-paths = [(PHI_DIR+file, OUTPUT_DIR+file) for file in os.listdir(PHI_DIR) if file[:3] == 'lat']
-print(paths[0])
+paths = [PATH+file for file in os.listdir(PATH) if file != '.DS_Store']
+texts = ['/'.join([dir, p]) for dir in paths for p in os.listdir(dir) if p != '.DS_Store']
 
-for index, (input_path, output_path) in enumerate(paths):
-    macronize_script = f'python macronize.py -i {input_path} -o {output_path} -v -j --maius\necho \"macronized text {index}\"\n'
-    print(macronize_script)
+script = []
+for index, path in enumerate(texts):
+    macronize_script = f'python macronize.py -i {path} -o {path} -v -j --maius\necho \"macronized text {index}\"\n'
+    script.append(macronize_script)
+
+with open('macronize_texts.sh', 'w') as f:
+    for s in script:
+        f.write(s)
 
