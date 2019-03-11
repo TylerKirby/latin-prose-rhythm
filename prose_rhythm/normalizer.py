@@ -38,7 +38,9 @@ class Normalizer(object):
     def _replace_bracket_and_dagger_text(text):
         text = text.replace('[', ' 11111 ')\
                    .replace(']', ' 11111 ')\
-                   .replace('†', ' 11111 ')
+                   .replace('†', ' 11111 ')\
+                   .replace('<', ' 11111 ')\
+                   .replace('>', ' 11111 ')
         return text
 
     @staticmethod
@@ -71,15 +73,15 @@ class Normalizer(object):
             text = text.replace(punc, default_seperator)
 
         text = self._replace_abbreviations(text)
-
+        text = self._replace_roman_numerals(text)
+        text = text.lower()
         text = text.replace('hic', 'hicc')\
                    .replace('hoc', 'hocc')\
                    .replace('\'', '')\
                    .replace('\"', '')\
                    .replace('_,', '')\
-                   .replace('Vnde', 'Unde')\
                    .replace('vnde', 'unde')\
-                   .replace('qvid', 'quid')\
+                   .replace('qv', 'qu')\
                    .replace('(', '')\
                    .replace(')', '')\
                    .replace('”', '')\
@@ -90,8 +92,5 @@ class Normalizer(object):
                    .replace('<', '')\
                    .replace('>', '')
         text = self._replace_underscores(text)
-        text = self._replace_roman_numerals(text)
-        text = text.lower()
-        # text = self._remove_word_enjambments(text)
         text = self._remove_extra_white_space(text)
         return text
