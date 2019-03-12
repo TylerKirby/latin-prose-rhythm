@@ -59,7 +59,8 @@ class Analyze(object):
                     bracket_excluded += 1
                 elif syllable_count > 0 and syllable_count < 4:
                     short_clausulae += 1
-                else:
+                elif sentence['structured_sentence'] != []:
+                    print('other: ', sentence)
                     other_excluded += 1
             sentence_clausula = sentence_clausula[::-1]
             sentence_clausula.append('x')
