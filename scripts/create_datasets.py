@@ -121,6 +121,7 @@ if __name__ == '__main__':
         add_rhythm_col('short sequence', 'uuuuux')
 
         artistic_rhythms = [
+           'cretic-trochee (-u--x)',
            'cretic-trochee 1 res (uuu--x)', 'cretic-trochee 1 res (-uuu-x)',
            'cretic-trochee 1 res (-u-uux)',
            'double/molossus-cretic pure double-cretic (-u--ux)',
@@ -140,12 +141,12 @@ if __name__ == '__main__':
         unartistic_rhythms = [
             'spondaic (---x)', 'heroic (-uu-x)',
             'first paeon (-uux)', 'choriamb trochee (-uu--x)',
-            'short sequence (uuuuux)', 'misc_clausulae'
+            'short sequence (uuuuux)'
         ]
 
         df['total_artistic'] = df[artistic_rhythms].sum(axis=1)
-        df['misc_clausulae'] = (df['total_clausulae'] - df['total_excluded']) - df['total_artistic']
-        df['total_unartistic'] = df[unartistic_rhythms].sum(axis=1)
+        df['misc_clausulae'] = (df['total_clausulae'] - df['total_excluded']) - (df['total_artistic'] + df[unartistic_rhythms].sum(axis=1))
+        df['total_unartistic'] = df[unartistic_rhythms+['misc_clausulae']].sum(axis=1)
         df['percent_clausulae'] = (df['total_artistic'] + df['misc_clausulae']) / (df['total_clausulae'] - df['total_excluded'])
 
         df.to_csv('../data/{}_df.csv'.format(author), index=None)
