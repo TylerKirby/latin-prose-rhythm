@@ -208,7 +208,7 @@ class Preprocessor(object): # pylint: disable=too-few-public-methods
         tokenized_text = []
         for sentence in tokenized_sentences:
             sentence_dict = {}
-            sentence_dict["contains_numeral"] = True if "roman_numeral" in sentence else False
+            sentence_dict["contains_numeral"] = True if "22222" in sentence else False
             sentence = re.sub(r"abbrev", "", sentence)
             sentence = re.sub(r"roman_numeral", "", sentence)
             sentence = re.sub(r"[ ]{2,}", " ", sentence)
