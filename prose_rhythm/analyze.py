@@ -42,7 +42,7 @@ class Analyze(object):
         for sentence in tokens['text']:
             sentence_clausula = []
             syllable_count = sum([word['syllables_count'] for word in sentence['structured_sentence']])
-            if not sentence['contains_abbrev'] and not sentence['contains_bracket_text'] and syllable_count > 3:
+            if not sentence['contains_abbrev'] and not sentence['contains_bracket_text'] and syllable_count > 3 and not sentence['contains_greek']:
                 syllables = [word['syllables'] for word in sentence['structured_sentence']]
                 flat_syllables = [syllable for word in syllables for syllable in word]
                 flat_syllables = self.process_syllables(flat_syllables)
@@ -96,9 +96,7 @@ class Analyze(object):
 
 
 if __name__ == '__main__':
-    text = """et suō jūre possit?
-sed praesidiō esse, ut intellegātis contrā hesternam illam 
-contiōnem licēre vōbīs quod sentiātis līberē jūdicāre. """
+    text = """οὔ τοι ἀπόβλητ' ἐστὶ θεῶν ἐρικυδέα δῶρα, ὅσσα κεν αὐτοὶ δῶσιν, ἑκὼν δ' οὐκ ἄν τις ἕλοιτο. """
     p = Preprocessor(text=text)
     a = Analyze()
     tokens = p.tokenize()

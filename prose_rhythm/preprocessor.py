@@ -8,6 +8,19 @@ import regex as re
 from cltk.prosody.latin.Syllabifier import Syllabifier
 from prose_rhythm.normalizer import Normalizer
 
+import unicodedata as ud
+
+latin_letters= {}
+
+def is_latin(uchr):
+    try: return latin_letters[uchr]
+    except KeyError:
+         return latin_letters.setdefault(uchr, 'LATIN' in ud.name(uchr))
+
+def only_roman_chars(unistr):
+    return all(is_latin(uchr)
+           for uchr in unistr
+           if uchr.isalpha())
 
 class Preprocessor(object): # pylint: disable=too-few-public-methods
     """
@@ -218,6 +231,7 @@ class Preprocessor(object): # pylint: disable=too-few-public-methods
             syllables = [syll['syllable'] for syllable in syllables for syll in syllable]
             sentence_dict["contains_abbrev"] = True if "00000" in syllables[-13:] else False
             sentence_dict["contains_bracket_text"] = True if "11111" in syllables[-13:] else False
+            sentence_dict["contains_greek"] = False if only_roman_chars(sentence) else True
             tokenized_text.append(sentence_dict)
 
         return {"title": self.title, "text": tokenized_text}
