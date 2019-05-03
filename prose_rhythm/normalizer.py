@@ -90,7 +90,8 @@ class Normalizer(object):
                    .replace('#', '')\
                    .replace('*', '')\
                    .replace('<', '')\
-                   .replace('>', '')
+                   .replace('>', '')\
+                   .replace(' , ', ', ')
         text = self._replace_underscores(text)
         text = self._remove_extra_white_space(text)
         return text
