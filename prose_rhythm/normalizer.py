@@ -73,7 +73,7 @@ class Normalizer(object):
             text = text.replace(punc, default_seperator)
 
         text = self._replace_abbreviations(text)
-        text = self._replace_roman_numerals(text)
+        # text = self._replace_roman_numerals(text)
         text = text.lower()
         text = text.replace('hic', 'hicc')\
                    .replace('hoc', 'hocc')\
