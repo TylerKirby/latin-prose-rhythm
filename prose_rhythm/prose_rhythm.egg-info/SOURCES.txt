@@ -1,4 +1,0 @@
-prose_rhythm.egg-info/PKG-INFO
-prose_rhythm.egg-info/SOURCES.txt
-prose_rhythm.egg-info/dependency_links.txt
-prose_rhythm.egg-info/top_level.txt
